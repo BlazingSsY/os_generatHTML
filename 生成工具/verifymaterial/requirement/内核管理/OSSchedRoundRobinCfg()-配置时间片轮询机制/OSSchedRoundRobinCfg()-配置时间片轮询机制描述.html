@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OSSchedRoundRobinCfg()-配置时间片轮询机制.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p><strong>需求编号</strong>：HLR_OS_11_07</p><p><strong>工作描述：</strong>HLR：uC/OS-III 应提供配置时间片轮询调度机制的接口，该接口应能全局启用/禁用轮询机制并设置默认时间片长度。</p><p><strong>是否需求：</strong>是</p><p><strong>验证方法</strong>：测试验证</p><p><br></p><p>1 函数名称</p><p>OSSchedRoundRobinCfg() - 配置时间片轮询机制</p><p><br></p><p>2 函数框架</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">void OSSchedRoundRobinCfg(</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;CPU_BOOLEAN en, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* 输入: 启用/禁用时间片轮询机制 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_TICK dflt_time_quanta, /* 输入: 默认时间片长度（时钟节拍数） */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_ERR *p_err &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* 输出: 错误码指针 */</div><div class="ql-code-block" data-language="plain">)</div></div><p><br></p><p>3 函数描述</p><p>该函数用于全局配置时间片轮询调度机制，可在运行时动态设置轮询机制的启用状态和默认时间片长度，配置后立即生效，影响系统中所有参与轮询调度的任务。</p><p><br></p><p>4 参数说明</p><p>（1）en</p><p>类型：CPU_BOOLEAN</p><p>作用：用于启用/禁用时间片轮询机制</p><p><br></p><p>（2）dflt_time_quanta</p><p>类型：OS_TICK</p><p>作用：用于设置默认时间片长度（单位：系统时钟节拍）</p><p><br></p><p>（3）p_err</p><p>类型：OS_ERR*</p><p>作用：用于返回函数执行的错误代码，指示函数调用是否成功以及失败的原因</p><p>错误码：目前只有OS_ERR_NONE一种错误码</p><p><br></p><p>5 算法逻辑</p><p>以下操作需在临界区中进行，即在操作前进入临界区，操作完成后退出临界区</p><p>1）启用/禁用时间片轮询机制</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>若输入的en等于0，则设置OSSchedRoundRobinEn = OS_FALSE，标志全局禁用时间片轮询机制；否则，设置设置 OSSchedRoundRobinEn = OS_TRUE，标志全局启用时间片轮询机制</li></ol><p>2）设置默认时间片长度</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>若输入dflt_time_quanta &gt; 0，则设置 OSSchedRoundRobinDfltTimeQuanta = dflt_time_quanta；否则，设置OSSchedRoundRobinDfltTimeQuanta 为心跳频率的十分之（OSCfg_TickRate_Hz / 10）</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>设置 *p_err = OS_ERR_NONE</li></ol><p><br></p><p>6 返回值</p><p>无</p><p><br></p><p>7 健康管理错误码</p><p>无</p>
+        </div>
+    </div>
+</body>
+</html>

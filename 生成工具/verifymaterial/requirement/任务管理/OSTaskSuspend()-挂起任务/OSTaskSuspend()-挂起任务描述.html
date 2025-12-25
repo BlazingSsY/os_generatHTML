@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OSTaskSuspend()-挂起任务.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p>需求编号：HLR_OS_01_17</p><p><strong>工作描述：</strong>HLR：uC/OS-Ⅲ应提供挂起任务的接口。</p><p>是否需求：是</p><p>验证方法：测试验证</p><p>补充信息：</p><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数名称</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>OSTaskSuspend( ) – 挂起任务</li><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数框架</li></ol><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;void OSTaskSuspend(</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;OS_TCB&nbsp;*p_tcb&nbsp;&nbsp;&nbsp;&nbsp;/*in:&nbsp;任务控制块指针*/</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;OS_ERR&nbsp;*p_err&nbsp;&nbsp;&nbsp;&nbsp;/*out:&nbsp;错误码指针*/</div><div class="ql-code-block" data-language="plain">)</div></div><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数描述</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>该函数用于挂起一个任务，使其不再参与系统的调度和执行</li><li class="ordered"><span class="ql-ui" contenteditable="false"></span>参数说明</li></ol><p>（1）p_tcb</p><p>类型：OS_TCB*</p><p>作用：指向要挂起的任务的任务控制块（TCB）。</p><p>注意事项：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;在调度器锁定的情况下，不能挂起“自我”（即当前任务）。</p><p>（2）p_err</p><p>类型：OS_ERR*</p><p>作用：返回函数调用的结果状态码。</p><p>返回码：</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;OS_ERR_NONE&nbsp;-&nbsp;成功挂起目标任务</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;OS_ERR_OS_NOT_RUNNING&nbsp;-&nbsp;uC/OS-III 尚未运行</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;OS_ERR_SCHED_LOCKED&nbsp;-&nbsp;在任务调度被锁定的情况下挂起当前任务</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;OS_ERR_STATE_INVALID&nbsp;-&nbsp;目标任务处于无效状态</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;OS_ERR_TASK_SUSPEND_CTR_OVF&nbsp;-&nbsp;目标任务挂起计数器异常</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;OS_ERR_TASK_SUSPEND_ISR&nbsp;-&nbsp;&nbsp;从中断服务程序中挂起任务</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;OS_ERR_TASK_SUSPEND_IDLE&nbsp;-&nbsp;&nbsp;尝试挂起空闲任务</div></div><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数算法逻辑</li></ol><p>&nbsp;（1）检查是否在 ISR 中调用</p><p>&nbsp;&nbsp;&nbsp;&nbsp;当OS_CFG_CALLED_FROM_ISR_CHK_EN功能启用时，检查是否在中断中调用，如果当前在中断服务程序（ISR）中调用 OSTaskResume()，则返回错误码OS_ERR_TASK_SUSPEND_ISR。</p><p>（2）检查是否挂起空闲任务</p><p>&nbsp;&nbsp;&nbsp;&nbsp;当OS_CFG_TASK_IDLE_EN功能启用时，检查要挂起的目标任务是否为空闲任务，若是，则返回错误码OS_ERR_TASK_SUSPEND_IDLE</p><p>（3）检查输入参数p_tcb</p><p>&nbsp;&nbsp;&nbsp;&nbsp;进入临界区，如果输入参数p_tcb为空，则检查当前内核是否处于停止态：如果内核处于停止态，则退出临界区，返回错误码OS_ERR_OS_NOT_RUNNING；如果内核处于运行态，将p_tcb指向当前任务。</p><p>（4）检查是否锁定任务调度</p><p>&nbsp;&nbsp;&nbsp;&nbsp;如果输入参数p_tcb指向当前任务且任务调度被锁定的时，退出临界区，返回错误码OS_ERR_SCHED_LOCKED</p><p>（5）挂起任务</p><p>将错误码设置为OS_ERR_NONE，检查目标任务的状态：</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>目标任务处于就绪态，更新任务状态为挂起态，挂起计数器设置为1，将目标任务从就绪列表中移除，退出临界区；</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>目标任务处于延时态，更新任务状态为延时挂起态，挂起计数器设置为1，退出临界区；</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>目标任务处于等待态，更新任务状态为等待挂起态，挂起计数器设置为1，退出临界区；</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>目标任务处于等待超时态，更新任务状态为等待超时挂起态，挂起计数器设置为1，退出临界区；</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>目标任务处于挂起态、延时挂起态、等待挂起态、等待超时挂起态四种状态之一，检查挂起计数器是否异常：如果异常，退出临界区，函数返回，返回错误码OS_ERR_TASK_SUSPEND_CTR_OVF，如果正常，退出临界区，挂起计数器加1；</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>目标任务处于其他状态，退出临界区，返回错误码OS_ERR_STATE_INVALID。</li></ol><p>（6）任务调度</p><p>&nbsp;&nbsp;&nbsp;&nbsp;挂起任务结束后，如果内核处于运行态，将执行任务调度</p><ol class="bullet"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>返回值</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>无</li><li class="ordered"><span class="ql-ui" contenteditable="false"></span>健康管理错误码</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>无</li></ol>
+        </div>
+    </div>
+</body>
+</html>

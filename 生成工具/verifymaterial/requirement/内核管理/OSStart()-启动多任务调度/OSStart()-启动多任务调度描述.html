@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OSStart()-启动多任务调度.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p><strong>需求编号：</strong>&nbsp;HLR_OS_11_09</p><p><strong>工作描述：</strong>&nbsp;HLR：uC/OS-III 应提供启动多任务调度的接口。</p><p><strong>是否需求：</strong>&nbsp;是</p><p><strong>验证方法：</strong>&nbsp;测试验证</p><p>1. 函数名称</p><p>OSStart()&nbsp;– 启动多任务调度</p><p>2. 函数框架</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">void OSStart (</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_ERR *p_err   /* 输出：错误码指针 */</div><div class="ql-code-block" data-language="plain">)</div></div><p>3. 函数描述</p><p>该函数用于启动 uC/OS-III 的任务调度系统。当 OSStart()&nbsp;被调用时，操作系统进入运行状态，并开始调度运行就绪列表中最高优先级的任务。调用此函数前必须已成功执行 OSInit()，并至少创建一个应用任务。该函数理论上不会返回，如果返回，表示调度器未能成功启动。</p><p>4. 参数说明</p><p>（1）p_err</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>类型：&nbsp;OS_ERR*</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>作用：&nbsp;用于返回函数调用结果的错误码。</li></ol><p>错误码：</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">OS_ERR_OS_NOT_INIT---操作系统尚未初始化</div><div class="ql-code-block" data-language="plain">OS_ERR_OS_NO_APP_TASK---没有创建任何用户应用任务</div><div class="ql-code-block" data-language="plain">OS_ERR_OS_RUNNING---操作系统已经在运行</div><div class="ql-code-block" data-language="plain">OS_ERR_FETAL_RETURN---开启调度成功后不会返回，否则，表示失败，并返回该错误码</div></div><p>5. 算法逻辑</p><p>(1)调度开启条件检查</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>检查是否初始化</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;&nbsp;•若初始化标志OSInitialized != OS_TRUE，表示尚未初始化，设置 *p_err = OS_ERR_OS_NOT_INIT&nbsp;并返回。</li></ol><p><br></p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>检查默认应用任务是否全部启动</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;&nbsp;•设置内核任务数量的初始值为0</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;&nbsp;•若OS_CFG_TMR_EN功能启用，内核任务数量加1</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;&nbsp;•若OS_CFG_TASK_IDLE_EN功能启动，内核任务数量加1</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;&nbsp;•如果总任务数 OSTaskQty&nbsp;小于或等于内核任务数量，表示没有任何用户创建的应用任务，设置 *p_err = OS_ERR_OS_NO_APP_TASK&nbsp;并返回。</li></ol><p><br></p><p>2）启动多任务调度</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>若 内核运行状态OSRunning != OS_STATE_OS_STOPPED，说明操作系统已经运行，设置 *p_err = OS_ERR_OS_RUNNING&nbsp;并返回。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>若内核运行状态OSRunning为OS_STATE_OS_STOPPED，则通过以下操作启动任务调度：</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;&nbsp;•&nbsp;通过OS_PrioGetHighest()&nbsp;获取优先级表中最高优先级，并赋值给就绪任务最高优先级变量OSPrioHighRdy。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;&nbsp;•&nbsp;设置当前运行任务优先级OSPrioCur为当前就绪任务中的最高优先级OSPrioHighRdy</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;&nbsp;•&nbsp;使用就绪任务中的最高优先级OSPrioHighRdy从对应就绪列表中获取头指针并赋值给最高优先级就绪任务指针OSTCBHighRdyPtr</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;&nbsp;•&nbsp;设置当前任务指针 OSTCBCurPtr为最高优先级就绪任务指针OSTCBHighRdyPtr</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;&nbsp;•&nbsp;设置内核运行状态OSRunning为OS_STATE_OS_RUNNING</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;&nbsp;•&nbsp;调用目标平台相关的调度器启动函数 OSStartHighRdy()，正式进入多任务调度</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;&nbsp;•&nbsp;若 OSStartHighRdy()&nbsp;返回，则视为调度启动失败，设置 *p_err = OS_ERR_FATAL_RETURN</li></ol><p>6. 返回值</p><p>无。</p><p>7. 健康管理错误码</p><p>错误码：</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>OS_ERR_OS_NOT_INIT，操作系统尚未初始化</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>OS_ERR_OS_NO_APP_TASK，没有创建任何用户应用任务</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>OS_ERR_OS_RUNNING，操作系统已经在运行</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>OS_ERR_FETAL_RETURN，开启调度成功后不会返回，否则，表示失败，并返回该错误码</li></ol><p><strong>备注：</strong></p><p>&nbsp;该函数是启动 uC/OS-III 多任务调度的关键入口。应用程序通常在 main()&nbsp;函数中最后调用 OSStart()，之后程序控制权将被操作系统接管，理论上不会再返回主函数。此函数仅能调用一次，多次调用无效。</p>
+        </div>
+    </div>
+</body>
+</html>

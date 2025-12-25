@@ -23,18 +23,6 @@
 *********************************************************************************************************
 */
 
-/*
-* 函数名 高层需求名  
-* OSTaskChangePrio HLR_OS_01_01任务优先级设置 
-* OSTaskCreate HLR_OS_01_02任务创建 
-* OSTaskDel HLR_OS_01_03任务删除
-* OSTaskQFlush HLR_OS_01_04清空任务消息队列
-* OSTaskQPend HLR_OS_01_05等待任务消息
-* OSTaskQPendAbort HLR_OS_01_06终止等待任务消息
-* OSTaskQPost HLR_OS_01_07发送任务消息
-* OSTaskRegGet HLR_OS_01_09获取任务寄存器ID
-*/
-
 #define  MICRIUM_SOURCE
 #include "os.h"
 

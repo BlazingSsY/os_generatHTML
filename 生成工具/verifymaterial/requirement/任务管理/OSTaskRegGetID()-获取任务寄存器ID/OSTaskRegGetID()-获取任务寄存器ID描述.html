@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OSTaskRegGetID()-获取任务寄存器ID.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p>需求编号：HLR_OS_01_09</p><p>工作描述：HLR：uC/OS-Ⅲ应提供获取下一个可用的任务寄存器ID接口。</p><p>是否需求：是</p><p>验证方法：测试验证</p><p>补充信息：</p><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数名称</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>OSTaskRegGetID() - 获取下一个可用的任务寄存器ID。</li><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数框架</li></ol><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">OS_REG_ID OSTaskRegGetID(OS_ERR *p_err   / out: 错误码指针 */</div><div class="ql-code-block" data-language="plain">);</div></div><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数描述</li></ol><p>该函数用于动态获取下一个可用的任务寄存器ID，避免了静态分配寄存器ID的局限性，使任务寄存器ID的分配更加灵活和高效。</p><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>参数说明</li></ol><p>（1）p_err</p><p>类型：OS_ERR*</p><p>作用：返回函数调用的结果状态码。</p><p>返回代码：</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">    OS_ERR_NONE：调用成功，成功分配了任务寄存器ID。</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_ERR_NO_MORE_ID_AVAIL：无法分配更多任务寄存器ID，已超过通过OS_CFG_TASK_REG_TBL_SIZE配置的可用数量。</div></div><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数算法逻辑</li></ol><p>（1）检查可用任务寄存器 ID：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;检查全局变量OSTaskRegNextAvailID是否已超过配置的最大值OS_CFG_TASK_REG_TBL_SIZE。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;如果超过，设置错误码为OS_ERR_NO_MORE_ID_AVAIL，退出临界区，并返回OS_CFG_TASK_REG_TBL_SIZE表示无法分配。</p><p>（2）分配任务寄存器 ID：</p><ol class="ordered"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>将当前的OSTaskRegNextAvailID作为分配的ID。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>增量更新OSTaskRegNextAvailID以便下次分配。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>设置p_err为OS_ERR_NONE，表示分配成功，并返回分配的任务寄存器ID。</li><li class="ordered"><span class="ql-ui" contenteditable="false"></span>返回值</li></ol><p>&nbsp;&nbsp;&nbsp;类型:&nbsp;OS_REG_ID</p><p>&nbsp;&nbsp;&nbsp;作用：&nbsp;成功时，返回下一个可用的任务寄存器ID。如果没有可用的ID，则返回OS_CFG_TASK_REG_TBL_SIZE。</p><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>健康管理错误码</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;无</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;备注：&nbsp;无</p>
+        </div>
+    </div>
+</body>
+</html>

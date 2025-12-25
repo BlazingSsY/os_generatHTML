@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OS_IdleTask()-空闲任务函数.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p><strong>需求编号：</strong>&nbsp;HLR_OS_11_11</p><p><strong>工作描述：</strong>HLR：uC/OS-III应提供空闲任务入口函数</p><p><strong>是否需求：</strong>是</p><p><strong>验证方法：</strong>测试验证</p><p>1.函数名称</p><p>OS_IdleTask ()-空闲任务入口函数</p><p>2.函数框架</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">void  OS_IdleTask (</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;void  *p_arg&nbsp;&nbsp;&nbsp;/*输入：</div><div class="ql-code-block" data-language="plain">)</div></div><p>3.函数描述</p><p>该函数是空闲任务的入口函数，即空闲任务函数，当空闲任务获取系统执行权时，该函数将被执行</p><p>4.参数说明</p><p>（1）p_arg</p><p>类型：void</p><p>作用：<span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">任务通用参数，但空闲任务通常不需要参数，此处强制类型转换避免未使用变量的警告。</span></p><p>5.算法逻辑</p><p>&nbsp;•&nbsp;检查是否启用了调试（OS_CFG_DBG_EN&gt;0）或统计任务（OS_CFG_STAT_TASK_EN&gt;0）。若启用了，则分配CPU状态寄存器空间为临界区做准备；若未启用，不做任何处理</p><p>&nbsp;•无限循环处理。</p><p>&nbsp;•&nbsp;&nbsp;•检查是否启用了调试（OS_CFG_DBG_EN&gt;0）或统计任务（OS_CFG_STAT_TASK_EN&gt;0）。若未启用，不做任何处理；&nbsp;若启用了，则进入临界区，禁用中断并作进一步处理：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;•&nbsp;&nbsp;•若启用了调试（OS_CFG_DBG_EN&gt;0），空闲任务计数器OSIdleTaskCtr加1；若未启用，不做任何处理</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;•&nbsp;&nbsp;•若启用统计任务（OS_CFG_STAT_TASK_EN&gt;0），统计任务计数器OSStatTaskCtr数值加1；若未启用，不做任何处理</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;•&nbsp;&nbsp;•退出临界区&nbsp;</p><p>&nbsp;•&nbsp;&nbsp;•若用户钩子函数功能启用（OS_CFG_APP_HOOKS_EN&gt;0），&nbsp;将执行用户自定义的钩子函数，若未启用，不做任何处理<span style="background-color: rgb(255, 255, 255); color: rgb(64, 64, 64);">。</span></p><p>6.返回值</p><p>无</p><p>7.健康管理错误码</p><p>无</p><p>&nbsp;&nbsp;&nbsp;<strong>备注：</strong>本函数为 uC/OS-III 的内部处理函数，应用程序不应直接调用。必须启用空闲任务功能OS_CFG_TASK_IDLE_EN &gt; 0&nbsp;才会编译此函数。</p>
+        </div>
+    </div>
+</body>
+</html>

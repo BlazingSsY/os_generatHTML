@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="LLR_OS_02_08_02提取消息数据并更新队列状态.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p>需求编号：LLR_OS_02_08_02</p><p>需求描述：</p><p>1&nbsp;提取消息数据</p><p>&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: rgb(252, 252, 252); color: rgba(0, 0, 0, 0.9); font-size: 15px;">从队列的&nbsp;</span><code style="background-color: rgb(252, 252, 252); color: rgba(0, 0, 0, 0.9); font-size: 15px;">OutPtr</code><span style="background-color: rgb(252, 252, 252); color: rgba(0, 0, 0, 0.9); font-size: 15px;">（输出指针）获取当前消息&nbsp;</span><code style="background-color: rgb(252, 252, 252); color: rgba(0, 0, 0, 0.9); font-size: 15px;">p_msg，</code><span style="background-color: rgb(252, 252, 252); color: rgba(0, 0, 0, 0.9); font-size: 15px;">从消息中提取：</span></p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span><span style="background-color: rgb(252, 252, 252); color: rgba(0, 0, 0, 0.9); font-size: 15px;">消息内容</span><span style="background-color: rgb(252, 252, 252); color: rgb(203, 22, 14); font-size: 15px;">&nbsp;</span></li><li class="bullet"><span class="ql-ui" contenteditable="false"></span><span style="background-color: rgb(252, 252, 252); color: rgba(0, 0, 0, 0.9); font-size: 15px;">消息大小</span><span style="background-color: rgb(252, 252, 252); color: rgb(203, 22, 14); font-size: 15px;">&nbsp;</span></li></ol><p>2&nbsp;更新队列状态</p><p>&nbsp;&nbsp;&nbsp;调整输出指针和消息计数。​移动&nbsp;OutPtr：指向下一条消息（p_msg-&gt;NextPtr）。</p><p>​若&nbsp;OutPtr&nbsp;变为&nbsp;NULL，说明队列已空，同时清空&nbsp;InPtr（输入指针）和&nbsp;NbrEntries。否则，减少消息计数（NbrEntries--）。</p>
+        </div>
+    </div>
+</body>
+</html>

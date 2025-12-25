@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="LLR_OS_11_17_01将任务插入等待列表.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p>需求编号：LLR_OS_11_17_01</p><p>需求描述：获取待插入任务的优先级，然后根据等到列表的状态，分为下列情况处理：</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>若等待列表为空，则将等待列表的头指针和尾指针指向目标任务，置空目标任务的PendPrevPtr和PendNextPtr指针</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>若等待列表不为空，则从头指针开始遍历等待列表，直至找到列表中一个任务(锚点任务)其优先级低于目标任务，若未找到，则在列表尾部终止</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>•&nbsp;如果要插入的位置在列表尾部(锚点任务为空)，则将目标任务的PendPrevPtr指向原目标等待列表尾部任务，PendNextPtr置空，原尾部任务的PendNextPtr指向目标任务，更新目标等待列表的尾指针指向目标任务</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>•&nbsp;如果要插入的位置在列表头部(锚点任务的PendPrevPtr为空)，则将目标任务的PendNextPtr指向锚点任务，目标任务的PendPrevPtr置空，锚点任务的PendPrevPtr指向目标任务，更新目标等待列表的头指针指向目标任务</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>•&nbsp;如果要插入的位置在列表中间(锚点任务的PendPrevPtr不为空)，目标任务的PendNextPtr指向锚点任务，目标任务的PendPrevPtr指向锚点任务的PendPrevPtr，锚点任务的PendPrevPtr的PendNextPtr指向目标任务，锚点任务的PendPrevPtr指向目标任务</li></ol>
+        </div>
+    </div>
+</body>
+</html>

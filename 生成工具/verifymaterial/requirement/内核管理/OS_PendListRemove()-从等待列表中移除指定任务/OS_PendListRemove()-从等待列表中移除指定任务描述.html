@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OS_PendListRemove()-从等待列表中移除指定任务.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p><strong>需求编号</strong>：HLR_OS_11_18</p><p><strong>工作描述</strong>：HLR：uC/OS-Ⅲ应提供从等待列表中移除指定任务的接口。</p><p><strong>是否需求</strong>：是</p><p><strong>验证方法</strong>：测试验证</p><p><strong>补充信息</strong>：</p><p>1.函数名称</p><p>OS_PendListRemove()&nbsp;– 从等待链表中移除指定任务</p><p>2.函数框架</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">void OS_PendListRemove (</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_TCB *p_tcb   /* 输入：待移除的任务控制块 */</div><div class="ql-code-block" data-language="plain">)</div></div><p>3.函数描述</p><p>该函数用于根据任务控制块从其所属等待列表中移除该任务节点，移除后，将更新等待列表头尾指针与相邻任务节点指针，确保列表结构完整。同时，清空任务控制块中与等待列表相关的指针。</p><p>4.参数说明</p><p>（1）p_tcb</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>类型：OS_TCB*</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>作用：指向需要从其等待链表中移除的任务控制块。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;注意事项：该任务控制块的 PendObjPtr&nbsp;成员需指向一个有效的挂起对象，否则函数不执行任何操作。</li></ol><p>5.算法逻辑</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>检查任务是否有等待对象</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;•若任务的等待对象为空，表示不在任何挂起链表中，函数直接返回。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>从等待对象的等待链表中移除指定任务</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;•获取任务等待对象的等待列表</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;•若等待列表只有一个节点，则将等待列表的头尾指针置空。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;•若指定任务是等待列表的表头任务，则将指定任务的下一个任务设置为新的表头任务，将新表头任务的前向指针置空。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;•若指定任务是等待列表的表尾任务，则将指定任务的前一个任务设置为新的表尾任务，将新表尾任务的后向指针置空。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;•若指定任务是等待列表的中间节点，将指定任务在等待列表中的前一个任务的后向指针指向指定任务的后一个任务，将指定任务在等待列表中的后一个任务的前向指针指向指定任务的前一个任务。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;•清除任务控制块的前向指针，后向指针和等待对象指针。</li></ol><p>6.返回值</p><p>无。</p><p>7.健康管理错误码</p><p>无。</p><p><strong>备注</strong>：此函数为 uC/OS-III 的内部函数，您的应用程序不得调用它。</p>
+        </div>
+    </div>
+</body>
+</html>

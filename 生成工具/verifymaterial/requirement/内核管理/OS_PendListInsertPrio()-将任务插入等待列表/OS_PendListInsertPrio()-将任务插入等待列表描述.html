@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OS_PendListInsertPrio()-将任务插入等待列表.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p><strong>需求编号</strong>：HLR_OS_11_17</p><p><strong>工作描述</strong>：HLR：uC/OS-Ⅲ应提供将任务按优先级插入等待链表的接口。</p><p><strong>是否需求</strong>：是</p><p><strong>验证方法</strong>：测试验证</p><p><strong>补充信息</strong>：</p><p>1.函数名称</p><p>OS_PendListInsertPrio()&nbsp;– 将任务按优先级插入等待链表</p><p>2.函数框架</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">void OS_PendListInsertPrio (</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_PEND_LIST *p_pend_list,  /* 输入：等待链表指针 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_TCB       *p_tcb         /* 输入：待插入的任务控制块 */</div><div class="ql-code-block" data-language="plain">)</div></div><p>3.函数描述</p><p>该函数用于将任务控制块按其优先级顺序插入指定的等待列表。任务优先级越高，插入位置越靠前（即优先级值越小，排在越前面）。</p><p>4.参数说明</p><p>（1）p_pend_list</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;类型：OS_PEND_LIST*</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;作用：指向挂起等待链表的结构体指针。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;注意事项：必须为有效指针，调用前应确保其已初始化。</li></ol><p>（2）p_tcb</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;类型：OS_TCB*</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;作用：指向待插入的任务控制块，其 Prio&nbsp;字段用于确定插入位置。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;注意事项：必须为有效指针，且其 PendNextPtr&nbsp;与 PendPrevPtr&nbsp;成员未处于其他链表中。</li></ol><p>5.算法逻辑</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>获取任务优先级</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>判断链表是否为空</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;•若等待链表为空，将指定任务的前向等待指针和后向等待指针置空，等待列表的头指针和尾指针都指向指定任务控制块。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;•若等待链表不为空，遍历等待列表中的任务，直到出现任务的优先级低于指定任务的优先级或到列表末尾</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;•&nbsp;&nbsp;•若遍历到等待列表末尾，则将指定任务的后向等待指针置空，前向等待指针指向等待列表尾部任务，等待列表尾部任务的后向等待指针指向指定任务，等待列表的尾指针指向指定任务。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;•&nbsp;&nbsp;•&nbsp;若遍历到等待列表开头，则将指定任务的前向等待指针置空，后向等待指针指向等待列表头部任务，等待列表头部任务的前向等待指针指向指定任务，等待列表的头指针指向指定任务。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;•&nbsp;&nbsp;•&nbsp;否则，按照遍历任务的前向等待指针的指向任务，指定任务，遍历任务的顺序设置这三个任务的前后等待指针指向。</li></ol><p>6.返回值</p><p>无。</p><p>7.健康管理错误码</p><p>无。</p><p><strong>备注</strong>：此函数为 uC/OS-III 的内部函数，应用程序不得调用它。</p>
+        </div>
+    </div>
+</body>
+</html>

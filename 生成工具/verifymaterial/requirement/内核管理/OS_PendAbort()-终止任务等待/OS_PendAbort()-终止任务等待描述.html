@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OS_PendAbort()-终止任务等待.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p><strong>需求编号：</strong>&nbsp;HLR_OS_11_14</p><p><strong>工作描述：</strong>&nbsp;HLR：uC/OS-III 应提供终止任务等待的接口。</p><p><strong>是否需求：</strong>&nbsp;是</p><p><strong>验证方法：</strong>&nbsp;测试验证</p><p>1. 函数名称</p><p>OS_PendAbort()&nbsp;– 终止任务等待</p><p>2. 函数框架</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">void OS_PendAbort (</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_TCB     *p_tcb,    /* 输入：指向将被终止等待的任务控制块 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;CPU_TS      ts,       /* 输入：终止等待时的时间戳 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_STATUS   reason    /* 输入：终止等待的原因 */</div><div class="ql-code-block" data-language="plain">)</div></div><p>3. 函数描述</p><p>该函数由 OSxxxPendAbort()&nbsp;和 OSxxxDel()&nbsp;等服务调用，用于终止任务的等待状态，将任务从等待列表移除并根据不同状态更新任务的状态。终止等待后，任务被重新放入就绪列表或保持挂起态（如等待状态+挂起态），并设置任务终止等待的原因。</p><p>4. 参数说明</p><p>（1）参数名称：p_tcb</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>类型：OS_TCB*</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>作用：指向待终止等待状态的任务控制块</li></ol><p>（2）参数名称：ts</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>类型：CPU_TS</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>作用：终止等待状态的时间戳（系统时间）</li></ol><p>（3)参数名称：reason</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>类型：OS_STATUS</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>作用：任务终止等待状态的原因，取值为OS_STATUS_PEND_DEL或OS_STATUS_PEND_ABORT</li></ol><p>5. 算法逻辑</p><p>1）根据目标任务状态进行分支处理：</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>若任务处于等待或等待超时态：</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>•&nbsp;若启用消息队列功能，则设置任务控制块的消息地址为空和消息大小为0；</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>•&nbsp;将任务从等待列表中移除；</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>•&nbsp;若OS_CFG_TICK_EN功能启用，且任务处于等待超时态，则将任务从延时列表中移除；</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>•&nbsp;将任务插入就绪列表中，更新任务的状态为就绪态，设置任务的等待状态为输入的reason，任务的等待对象为OS_TASK_PEND_ON_NOTHING，退出。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>若任务处于等待挂起或等待超时挂起态：</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>•&nbsp;若启用消息队列功能，则设置任务控制块的消息地址为空和消息大小为0；</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>•&nbsp;将任务从等待列表中移除；</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>•&nbsp;若OS_CFG_TICK_EN功能启用，且任务处于等待超时挂起态，则将任务从延时列表中移除；</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>•&nbsp;更新任务的状态为挂起态，设置任务的等待状态为输入的reason，任务的等待对象为OS_TASK_PEND_ON_NOTHING，退出。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>若任务处于就绪、延时、挂起、延时挂起状态或其他状态，不处理，直接退出。</li></ol><p>6. 返回值</p><p>无。</p><p>7. 健康管理错误码</p><p>无</p><p><strong>备注：</strong></p><p>&nbsp;此函数是 uC/OS-III 内部使用函数，应用程序不得直接调用。</p>
+        </div>
+    </div>
+</body>
+</html>

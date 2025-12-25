@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSTaskCreate()-任务创建 SR-AR需求表</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 24px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #2ecc71;
+            color: white;
+            font-weight: 500;
+            padding: 14px 16px;
+            text-align: center;
+            border-right: 1px solid #27ae60;
+        }
+        
+        th:last-child {
+            border-right: none;
+        }
+        
+        td {
+            padding: 12px 16px;
+            text-align: center;
+            border-bottom: 1px solid #eaeaea;
+            border-right: 1px solid #eaeaea;
+        }
+        
+        td:last-child {
+            border-right: none;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        tr:hover {
+            background-color: #f0f7ff;
+        }
+        
+        .sr-cell {
+            background-color: #d1fae5;
+            font-weight: 500;
+            vertical-align: middle;
+            color: #065f46;
+        }
+        
+        a {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+        
+        a:hover {
+            background-color: #3498db;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>OSTaskCreate()-任务创建 SR-AR需求表</h1>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>SR</th>
+                    <th>AR-低层需求ID</th>
+                    <th>AR-需求名称</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td class="sr-cell" rowspan="17">
+                        <a href="OSTaskCreate()-任务创建.html" target="_blank">OSTaskCreate()-任务创建</a>
+                    </td>
+                    <td>LLR_OS_01_02_01</td>
+                    <td><a href="LLR_OS_01_02_01判断是否在ISR中/LLR_OS_01_02_01判断是否在ISR中.html" target="_blank">LLR_OS_01_02_01判断是否在ISR中</a></td>
+                </tr>
+                <tr>
+                    <td>LLR_OS_01_02_02</td>
+                    <td><a href="LLR_OS_01_02_02参数有效性检查/LLR_OS_01_02_02参数有效性检查.html" target="_blank">LLR_OS_01_02_02参数有效性检查</a></td>
+                </tr>
+                <tr>
+                    <td>LLR_OS_01_02_03</td>
+                    <td><a href="LLR_OS_01_02_03检查是否为空闲任务/LLR_OS_01_02_03检查是否为空闲任务.html" target="_blank">LLR_OS_01_02_03检查是否为空闲任务</a></td>
+                </tr>
+                <tr>
+                    <td>LLR_OS_01_02_04</td>
+                    <td><a href="LLR_OS_01_02_04清空任务块且根据设置清空任务堆栈/LLR_OS_01_02_04清空任务块且根据设置清空任务堆栈.html" target="_blank">LLR_OS_01_02_04清空任务块且根据设置清空任务堆栈</a></td>
+                </tr>
+                <tr>
+                    <td>LLR_OS_01_02_05</td>
+                    <td><a href="LLR_OS_01_02_05根据堆栈生长方向生成堆栈限制指针/LLR_OS_01_02_05根据堆栈生长方向生成堆栈限制指针.html" target="_blank">LLR_OS_01_02_05根据堆栈生长方向生成堆栈限制指针</a></td>
+                </tr>
+                <tr>
+                    <td>LLR_OS_01_02_06</td>
+                    <td><a href="LLR_OS_01_02_06任务堆栈初始化/LLR_OS_01_02_06任务堆栈初始化.html" target="_blank">LLR_OS_01_02_06任务堆栈初始化</a></td>
+                </tr>
+                <tr>
+                    <td>LLR_OS_01_02_07</td>
+                    <td><a href="LLR_OS_01_02_07根据堆栈生长方向判断初始化后的堆栈是否越界/LLR_OS_01_02_07根据堆栈生长方向判断初始化后的堆栈是否越界.html" target="_blank">LLR_OS_01_02_07根据堆栈生长方向判断初始化后的堆栈是否越界</a></td>
+                </tr>
+                <tr>
+                    <td>LLR_OS_01_02_08</td>
+                    <td><a href="LLR_OS_01_02_08设置任务优先级和基础优先级/LLR_OS_01_02_08设置任务优先级和基础优先级.html" target="_blank">LLR_OS_01_02_08设置任务优先级和基础优先级</a></td>
+                </tr>
+                <tr>
+                    <td>LLR_OS_01_02_09</td>
+                    <td><a href="LLR_OS_01_02_09设置堆栈指针和堆栈限制指针以及p_ext指针/LLR_OS_01_02_09设置堆栈指针和堆栈限制指针以及p_ext指针.html" target="_blank">LLR_OS_01_02_09设置堆栈指针和堆栈限制指针以及p_ext指针</a></td>
+                </tr>
+                <tr>
+                    <td>LLR_OS_01_02_10</td>
+                    <td><a href="LLR_OS_01_02_10设置时间片和剩余时间片/LLR_OS_01_02_10设置时间片和剩余时间片.html" target="_blank">LLR_OS_01_02_10设置时间片和剩余时间片</a></td>
+                </tr>
+                <tr>
+                    <td>LLR_OS_01_02_11</td>
+                    <td><a href="LLR_OS_01_02_11设置堆栈基地址和堆栈大小以及任务选项/LLR_OS_01_02_11设置堆栈基地址和堆栈大小以及任务选项.html" target="_blank">LLR_OS_01_02_11设置堆栈基地址和堆栈大小以及任务选项</a></td>
+                </tr>
+                <tr>
+                    <td>LLR_OS_01_02_12</td>
+                    <td><a href="LLR_OS_01_02_12清空任务寄存器数组/LLR_OS_01_02_12清空任务寄存器数组.html" target="_blank">LLR_OS_01_02_12清空任务寄存器数组</a></td>
+                </tr>
+                <tr>
+                    <td>LLR_OS_01_02_13</td>
+                    <td><a href="LLR_OS_01_02_13初始化任务消息队列/LLR_OS_01_02_13初始化任务消息队列.html" target="_blank">LLR_OS_01_02_13初始化任务消息队列</a></td>
+                </tr>
+                <tr>
+                    <td>LLR_OS_01_02_14</td>
+                    <td><a href="LLR_OS_01_02_14调用任务创建钩子函数/LLR_OS_01_02_14调用任务创建钩子函数.html" target="_blank">LLR_OS_01_02_14调用任务创建钩子函数</a></td>
+                </tr>
+                <tr>
+                    <td>LLR_OS_01_02_15</td>
+                    <td><a href="LLR_OS_01_02_15根据任务优先级更新优先级表/LLR_OS_01_02_15根据任务优先级更新优先级表.html" target="_blank">LLR_OS_01_02_15根据任务优先级更新优先级表</a></td>
+                </tr>
+                <tr>
+                    <td>LLR_OS_01_02_16</td>
+                    <td><a href="LLR_OS_01_02_16将任务插入就绪列表/LLR_OS_01_02_16将任务插入就绪列表.html" target="_blank">LLR_OS_01_02_16将任务插入就绪列表</a></td>
+                </tr>
+                <tr>
+                    <td>LLR_OS_01_02_17</td>
+                    <td><a href="LLR_OS_01_02_17检查内核运行状态/LLR_OS_01_02_17检查内核运行状态.html" target="_blank">LLR_OS_01_02_17检查内核运行状态</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

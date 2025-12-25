@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OSIntExit()-中断退出处理.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p><strong>需求编号：</strong>HLR_OS_11_03</p><p><strong>工作描述：</strong></p><p>&nbsp;HLR：uC/OS-III应提供中断退出处理的接口，供中断服务程序（ISR)退出时调用，以便在最后一个嵌套中断完成后，触发任务调度器进行任务切换。</p><p><strong>是否需求：</strong>&nbsp;是</p><p><strong>验证方法：</strong>&nbsp;测试验证</p><h3>1. 函数名称</h3><p><strong>OSIntExit()</strong>&nbsp;– 中断退出处理</p><h3>2. 函数框架</h3><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">void OSIntExit(void)</div></div><h3>3. 函数描述</h3><p>该函数供中断服务程序（ISR）退出时调用，减少中断嵌套计数，并在最后一个中断嵌套层级退出且调度器未被锁定时，根据当前就绪任务优先级执行任务切换</p><p>&nbsp;此函数应始终与 OSIntEnter()&nbsp;成对使用，用于保证中断期间系统状态的正确管理。</p><h3>4. 参数说明</h3><p>无参数。</p><h3>5. 算法逻辑</h3><p><strong>1）</strong>检查内核是否启动</p><p>&nbsp;若 OSRunning != OS_STATE_OS_RUNNING，表示内核尚未运行，直接返回。</p><h3>2）<span style="color: rgba(0, 0, 0, 0.9); background-color: rgb(255, 255, 255);">中断嵌套计数器管理</span></h3><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>调用CPU_INT_DIS()函数进入临界区</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>检查中断嵌套计数器OSIntNestingCtr是否为0，若OSIntNestingCtr为0，说明未进入ISR却错误调用 OSIntExit()，调用CPU_INT_EN函数退出临界区并返回。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>将中断嵌套计数器OSIntNestingCtr减1，并判断中断嵌套计数器OSIntNestingCtr是否大于0，若是，则调用CPU_INT_EN函数退出临界区并返回</li></ol><h3>3）<span style="color: rgba(0, 0, 0, 0.9); background-color: rgb(255, 255, 255);">检查调度器是否锁定</span></h3><p>若调度计数器OSSchedLockNestingCtr &gt; 0，说明调度器当前被锁定，则调用CPU_INT_EN函数退出临界区并返回</p><p>4）<span style="background-color: rgb(255, 255, 255); color: rgba(0, 0, 0, 0.9);">&nbsp;任务切换</span></p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>调用OS_PrioGetHighest函数获取就绪任务中的最高优先级并赋值给就绪任务最高优先级变量OSPrioHighRdy</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>若OS_CFG_TASK_IDLE_EN功能启用，则根据就绪任务最高优先级变量OSPrioHighRdy获取该优先级所在就绪链表中的头部指针并赋值给最高优先级就绪任务指针变量OSTCBHighRdyPtr，若最高优先级就绪任务指针指向当前任务，则调用CPU_INT_EN函数退出临界区并返回</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>若OS_CFG_TASK_PROFILE_EN功能启用，则将最高优先级就绪任务的任务切换计数器CtxSwCtr加1</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>若OS_CFG_TASK_PROFILE_EN或OS_CFG_DBG_EN功能启用，则将系统任务切换计数器OSTaskCtxSwCtr加1</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>调用OSIntCtxSw函数执行中断任务切换，然后调用CPU_INT_EN函数退出临界区并返回</li></ol><h3>6. 返回值</h3><p>无。</p><h3>7. 健康管理错误码</h3><p>无。</p><h3>备注</h3><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>OSIntExit()必须与 OSIntEnter()成对使用，确保中断嵌套计数准确。</li></ol>
+        </div>
+    </div>
+</body>
+</html>

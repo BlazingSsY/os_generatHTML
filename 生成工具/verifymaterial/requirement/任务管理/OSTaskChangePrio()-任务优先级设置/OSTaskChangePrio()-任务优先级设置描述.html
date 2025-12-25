@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OSTaskChangePrio()-任务优先级设置.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p>需求编号：HLR_OS_01_01</p><p>工作描述：HLR：uC/OS-Ⅲ应提供任务优先级设置接口，以设置指定任务的优先级。</p><p>是否需求：是</p><p>验证方法：测试验证</p><p>补充信息：</p><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数名称</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>OSTaskChangePrio( ) – 设置任务优先级</li><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数框架</li></ol><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">&nbsp;void OSTaskChangePrio(</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OS_TCB &nbsp;&nbsp;*p_tcb&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*in: 任务控制块指针*/</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OS_PRIO  prio_new,&nbsp;&nbsp;&nbsp;&nbsp;/*in: 新的优先级*/</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OS_ERR   *p_err&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*out:&nbsp;错误码指针*/</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</div></div><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数描述</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>该函数用于设置一个任务的优先级</li><li class="ordered"><span class="ql-ui" contenteditable="false"></span>参数说明</li></ol><p>（1）p_tcb</p><p>类型：OS_TCB*</p><p>作用：指向要设置优先级的目标任务的任务控制块（TCB）。</p><p>（2）prio_new</p><p>类型：OS_PRIO</p><p>作用：将要设置的新优先级</p><p>（3）p_err</p><p>类型：OS_ERR*</p><p>作用：返回函数调用的结果状态码。</p><p>返回代码:</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">&nbsp;OS_ERR_NONE - 成功设置新的优先级</div><div class="ql-code-block" data-language="plain">&nbsp;OS_ERR_OS_NOT_RUNNING - uC/OS-Ⅲ处于停止态，尚未运行</div><div class="ql-code-block" data-language="plain">&nbsp;OS_ERR_PRIO_INVALID - 新的优先级不可用</div><div class="ql-code-block" data-language="plain">&nbsp;OS_ERR_STATE_INVALID - 当前任务处于不可设置优先级的状态</div><div class="ql-code-block" data-language="plain">&nbsp;OS_ERR_TASK_CHANGE_PRIO_ISR - 在中断中设置新的优先级</div></div><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>算法逻辑</li></ol><p>（1）检查当前任务状态是否有效</p><p>&nbsp;&nbsp;&nbsp;&nbsp;当OS_CFG_ARG_CHK_EN功能启用时，如果输入的任务控制块指针不为空且目标任务处于删除态，&nbsp;返回错误码OS_ERR_STATE_INVALID。</p><p>（2）检查是否在 ISR 中调用</p><p>&nbsp;&nbsp;&nbsp;&nbsp;当OS_CFG_CALLED_FROM_ISR_CHK_EN功能启用时，如果当前在中断服务程序（ISR）中调用 OSTaskChangePrio()，则返回错误 OS_ERR_TASK_CHANGE_PRIO_ISR。</p><p>（3）检查新优先级的有效性</p><p>&nbsp;&nbsp;&nbsp;&nbsp;如果当新优先级不高于空闲任务的优先级，即新优先级的值prio_new &gt;= (OS_CFG_PRIO_MAX - 1u)则返回错误 OS_ERR_PRIO_INVALID。</p><p>（4）判断是否改变自身任务优先级并根据内核状态处理</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>进入临界区</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>如果输入任务控制块指针为空，则判断当前内核是否处于停止态，若是，退出临界区并返回错误码OS_ERR_OS_NOT_RUNNING，若不是，则将任务控制块指针指向当前任务</li></ol><p>（5）更新基础优先级并计算新的最终优先级</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;&nbsp;&nbsp;更新目标任务的基础优先级</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>如果目标任务拥有互斥量，判断新的优先级是否低于当前优先级，若是，则获取互斥量组的最高优先级，如果互斥组的最高优先级不低于新的优先级，将新的优先级置为互斥量组的最高优先级</li></ol><p>（6）更改目标任务的优先级</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;&nbsp;&nbsp;&nbsp;调用OS_TaskChangePrio函数更改目标任务的优先级</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>退出临界区</li></ol><p>（7）执行任务调度并设置错误码</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;优先级更改成功后，如果当前内核处于运行态，则执行任务调度，执行最高优先级任务</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>设置错误码为OS_ERR_NONE</li></ol><p><br></p><ol class="bullet"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>返回值</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>无</li><li class="ordered"><span class="ql-ui" contenteditable="false"></span>健康管理错误码</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>无</li></ol><p>&nbsp;备注：&nbsp;必须保证新设置的优先级可用。</p>
+        </div>
+    </div>
+</body>
+</html>

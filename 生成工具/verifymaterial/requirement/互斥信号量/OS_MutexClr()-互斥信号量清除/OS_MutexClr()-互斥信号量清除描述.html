@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OS_MutexClr()-互斥信号量清除.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p><strong>需求编号：</strong>HLR_OS_04_06</p><p><strong>工作描述：</strong>HLR：uC/OS-Ⅲ应提清除互斥量的接口。</p><p>是否需求：是</p><p>验证方法：测试验证</p><p><strong>补充信息：</strong></p><p>1.函数名称</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">OS_MutexClr() ---互斥量清除函数</div></div><p>2.函数框架</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">void OS_MutexClr (</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_MUTEX  *p_mutex    /* 输入：指向互斥量控制块的指针 */</div><div class="ql-code-block" data-language="plain">)</div></div><p>3.函数描述</p><p>该函数用于清除互斥量控制块，将其重置为初始状态。将互斥量的类型设置为无类型、重置互斥量的所有者和嵌套计数，并初始化互斥量的等待列表。</p><p>4.参数说明</p><p>&nbsp;&nbsp;&nbsp;&nbsp;(1)p_mutex</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型: OS_MUTEX*</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作用：指向需要清除的互斥量对象</p><p>5.函数算法逻辑</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>如果OS_OBJ_TYPE_REQ功能启用，将互斥量控制块的 Type 成员设置为 OS_OBJ_TYPE_NONE，表示该数据结构不再是一个互斥量。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>将互斥量的 MutexGrpNextPtr 成员设置为 NULL，表示该互斥量不再链接到其他互斥量。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>将互斥量的 OwnerTCBPtr 成员设置为 NULL，表示当前没有任务拥有该互斥量。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>将互斥量的 OwnerNestingCtr 成员设置为 0，表示该互斥量的嵌套计数已重置。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>调用 OS_PendListInit() 函数初始化互斥量的等待列表</li></ol><p>6.返回值</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>无</li></ol><p>7.健康管理错误码</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>无</li></ol><p>备注：此函数是 uC/OS-III 的内部函数，应用程序不应直接调用它。</p>
+        </div>
+    </div>
+</body>
+</html>

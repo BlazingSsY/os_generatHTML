@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OS_PrioRemove()-从优先级表移中除优先级.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p><strong style="color: rgb(0, 0, 0);">需求编号：</strong><span style="color: rgb(0, 0, 0);">HLR_OS_10_04</span></p><p><strong style="color: rgb(0, 0, 0);">工作描述：</strong><span style="color: rgb(0, 0, 0);">HLR:uC/OS-Ⅲ应提供从优先级表中移除指定优先级的接口</span></p><p><strong style="color: rgb(0, 0, 0);">是否需求：</strong><span style="color: rgb(0, 0, 0);">是</span></p><p><strong style="color: rgb(0, 0, 0);">验证方法：</strong><span style="color: rgb(0, 0, 0);">测试验证</span></p><p><strong>补充信息：</strong></p><p>1. 函数名称：OS_PrioRemove ()— 从优先级表中移除优先级</p><p>2. 函数框架</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">void OS_PrioRemove (OS_PRIO prio)</div></div><p>3. 函数描述</p><p>该函数用于从优先级位图表OSPrioTbl中移除指定优先级（即清除对应位为 0，表示该优先级下无任务就绪）。</p><p>4. 参数说明</p><p>(1)prio</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>类型：OS_PRIO</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>作用：需要移除的优先级（表示该优先级下无任务就绪）。</li></ol><p>5. 函数算法逻辑</p><p>根据系统配置的最大优先级OS_CFG_PRIO_MAX与 CPU 数据宽度（CPU_CFG_DATA_SIZE * 8u）的关系来决定算法：</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>若OS_CFG_PRIO_MAX小于等于 2 倍 CPU 数据宽度：</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span><span style="color: rgba(0, 0, 0, 0.9);">&nbsp;•&nbsp;&nbsp; </span>若prio小于 CPU 数据宽度，在OSPrioTbl[0]中清除对应位</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span><span style="color: rgba(0, 0, 0, 0.9);">&nbsp;•&nbsp;&nbsp; </span>否则，在OSPrioTbl[1]中清除对应位。</li></ol><p>6. 返回值</p><p>类型：无返回值（void）</p><p>作用：修改优先级位图表OSPrioTbl，标记指定优先级下无任务就绪。</p><p>7. 健康管理错误码</p><p>无</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="LLR_OS_09_04_01根据 opt 计算延时基准.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p>需求编号：LLR_OS_09_04_01</p><p>需求描述：</p><p>1.设置已流逝的节拍数为0(下一步计算时使用)</p><p>2.根据 opt 计算延时基准&nbsp;</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>若opt为OS_OPT_TIME_MATCH，设置延时基准为0</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>若opt为OS_OPT_TIME_PERIODIC：</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;•&nbsp;若输入参数time为0，返回错误码OS_ERR_TIME_ZERO_DLY</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;•&nbsp;使用目标任务的TickCtrPrev作为延时基准，并计算系统节拍计数和延时基准的差值，如果该差值不小于输入的time：</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;•&nbsp;&nbsp;•&nbsp;更新延时基准，将差值按照time为单位向下取整后加到延时基准上，将更新后的延时基准赋值给目标任务的TickCtrPrev</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;•&nbsp;更新目标任务的TickCtrPrev，将TickCtrPrev加上time</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>若opt为其他模式（OS_OPT_TIME_DLY/OS_OPT_TIME_TIMEOUT），设置延时基准为系统节拍计数</li></ol>
+        </div>
+    </div>
+</body>
+</html>

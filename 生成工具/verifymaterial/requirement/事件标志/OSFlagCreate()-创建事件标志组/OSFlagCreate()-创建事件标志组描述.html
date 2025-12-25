@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OSFlagCreate()-创建事件标志组.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p>需求编号：HLR_OS_05_01</p><p>工作描述：HLR：uC/OS-Ⅲ应提供创建事件标志组得接口</p><p>是否需求：是</p><p>验证方法：测试验证</p><p>补充信息：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;1. 函数名称</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">OSFlagCreate()&nbsp;//事件标志组创建函数</div></div><p>&nbsp;&nbsp;&nbsp;&nbsp;2. 函数框架</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">void  OSFlagCreate (OS_FLAG_GRP  *p_grp,&nbsp;/*in: 事件标志组控制块指针*/</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CPU_CHAR     *p_name,/*in: 事件标志组的名称*/</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OS_FLAGS      flags,&nbsp;/*in: 初始标志值 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OS_ERR       *p_err&nbsp;/*out: 错误码指针*/</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</div></div><p>&nbsp;&nbsp;&nbsp;&nbsp;3. 函数描述</p><p>&nbsp;&nbsp;&nbsp;&nbsp;该函数用于<span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">用于创建并初始化一个事件标志组，设置其初始标志值和相关属性。</span></p><p>&nbsp;&nbsp;&nbsp;&nbsp;4. 参数说明</p><p><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1) p_grp</strong></p><p><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：OS_FLAG_GRP*</span></p><p><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作用：指向要创建的事件标志组控制块</span></p><p><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">(2) p_name</strong></p><p><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：CPU_CHAR*</span></p><p><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作用：事件标志组名称（用于调试）</span></p><p><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">(3) flags</strong></p><p><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：OS_FLAGS</span></p><p><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作用：事件标志组的初始标志值</span></p><p><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">(4) p_err</strong></p><p><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：OS_ERR*</span></p><p><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作用：返回操作错误码</span></p><p><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;错误码：</span></p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">OS_ERR_NONE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*调用成功*/</div><div class="ql-code-block" data-language="plain">OS_ERR_CREATE_ISR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*尝试从 ISR 创建事件标志*/</div><div class="ql-code-block" data-language="plain">OS_ERR_OBJ_PTR_NULL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*p_grp 是 NULL 指针*/</div><div class="ql-code-block" data-language="plain">OS_ERR_OBJ_CREATED&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*事件标志已被创建*/</div></div><p>&nbsp;&nbsp;&nbsp;&nbsp;5. 函数算法逻辑</p><p>&nbsp;&nbsp;&nbsp;&nbsp;(1) ISR 检查:</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">如果OS_CFG_CALLED_FROM_ISR_CHK_EN功能启用，</span>检查函数是否在中断服务例程 (ISR) 中被调用(<span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">OSIntNestingCtr &gt; 0</span>)。如果是，则设置错误为 OS_ERR_CREATE_ISR 并返回。</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;(2) 参数检查:</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">如果OS_CFG_ARG_CHK_EN功能启用，检查p_grp 是否为 NULL，如果为是则设置错误码OS_ERR_OBJ_PTR_NULL并返回</span>。</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;(3) 进入临界区并检查是否重复创建事件标志组::</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>调用 CPU_CRITICAL_ENTER() 进入临界区，避免在此过程中被中断。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;<span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">如果OS_OBJ_TYPE_REQ和OS_CFG_OBJ_CREATED_CHK_EN功能都启用，检查p_grp-&gt;Type 是否为OS_OBJ_TYPE_FLAG，如果是则设置错误码OS_ERR_OBJ_CREATED并返回</span></li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;(4) 事件组初始化:</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>设置标志组的类型为 OS_OBJ_TYPE_FLAG。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>将 p_grp 的标志设置为传入的初始标志值。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>调用<span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">OS_PendListInit函数</span>初始化等待列表。</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;(5) 退出临界区并返回错误码</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>调用 CPU_CRITICAL_EXIT() 退出临界区，p_err 设置为 OS_ERR_NONE，表示操作成功完成并返回。</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;6. 返回值</p><p>&nbsp;&nbsp;&nbsp;无</p><p>&nbsp;&nbsp;&nbsp;&nbsp;7. 健康管理错误码</p><p>&nbsp;&nbsp;&nbsp;&nbsp;无</p>
+        </div>
+    </div>
+</body>
+</html>

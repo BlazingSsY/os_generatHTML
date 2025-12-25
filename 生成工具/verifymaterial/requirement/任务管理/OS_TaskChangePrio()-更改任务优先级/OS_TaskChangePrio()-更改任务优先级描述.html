@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OS_TaskChangePrio()-更改任务优先级.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p>需求编号：HLR_OS_01_22</p><p>工作描述：HLR：uC/OS-Ⅲ应提供更改任务优先级接口。</p><p>是否需求：是</p><p>验证方法：测试验证</p><p>补充信息：</p><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数名称</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>OS_TaskChangePrio() - 更改任务的优先级。</li><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数框架</li></ol><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">void OS_TaskChangePrio(</div><div class="ql-code-block" data-language="plain">OS_TCB *p_tcb,   /*in: 指向要更改优先级的任务的任务控制块&nbsp;*/</div><div class="ql-code-block" data-language="plain">OS_PRIO prio_new /*in: 新的任务优先级 */</div><div class="ql-code-block" data-language="plain">);</div></div><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数描述</li></ol><p>&nbsp;&nbsp;&nbsp;该函数用于更改任务的优先级。它是由内核调用来实现任务优先级的实际变更操作，并根据需要更新优先级继承等情况。</p><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>参数说明</li></ol><p>（1）p_tcb</p><p>类型：OS_TCB*</p><p>作用：指向要更改优先级的任务的任务控制块（TCB）。</p><p>注意事项：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;如果任务不存在或无效，函数的行为是未定义的。</p><p>（2）prio_new</p><p>类型：OS_PRIO</p><p>作用：指定任务的新优先级。</p><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数算法逻辑</li></ol><p>（1）</p><p><span style="background-color: rgb(255, 255, 255); color: rgba(0, 0, 0, 0.9); font-size: 16px;">•&nbsp;</span>初始化 局部变量p_tcb_owner 为 NULL。</p><p><span style="background-color: rgb(255, 255, 255); color: rgba(0, 0, 0, 0.9); font-size: 16px;">•&nbsp;</span>如果启用互斥量功能（OS_CFG_MUTEX_EN &gt; 0u），将当前任务的优先级（p_tcb-&gt;Prio）保存到变量 prio_cur 中。</p><p><span style="background-color: rgb(255, 255, 255); color: rgba(0, 0, 0, 0.9); font-size: 16px;">•&nbsp;</span>根据任务的当前状态（p_tcb-&gt;TaskState）进行不同处理：</p><p><span style="background-color: rgb(255, 255, 255); color: rgba(0, 0, 0, 0.9); font-size: 16px;">&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;•&nbsp;</span>就绪状态（OS_TASK_STATE_RDY）：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 16px; color: rgba(0, 0, 0, 0.9); background-color: rgb(255, 255, 255);">•&nbsp;•&nbsp;•&nbsp;</span>调用OS_RdyListRemove函数从当前的就绪列表中移除任务。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 16px; color: rgba(0, 0, 0, 0.9); background-color: rgb(255, 255, 255);">•&nbsp;•&nbsp;•&nbsp;</span>更新任务的优先级p_tcb-&gt;Prio为 prio_new。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: rgb(255, 255, 255); color: rgba(0, 0, 0, 0.9); font-size: 16px;">•&nbsp;•&nbsp;•&nbsp;</span>调用OS_PrioInsert函数将任务的优先级插入优先级表中</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 16px; color: rgba(0, 0, 0, 0.9); background-color: rgb(255, 255, 255);">•&nbsp;•&nbsp;•&nbsp;</span>判断任务是否是当前任务（OSTCBCurPtr）：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: rgb(255, 255, 255); color: rgba(0, 0, 0, 0.9); font-size: 16px;">•&nbsp;•&nbsp;•&nbsp;•&nbsp;</span>如果是，调用OS_RdyListInsertHead函数将任务插入就绪列表的头部。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 16px; color: rgba(0, 0, 0, 0.9); background-color: rgb(255, 255, 255);">•&nbsp;•&nbsp;•&nbsp;•&nbsp;</span>如果不是，调用OS_RdyListInsertTail函数将任务插入就绪列表的尾部。</p><p><span style="font-size: 16px; color: rgba(0, 0, 0, 0.9); background-color: rgb(255, 255, 255);">&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;•&nbsp;</span>延迟、挂起或延迟挂起状态（OS_TASK_STATE_DLY、OS_TASK_STATE_SUSPENDED、OS_TASK_STATE_DLY_SUSPENDED）：</p><p><span style="font-size: 16px; color: rgba(0, 0, 0, 0.9); background-color: rgb(255, 255, 255);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;•&nbsp;•&nbsp;</span>直接更新任务的优先级为 prio_new，无需其他操作。</p><p><span style="background-color: rgb(255, 255, 255); color: rgba(0, 0, 0, 0.9); font-size: 16px;">&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;•&nbsp;</span>Pend 状态（OS_TASK_STATE_PEND、OS_TASK_STATE_PEND_TIMEOUT、OS_TASK_STATE_PEND_SUSPENDED、OS_TASK_STATE_PEND_TIMEOUT_SUSPENDED）：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: rgb(255, 255, 255); color: rgba(0, 0, 0, 0.9); font-size: 16px;">•&nbsp;•&nbsp;•&nbsp;</span>更新任务的优先级为 prio_new。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 16px; color: rgba(0, 0, 0, 0.9); background-color: rgb(255, 255, 255);">•&nbsp;•&nbsp;•&nbsp;</span>根据任务 Pend 的对象类型进行不同的处理：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: rgb(255, 255, 255); color: rgba(0, 0, 0, 0.9); font-size: 16px;">•&nbsp;•&nbsp;•&nbsp;•&nbsp;</span>如果 Pend对象为OS_TASK_PEND_ON_FLAG、OS_TASK_PEND_ON_Q、OS_TASK_PEND_ON_SEM，调用 OS_PendListChangePrio 函数更新 Pend 列表的优先级。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: rgb(255, 255, 255); color: rgba(0, 0, 0, 0.9); font-size: 16px;">•&nbsp;•&nbsp;•&nbsp;•&nbsp;</span>如果 Pend 对象为互斥量（OS_TASK_PEND_ON_MUTEX），&nbsp;如果没有启用了互斥量功能（OS_CFG_MUTEX_EN &gt; 0u），则不做任何处理，反之，则：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 16px; color: rgba(0, 0, 0, 0.9); background-color: rgb(255, 255, 255);">•&nbsp;•&nbsp;•&nbsp;•&nbsp;•&nbsp;</span>调用 OS_PendListChangePrio 函数更新 Pend 列表中的任务优先级</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: rgb(255, 255, 255); color: rgba(0, 0, 0, 0.9); font-size: 16px;">•&nbsp;•&nbsp;•&nbsp;•&nbsp;•&nbsp;</span>获取互斥量的持有者任务的 TCB 指针，&nbsp;保存至变量p_tcb_owner。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 16px; color: rgba(0, 0, 0, 0.9); background-color: rgb(255, 255, 255);">•&nbsp;•&nbsp;•&nbsp;•&nbsp;•&nbsp;</span>如果当前任务的优先级提高（prio_cur &gt; prio_new）：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: rgb(255, 255, 255); color: rgba(0, 0, 0, 0.9); font-size: 16px;">•&nbsp;•&nbsp;•&nbsp;•&nbsp;•&nbsp;•&nbsp;</span>如果持有互斥量的任务的优先级低于新优先级（p_tcb_owner-&gt;Prio &lt;= prio_new），不需要调整互斥量持有者的优先级，p_tcb_owner置为NULL，反之则执行"（2）更改任务指针"</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: rgb(255, 255, 255); color: rgba(0, 0, 0, 0.9); font-size: 16px;">•&nbsp;•&nbsp;•&nbsp;•&nbsp;•&nbsp;</span>如果当前任务的优先级降低（prio_cur &lt;= prio_new）：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: rgb(255, 255, 255); color: rgba(0, 0, 0, 0.9); font-size: 16px;">•&nbsp;•&nbsp;•&nbsp;•&nbsp;•&nbsp;•&nbsp;</span>如果持有互斥量的任务的优先级等于当前任务优先级（p_tcb_owner-&gt;Prio == prio_cur）：。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 16px; color: rgba(0, 0, 0, 0.9); background-color: rgb(255, 255, 255);">•&nbsp;•&nbsp;•&nbsp;•&nbsp;•&nbsp;•&nbsp;•&nbsp;</span>调用 OS_MutexGrpPrioFindHighest 函数，获取互斥量组的最高优先级，将其设置为新优先级prio_new。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: rgb(255, 255, 255); color: rgba(0, 0, 0, 0.9); font-size: 16px;">•&nbsp;•&nbsp;•&nbsp;•&nbsp;•&nbsp;•&nbsp;•&nbsp;</span>如果新优先级高于互斥量的基础优先级（prio_new &gt; p_tcb_owner-&gt;BasePrio），则将其设置为基优先级（p_tcb_owner-&gt;BasePrio）。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 16px; color: rgba(0, 0, 0, 0.9); background-color: rgb(255, 255, 255);">•&nbsp;•&nbsp;•&nbsp;•&nbsp;•&nbsp;•&nbsp;•&nbsp;</span>如果新优先级等于互斥量持有者的当前优先级（prio_new == p_tcb_owner-&gt;Prio），说明不需要调整优先级，将 p_tcb_owner 设置为 NULL，反之则执行"（2）更改任务指针"</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 16px; color: rgba(0, 0, 0, 0.9); background-color: rgb(255, 255, 255);">•&nbsp;•&nbsp;•&nbsp;•&nbsp;•&nbsp;•</span>如果持有互斥量的任务的优先级不等于当前任务优先级（p_tcb_owner-&gt;Prio != prio_cur），不需要调整持有者的优先级，p_tcb_owner置为NULL。</p><p><span style="font-size: 16px; color: rgba(0, 0, 0, 0.9); background-color: rgb(255, 255, 255);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;•&nbsp;•&nbsp;•&nbsp;</span>其他 Pend 对象：OS_TASK_PEND_ON_TASK_Q、OS_TASK_PEND_ON_TASK_SEM、其他无效目标，则不做处理。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 16px; color: rgba(0, 0, 0, 0.9); background-color: rgb(255, 255, 255);">•&nbsp;•&nbsp;</span>无效状态：直接返回。</p><p>（2）更改任务指针</p><p>&nbsp;&nbsp;&nbsp;&nbsp;更改任务指针为 p_tcb_owner，如果任务指针不为空，循环执行“步骤1”，如果为空，函数返回</p><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>返回值</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;无</p><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>健康管理错误码</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;无</p><p>备注：此函数是 uC/OS-III 的内部函数，应用程序不应直接调用它。</p>
+        </div>
+    </div>
+</body>
+</html>

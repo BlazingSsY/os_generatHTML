@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OSSemCreate()-创建信号量.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p><span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(0, 0, 0);">需求编号：HLR_OS_03_01</span></p><p><strong>工作描述：</strong>HLR：uC/OS-Ⅲ应提供信号量创建接口，以创建二值信号量或计数信号量。</p><p>是否需求：是</p><p>验证方法：测试验证</p><p><strong>补充信息：</strong></p><h3><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">1. 函数名称</strong></h3><p><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">OSSemCreate()</strong><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;—— 信号量创建函数</span></p><h3><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">2. 函数框架</strong></h3><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">void&nbsp;OSSemCreate&nbsp;(</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_SEM      *p_sem,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* 输入：信号量控制块指针 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;CPU_CHAR    *p_name,&nbsp;&nbsp;&nbsp;&nbsp;/* 输入：信号量名称（调试用） */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_SEM_CTR   cnt,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* 输入：信号量初始计数值 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_ERR      *p_err      /* 输出：错误码 */);</div></div><h3><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">3. 函数描述</strong></h3><p><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">用于创建一个二值信号量或计数信号量，并初始化其计数值和等待列表。</span></p><h3><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">4. 参数说明</strong></h3><p><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">(1) p_sem</strong></p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">类型</strong><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">：</span><code style="color: rgb(64, 64, 64); background-color: rgb(236, 236, 236);">OS_SEM*</code></li><li class="bullet"><span class="ql-ui" contenteditable="false"></span><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">作用</strong><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">：指向信号量控制块的指针，用于管理信号量的状态和等待任务列表。</span></li></ol><p><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">(2) p_name</strong></p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">类型</strong><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">：</span><code style="color: rgb(64, 64, 64); background-color: rgb(236, 236, 236);">CPU_CHAR*</code></li><li class="bullet"><span class="ql-ui" contenteditable="false"></span><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">作用</strong><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">：信号量名称字符串（调试用），仅在&nbsp;</span><code style="color: rgb(64, 64, 64); background-color: rgb(236, 236, 236);">OS_CFG_DBG_EN</code><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;宏启用时有效。</span></li></ol><p><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">(3) cnt</strong></p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">类型</strong><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">：</span><code style="color: rgb(64, 64, 64); background-color: rgb(236, 236, 236);">OS_SEM_CTR</code></li><li class="bullet"><span class="ql-ui" contenteditable="false"></span><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">作用</strong><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">：信号量的初始计数值：</span></li><li class="bullet"><span class="ql-ui" contenteditable="false"></span><code style="background-color: rgb(236, 236, 236); color: rgb(64, 64, 64);">0</code><span style="background-color: rgb(255, 255, 255); color: rgb(64, 64, 64);">：资源不可用，任务获取信号量时将阻塞等待</span></li><li class="bullet"><span class="ql-ui" contenteditable="false"></span><code style="background-color: rgb(236, 236, 236); color: rgb(64, 64, 64);">1</code><span style="background-color: rgb(255, 255, 255); color: rgb(64, 64, 64);">：资源可用，实现二值信号量（互斥访问）</span></li><li class="bullet"><span class="ql-ui" contenteditable="false"></span><code style="background-color: rgb(236, 236, 236); color: rgb(64, 64, 64);">&gt;1</code><span style="background-color: rgb(255, 255, 255); color: rgb(64, 64, 64);">：资源可用，实现计数信号量（允许多次获取）</span></li></ol><p><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">(4) p_err</strong></p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">类型</strong><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">：</span><code style="color: rgb(64, 64, 64); background-color: rgb(236, 236, 236);">OS_ERR*</code></li><li class="bullet"><span class="ql-ui" contenteditable="false"></span><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">作用</strong><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">：返回操作错误码</span></li><li class="bullet"><span class="ql-ui" contenteditable="false"></span><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">错误码</strong><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">：</span></li><li class="bullet"><span class="ql-ui" contenteditable="false"></span><code style="background-color: rgb(236, 236, 236); color: rgb(64, 64, 64);">OS_ERR_NONE</code><span style="background-color: rgb(255, 255, 255); color: rgb(64, 64, 64);">：创建成功</span></li><li class="bullet"><span class="ql-ui" contenteditable="false"></span><code style="background-color: rgb(236, 236, 236); color: rgb(64, 64, 64);">OS_ERR_CREATE_ISR</code><span style="background-color: rgb(255, 255, 255); color: rgb(64, 64, 64);">：禁止在中断服务程序（ISR）中调用</span></li><li class="bullet"><span class="ql-ui" contenteditable="false"></span><code style="background-color: rgb(236, 236, 236); color: rgb(64, 64, 64);">OS_ERR_OBJ_PTR_NULL</code><span style="background-color: rgb(255, 255, 255); color: rgb(64, 64, 64);">：</span><code style="background-color: rgb(236, 236, 236); color: rgb(64, 64, 64);">p_sem</code><span style="background-color: rgb(255, 255, 255); color: rgb(64, 64, 64);">&nbsp;参数为&nbsp;</span><code style="background-color: rgb(236, 236, 236); color: rgb(64, 64, 64);">NULL</code></li><li class="bullet"><span class="ql-ui" contenteditable="false"></span><code style="background-color: rgb(236, 236, 236); color: rgb(64, 64, 64);">OS_ERR_OBJ_CREATED</code><span style="background-color: rgb(255, 255, 255); color: rgb(64, 64, 64);">：信号量已创建（重复初始化）</span></li></ol><h3><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">5. 函数算法逻辑</strong></h3><p><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）&nbsp;中断上下文检查</strong></p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">如果&nbsp;</span><code style="color: rgb(64, 64, 64); background-color: rgb(236, 236, 236);">OS_CFG_CALLED_FROM_ISR_CHK_EN</code><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;启用，检测是否在 ISR 中调用，若是则返回&nbsp;</span><code style="color: rgb(64, 64, 64); background-color: rgb(236, 236, 236);">OS_ERR_CREATE_ISR</code></li></ol><p><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（2）参数有效性检查</strong></p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">如果&nbsp;</span><code style="color: rgb(64, 64, 64); background-color: rgb(236, 236, 236);">OS_CFG_ARG_CHK_EN</code><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;启用，检查&nbsp;</span><code style="color: rgb(64, 64, 64); background-color: rgb(236, 236, 236);">p_sem</code><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;是否为&nbsp;</span><code style="color: rgb(64, 64, 64); background-color: rgb(236, 236, 236);">NULL</code><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">，若是则返回&nbsp;</span><code style="color: rgb(64, 64, 64); background-color: rgb(236, 236, 236);">OS_ERR_OBJ_PTR_NULL</code></li></ol><p><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（3）信号量类型检查与标记</strong></p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>进入临界区</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">如果&nbsp;</span><code style="color: rgb(64, 64, 64); background-color: rgb(236, 236, 236);">OS_OBJ_TYPE_REQ</code><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;和&nbsp;</span><code style="color: rgb(64, 64, 64); background-color: rgb(236, 236, 236);">OS_CFG_OBJ_CREATED_CHK_EN</code><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;启用：</span></li><li class="bullet"><span class="ql-ui" contenteditable="false"></span><span style="background-color: rgb(255, 255, 255);">检查&nbsp;</span><code style="background-color: rgb(236, 236, 236); color: rgb(64, 64, 64);">p_sem-&gt;Type</code><span style="background-color: rgb(255, 255, 255); color: rgb(64, 64, 64);">&nbsp;是否为&nbsp;</span><code style="background-color: rgb(236, 236, 236); color: rgb(64, 64, 64);">OS_OBJ_TYPE_SEM</code><span style="background-color: rgb(255, 255, 255); color: rgb(64, 64, 64);">，若是则退出临界区并返回&nbsp;</span><code style="background-color: rgb(236, 236, 236); color: rgb(64, 64, 64);">OS_ERR_OBJ_CREATED</code></li></ol><p><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（4）&nbsp;初始化信号量属性</strong></p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">否则标记&nbsp;</span><code style="color: rgb(64, 64, 64); background-color: rgb(236, 236, 236);">p_sem-&gt;Type = OS_OBJ_TYPE_SEM</code></li><li class="bullet"><span class="ql-ui" contenteditable="false"></span><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">设置初始计数值&nbsp;</span><code style="color: rgb(64, 64, 64); background-color: rgb(236, 236, 236);">p_sem-&gt;Ctr = cnt</code></li></ol><p><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（5）初始化等待列表</strong></p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">调用&nbsp;</span><code style="color: rgb(64, 64, 64); background-color: rgb(236, 236, 236);">OS_PendListInit(&amp;p_sem-&gt;PendList)</code><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;初始化等待列表</span></li></ol><p><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（6）&nbsp;返回成功状态</strong></p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">退出临界区</span></li><li class="bullet"><span class="ql-ui" contenteditable="false"></span><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">设置错误码&nbsp;</span><code style="color: rgb(64, 64, 64); background-color: rgb(236, 236, 236);">*p_err = OS_ERR_NONE</code></li></ol><h3><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">6. 返回值</strong></h3><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">类型</strong><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">：</span><code style="color: rgb(64, 64, 64); background-color: rgb(236, 236, 236);">void</code></li><li class="bullet"><span class="ql-ui" contenteditable="false"></span><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">作用</strong><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">：无直接返回值，通过&nbsp;</span><code style="color: rgb(64, 64, 64); background-color: rgb(236, 236, 236);">p_err</code><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;输出操作状态</span></li></ol><h3><strong style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">7. 健康管理错误码</strong></h3><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">无（错误码已通过&nbsp;</span><code style="color: rgb(64, 64, 64); background-color: rgb(236, 236, 236);">p_err</code><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">&nbsp;返回）</span></li></ol>
+        </div>
+    </div>
+</body>
+</html>

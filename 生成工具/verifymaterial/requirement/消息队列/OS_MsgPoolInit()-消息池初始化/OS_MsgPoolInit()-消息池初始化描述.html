@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OS_MsgPoolInit()-消息池初始化.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p><strong>需求编号</strong>：HLR_OS_02_12</p><p><strong>工作描述：</strong>HLR：<span style="color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);">uC/OS-Ⅲ</span>应提供系统消息池初始化接口，以便初始化系统消息池。</p><p>是否需求：是</p><p>验证方法：测试验证</p><p><strong>补充信息：</strong></p><p>1.函数名称</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">OS_MsgPoolInit()---消息池初始化&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></div><p>2.函数框架</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">void  OS_MsgPoolInit(</div><div class="ql-code-block" data-language="plain">OS_ERR  *p_err,&nbsp;&nbsp;&nbsp;/*输出：错误码指针 */</div><div class="ql-code-block" data-language="plain"><br></div><div class="ql-code-block" data-language="plain">)</div></div><p>3.函数描述</p><p>该函数用于初始化系统的消息池。消息池是一组预分配的消息缓冲区，任务可以从中申请和释放消息缓冲区。</p><p>4.参数说明</p><p>(1) p_err</p><p>类型：OS_ERR *</p><p>作用：用于返回函数执行的错误码，指示函数调用是否成功以及失败的原因。</p><p>错误码：</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">OS_ERR_MSG_POOL_NULL_PTR：消息池基址指针为空。</div><div class="ql-code-block" data-language="plain">OS_ERR_MSG_POOL_EMPTY：消息池大小为 0。</div><div class="ql-code-block" data-language="plain">OS_ERR_NONE：函数执行成功，无错误。</div></div><p><br></p><p>5.函数算法逻辑</p><p>（1）检查消息池基址指针的有效性</p><p>如果 OS_CFG_ARG_CHK_EN 功能启用，检查 OSCfg_MsgPoolBasePtr 是否为 NULL。若为 NULL，将错误码 OS_ERR_MSG_POOL_NULL_PTR 存储到 p_err 中，并返回。</p><p>（2）检查消息池大小的有效性</p><p>如果 OS_CFG_ARG_CHK_EN 功能启用，检查 OSCfg_MsgPoolSize 是否为 0。若为 0，将错误码 OS_ERR_MSG_POOL_EMPTY 存储到 p_err 中，并返回。</p><p>（3）初始化消息池中的所有消息节点后，,更新消息池状态并设置返回值。</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>获取消息池的起始消息节点指针 p_msg1 和下一个消息节点指针 p_msg2。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>循环遍历消息池中的消息节点（除最后一个外）：</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;将当前消息节点 p_msg1 的 NextPtr 指针设置为下一个消息节点 p_msg2。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;将当前消息节点的 MsgPtr 和 MsgSize 成员初始化为 0。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;移动 p_msg1 和 p_msg2 指针到下一个消息节点。</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>将最后一个消息节点的 NextPtr 指针设置为 NULL。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>将最后一个消息节点的 MsgPtr 和 MsgSize 成员初始化为 0。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>将消息池的 NextPtr 设置为消息池的基址指针，表示空闲消息链表的头部。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>将消息池的 NbrFree 设置为消息池的大小，表示所有消息节点都处于空闲状态。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>将消息池的 NbrUsed 设置为 0，表示当前没有消息节点被使用。</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;	设置返回值</p><p>将错误码 OS_ERR_NONE 存储到 p_err 中，表示消息池初始化成功,返回消息指针。</p><p><br></p><p>6&nbsp;返回值</p><p>&nbsp;&nbsp;&nbsp;&nbsp;无</p><p>7.健康管理错误码</p><p>&nbsp;&nbsp;&nbsp;&nbsp;无</p><p>备注：该函数是内部函数，不能被用户直接调用</p>
+        </div>
+    </div>
+</body>
+</html>

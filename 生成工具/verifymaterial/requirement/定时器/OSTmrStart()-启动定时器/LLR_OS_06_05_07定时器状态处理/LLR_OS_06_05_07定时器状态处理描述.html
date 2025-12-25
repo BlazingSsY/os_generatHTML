@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="LLR_OS_06_05_07定时器状态处理.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p>需求编号：LLR_OS_06_05_07</p><p>需求描述 ：</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>定时器处于运行中（OS_TMR_STATE_RUNNING）或超时（OS_TMR_STATE_TIMEOUT）状态 ：将定时器状态重新设置为运行中（OS_TMR_STATE_RUNNING）。调用 OS_TmrUnlink() 函数将定时器从当前位置移除，然后根据定时器的延迟时间（Dly）和周期时间（Period）设置定时器的剩余时间（Remain）。若延迟时间为 0，则将剩余时间设置为周期时间；否则，设置为延迟时间。接着，调用 OS_TmrLink() 函数将定时器重新添加到定时器链表中。将错误码 OS_ERR_NONE 存入 p_err 中，设置返回值为 OS_TRUE。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>定时器处于停止（OS_TMR_STATE_STOPPED）或完成（OS_TMR_STATE_COMPLETED）状态 ：将定时器状态设置为运行中（OS_TMR_STATE_RUNNING），并根据延迟时间和周期时间设置剩余时间。若延迟时间为 0，则将剩余时间设置为周期时间；否则，设置为延迟时间。然后，将定时器添加到定时器链表中。将错误码 OS_ERR_NONE 存入 p_err 中，设置返回值为OS_TRUE。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>定时器处于未使用（OS_TMR_STATE_UNUSED）状态 ：说明定时器未被创建，将错误码 OS_ERR_TMR_INACTIVE 存入 p_err 中，设置返回值为OS_FALSE。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>其他非法状态 ：将错误码 OS_ERR_TMR_INVALID_STATE 存入 p_err 中，设置返回值为 OS_FALSE。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span><br></li></ol>
+        </div>
+    </div>
+</body>
+</html>

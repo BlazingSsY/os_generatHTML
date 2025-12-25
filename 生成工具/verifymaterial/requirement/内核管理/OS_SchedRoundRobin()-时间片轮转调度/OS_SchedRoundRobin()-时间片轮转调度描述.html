@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OS_SchedRoundRobin()-时间片轮转调度.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p><strong>需求编号：</strong>&nbsp;HLR_OS_11_26</p><p><strong>工作描述：</strong>&nbsp;HLR：uC/OS-III 应提供运行时间片轮转调度的接口。</p><p><strong>是否需求：</strong>&nbsp;是</p><p><strong>验证方法：</strong>&nbsp;测试验证</p><h3>1. 函数名称</h3><p>OS_SchedRoundRobin()&nbsp;– 运行时间片轮转调度</p><h3>2. 函数框架</h3><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">void OS_SchedRoundRobin (</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_RDY_LIST *p_rdy_list   /* 输入：指定优先级就绪列表指针 */</div><div class="ql-code-block" data-language="plain">)</div></div><h3>3. 函数描述</h3><p>该函数用于在每个系统时钟节拍（tick）触发时，更新任务剩余时间片并根据时间片轮转调度策略决定是否切换当前优先级上的任务。若当前任务的时间片用尽且有多个任务处于相同优先级队列中，则当前任务将被移动到队列尾部，调度下一任务运行。</p><h3>4. 参数说明</h3><p>（1）p_rdy_list</p><p>类型：OS_RDY_LIST&nbsp;*</p><p>作用：指向特定优先级的就绪列表</p><h3>5. 算法逻辑</h3><p>1）检查是否启用了时间片轮转功能（OSSchedRoundRobinEn&nbsp;为 OS_TRUE）。若未启用，则直接返回。</p><p>&nbsp;2）进入临界区，获取输入就绪列表的头部任务 。若该任务为空则退出临界区并返回。</p><p>&nbsp;3）检查头部任务是否为空闲任务（OSIdleTaskTCB），若是，则不参与轮转，退出临界区并返回。</p><p>&nbsp;4）检查头部任务时间片计数器 TimeQuantaCtr，若大于0零，则减 1；若减完后仍大于 0，说明时间片尚未耗尽，退出临界区并返回。</p><p>&nbsp;5）若头部任务为该优先级的就绪列表的唯一任务（头指针与尾指针相同），则无需轮转，退出临界区并返回。</p><p>&nbsp;6）若当前调度被锁定（OSSchedLockNestingCtr &gt; 0），则退出临界区并返回。</p><p>&nbsp;7）执行轮转调度操作：</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>调用 OS_RdyListMoveHeadToTail()&nbsp;将当前任务移至就绪列表尾部；</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>设置新的头任务的时间片计数器 TimeQuantaCtr，检查该任务的 TimeQuanta是否为0，若是，则使用默认值 OSSchedRoundRobinDfltTimeQuanta设置TimeQuantaCtr，否则使用TimeQuanta设置TimeQuantaCtr。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;退出临界区。</li></ol><h3>6. 返回值</h3><p>无。</p><h3>7. 健康管理错误码</h3><p>无。</p><p><strong>备注：</strong></p><p>&nbsp;本函数为 uC/OS-III 的内部调度函数，应用程序不应直接调用。必须启用时间片轮转功能 OS_CFG_SCHED_ROUND_ROBIN_EN &gt; 0&nbsp;才会编译此函数。</p>
+        </div>
+    </div>
+</body>
+</html>

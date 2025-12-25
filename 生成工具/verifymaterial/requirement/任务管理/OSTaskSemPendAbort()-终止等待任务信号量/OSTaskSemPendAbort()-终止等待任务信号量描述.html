@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OSTaskSemPendAbort()-终止等待任务信号量.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p>需求编号：HLR_OS_01_13</p><p><strong>工作描述：</strong>HLR：uC/OS-Ⅲ应提供终止等待任务信号量的接口。</p><p>是否需求：是</p><p>验证方法：测试验证</p><p>补充信息：</p><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数名称</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>OSTaskSemPendAbort( ) –终止等待任务信号量.</li><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数框架</li></ol><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;CPU_BOOLEAN&nbsp;OSTaskSemPendAbort(</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;OS_TCB&nbsp;*p_tcb&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*in:&nbsp;任务控制块指针*/</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;OS_OPT&nbsp;opt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*in:&nbsp;终止选项*/</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;OS_ERR&nbsp;*p_err&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*out:&nbsp;错误码指针*/</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;)</div></div><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数描述</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>该函数用于终止一个任务等待任务信号量</li><li class="ordered"><span class="ql-ui" contenteditable="false"></span>参数说明</li></ol><p>（1）p_tcb</p><p>类型：OS_TCB *</p><p>作用：指向要终止的任务控制块的指针</p><p>（2）opt</p><p>类型：OS_OPT</p><p>作用：指定任务的终止行为。</p><p>取值范围：</p><p>&nbsp;&nbsp;&nbsp;OS_OPT_POST_NONE：&nbsp;终止完成后执行任务调度。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;OS_OPT_POST_NO_SCHED：终止完成后不执行任务调度。</p><p>注意事项：无效的选项将导致 OS_ERR_OPT_INVALID 错误。</p><p>（3）p_err</p><p>类型：OS_ERR *</p><p>作用：存储函数执行的错误码的指针</p><p>返回代码</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;OS_ERR_NONE&nbsp;-&nbsp;成功终止任务等待任务信号量</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;OS_ERR_OPT_INVALID&nbsp;-&nbsp;无效的终止选项</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;OS_ERR_OS_NOT_RUNNING&nbsp;-&nbsp;uC/OS-Ⅲ尚未运行，即内核处于停止态</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;OS_ERR_PEND_ABORT_ISR&nbsp;-&nbsp;在中断ISR中调用</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;OS_ERR_PEND_ABORT_NONE -&nbsp;任务等待事件非任务信号量</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;OS_ERR_PEND_ABORT_SELF - 终止任务自身</div><div class="ql-code-block" data-language="plain"><br></div><div class="ql-code-block" data-language="plain">&nbsp;</div></div><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>算法逻辑</li></ol><p>&nbsp;（1）检查是否在中断ISR中调用</p><p>&nbsp;&nbsp;&nbsp;&nbsp;当OS_CFG_CALLED_FROM_ISR_CHK_EN功能启用时，如果 OSIntNestingCtr大于0，表明是在中断ISR调用该函数，返回错误码OS_ERR_PEND_ABORT_ISR，返回值为OS_FALSE</p><p>&nbsp;（2）检查内核运行状态</p><p>当OS_CFG_INVALID_OS_CALLS_CHK_EN功能启用时，如果当前系统内核处于停止态，将返回错误码OS_ERR_OS_NOT_RUNNING，返回值为OS_FALSE</p><p>&nbsp;（3）检查输入参数opt</p><p>当OS_CFG_ARG_CHK_EN功能启用时，检查输入参数opt：</p><p>&nbsp;&nbsp;如果opt为OS_OPT_POST_NONE，正常处理</p><p>&nbsp;&nbsp;如果opt为OS_OPT_POST_NO_SCHED，正常处理</p><p>&nbsp;&nbsp;如果opt为其他值，返回错误码OS_ERR_OPT_INVALID，返回值为OS_FALSE</p><p>&nbsp;（4）检查输入参数p_tcb</p><p>&nbsp;&nbsp;&nbsp;进入临界区，如果输入p_tcb为空或者指向当前任务，退出临界区，返回错误码OS_ERR_PEND_ABORT_SELF，返回值为OS_FALSE。</p><p>&nbsp;（5）检查当前任务的等待事件</p><p>&nbsp;&nbsp;&nbsp;&nbsp;如果当前任务的等待事件非任务信号量，退出临界区，返回错误码OS_ERR_PEND_ABORT_NONE，返回值为OS_FALSE。</p><p>&nbsp;（6）终止任务等待</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;调用OS_PendAbort函数终止目标任务等待任务信号量，并退出临界区</p><p>&nbsp;（7）判断是否执行任务调度</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果opt不包含OS_OPT_POST_NO_SCHED选项，需调用OSSched函数执行任务调度</p><p>（8）函数返回</p><p>设置错误码为OS_ERR_NONE，返回OS_TRUE</p><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>返回值</li></ol><p>类型：CPU_BOOLEAN</p><p>取值范围：</p><p>OS_FALSE：终止任务等待任务信号量失败</p><p>OS_TRUE:&nbsp;成功终止任务等待任务信号量</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7.健康管理错误码</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>无</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;备注：无</p>
+        </div>
+    </div>
+</body>
+</html>

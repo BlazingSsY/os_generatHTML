@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OSTaskSemPend()-等待任务信号量.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p>需求编号：HLR_OS_01_12</p><p><strong>工作描述：</strong>HLR：uC/OS-Ⅲ应提供等待任务信号量的接口。</p><p>是否需求：是</p><p>验证方法：测试验证</p><p>补充信息：</p><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数名称</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>OSTaskSemPend() -&nbsp;等待任务信号量。</li><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数框架</li></ol><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">OS_SEM_CTR OSTaskSemPend(</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_TICK   timeout,  /* in: 等待任务信号量的超时时间 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_OPT    opt,      /* in: 等待选项 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;CPU_TS   *p_ts,     /* out: 信号量被发布的时间戳指针 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_ERR   *p_err     /* out: 错误码指针 */</div><div class="ql-code-block" data-language="plain">);</div></div><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数描述</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>该函数用于使当前任务等待一个任务信号量。如果在指定的超时时间内接收到信号量信号，任务将被唤醒并继续执行。如果任务在超时前没有收到信号量信号，函数将根据指定的选项返回错误码。</li><li class="ordered"><span class="ql-ui" contenteditable="false"></span>参数说明</li></ol><p>（1）timeout</p><p>类型：OS_TICK</p><p>作用：指定任务等待信号量信号的超时时间。如果设置为0，任务将无限期等待信号量信号。</p><p>（2）opt</p><p>&nbsp;&nbsp;&nbsp;&nbsp;类型：OS_OPT</p><p>&nbsp;&nbsp;&nbsp;&nbsp;作用：指定任务在没有信号量信号时的行为。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;OS_OPT_PEND_BLOCKING：任务将阻塞等待信号量信号，直到超时或接收到信号。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;OS_OPT_PEND_NON_BLOCKING：任务不会阻塞等待信号量信号，如果无法立即获取信号量信号，函数将立即返回。</p><p>（3）p_ts</p><p>&nbsp;&nbsp;&nbsp;&nbsp;类型：CPU_TS*</p><p>&nbsp;&nbsp;&nbsp;&nbsp;作用：指向一个变量，该变量将接收信号量信号发布的时间戳。</p><p>（4）p_err</p><p>&nbsp;&nbsp;&nbsp;&nbsp;类型：OS_ERR*</p><p>&nbsp;&nbsp;&nbsp;&nbsp;作用：存储函数执行结果状态码。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;返回代码：</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_ERR_NONE：函数成功执行，任务接收到信号量信号。</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_ERR_OPT_INVALID：指定的选项无效。</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_ERR_OS_NOT_RUNNING：uC/OS-III尚未运行。</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_ERR_PEND_ABORT：任务等待被中断。</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_ERR_PEND_ISR：从中断服务程序（ISR）中调用此函数。</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_ERR_PEND_WOULD_BLOCK：任务指定非阻塞选项，但无法立即获取信号量信号。</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_ERR_SCHED_LOCKED：调度程序被锁定，任务无法阻塞等待。</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_ERR_STATUS_INVALID：任务等待状态无效。</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_ERR_TIMEOUT：在指定的超时时间内未接收到信号量信号。</div></div><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数算法逻辑</li></ol><p>（1）中断服务程序（ISR）检查</p><p>&nbsp;&nbsp;&nbsp;&nbsp;当OS_CFG_CALLED_FROM_ISR_CHK_EN功能启用时，如果在ISR中调用此函数，则返回错误码OS_ERR_PEND_ISR，返回值为0.</p><p>（2）操作系统状态检查</p><p>&nbsp;&nbsp;&nbsp;&nbsp;当OS_CFG_INVALID_OS_CALLS_CHK_EN功能启用时，&nbsp;如果uC/OS-III尚未运行，返回错误码OS_ERR_OS_NOT_RUNNING，返回值为0.</p><p>（3）检查opt参数</p><p>&nbsp;当OS_CFG_ARG_CHK_EN功能启用时：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;如果opt参数为OS_OPT_PEND_BLOCKING，正常处理</p><p>&nbsp;&nbsp;&nbsp;&nbsp;如果opt参数为OS_OPT_PEND_NON_BLOCKING，正常处理</p><p>&nbsp;&nbsp;&nbsp;&nbsp;如果opt参数为其他值，返回错误码OS_ERR_OPT_INVALID，返回值为0</p><p>（4）任务信号量计数检查</p><p>&nbsp;&nbsp;&nbsp;&nbsp;进入临界区，如果当前任务的任务信号量计数（SemCtr）大于0，说明信号量信号已可用，&nbsp;SemCtr并减一，并获取其值做为返回值，并退出临界区返回。</p><p>（5）非阻塞选项处理</p><p>&nbsp;&nbsp;&nbsp;&nbsp;如果opt为非阻塞等待模式（OS_OPT_PEND_NON_BLOCKING）且信号量不可用，则返回错误码OS_ERR_PEND_WOULD_BLOCK，退出临界区，返回值为0</p><p>（6）调度程序锁定检查</p><p>&nbsp;&nbsp;&nbsp;&nbsp;如果opt为阻塞等待模式，但任务信号量不可用且调度程序被锁定，则返回错误码OS_ERR_SCHED_LOCKED，退出临界区，返回值为0</p><p>（7）阻塞等待当前任务</p><p>&nbsp;&nbsp;&nbsp;&nbsp;当前无可用信号量且opt为OS_OPT_PEND_BLOCKING且调度程序未被锁定时，调用OS_Pend将任务置于等待状态，等待任务信号量，退出临界区然后执行调度程序（OSSched）选择下一个最高优先级的任务来运行。</p><p>（8）等待状态处理</p><p>&nbsp;&nbsp;&nbsp;&nbsp;进入临界区，根据任务的等待状态（OSTCBCurPtr-&gt;PendStatus），进行处理：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果为OS_STATUS_PEND_OK，表示任务成功获取到任务信号量，设置返回码OS_ERR_NONE</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果为OS_STATUS_PEND_ABORT，表示任务等待被中断，设置返回码OS_ERR_PEND_ABORT</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果为OS_STATUS_PEND_TIMEOUT，表示在指定的超时时间内未接收到任务信号量，设置返回码OS_ERR_TIMEOUT</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果为其他状态，设置返回码OS_ERR_STATUS_INVALID</p><p>（9）等待状态处理完毕后返回信号量计数器值</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在等待状态处理完毕后，读取任务信号量计数器的值，退出临界区并返回该值</p><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>返回值</li></ol><p>类型：OS_SEM_CTR</p><p>&nbsp;&nbsp;&nbsp;作用：返回任务接收到的信号量信号计数。如果任务没有接收到信号量信号，则返回0。</p><ol class="bullet"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>健康管理错误码</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>无</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;备注：该函数不应从中断服务程序（ISR）或定时器回调函数中调用。</p>
+        </div>
+    </div>
+</body>
+</html>

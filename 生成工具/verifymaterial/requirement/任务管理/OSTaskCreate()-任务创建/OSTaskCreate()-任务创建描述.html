@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OSTaskCreate()-任务创建.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p>需求编号：HLR_OS_01_02</p><p>工作描述：HLR：uC/OS-Ⅲ应提供任务创建接口，以创建具有指定优先级和选项的新任务。</p><p>是否需求：是</p><p>验证方法：测试验证</p><p>补充信息：</p><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数名称</li></ol><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">OSTaskCreate()&nbsp;&nbsp; -&nbsp;&nbsp;&nbsp;任务创建函数</div></div><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数框架</li></ol><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">void OSTaskCreate(</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OS_TCB *p_tcb&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*in: 任务控制块指针*/</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CPU_CHAR *p_name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*in: 任务名称*/</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OS_TASK_PTR&nbsp;p_task&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*in: 任务函数*/</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;void *p_arg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*in: 传递给任务函数的参数*/</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp; OS_PRIO&nbsp;prio&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*in: 任务优先级*/</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CPU_STK *p_stk_base&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*in: 任务堆栈基地址*/</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CPU_STK_SIZE stk_limit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*in: 堆栈深度限位*/</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CPU_STK_SIZE stk_size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*in: 堆栈大小*/</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OS_MSG_QTY q_size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*in:&nbsp;任务消息队列长度*/</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OS_TICK time_quanta&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*in: 时间片长度*/</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;void *p_ext&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*in: 用户扩展的内存*/</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OS_OPT opt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*in: 任务选项*/</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OS_ERR *p_err&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*out: 错误码指针*/</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</div></div><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数描述</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>该函数用于创建一个任务，初始化任务控制器，任务堆栈，设置任务优先级及一些其他的任务参数，最后将其插入就绪列表中。</li><li class="ordered"><span class="ql-ui" contenteditable="false"></span>返回代码</li></ol><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">&nbsp;OS_ERR_NONE - 成功运行</div><div class="ql-code-block" data-language="plain">&nbsp;OS_ERR_ILLEGAL_CREATE_RUN_TIME - 调用 OSSafetyCriticalStart() 后创建任务</div><div class="ql-code-block" data-language="plain">&nbsp;OS_ERR_PRIO_INVALID - 输入的优先级大于最大优先级范围</div><div class="ql-code-block" data-language="plain">&nbsp;OS_ERR_STAT_STK_SIZE_INVALID - 在堆栈启动过程中堆栈溢出</div><div class="ql-code-block" data-language="plain">&nbsp;OS_ERR_STK_INVALID - 输入的任务堆栈基地址为空</div><div class="ql-code-block" data-language="plain">&nbsp;OS_ERR_STK_SIZE_INVALID - 输入的任务堆栈大小为空</div><div class="ql-code-block" data-language="plain">&nbsp;OS_ERR_STK_LIMIT_INVALID - 输入的任务堆栈深度限位大于堆栈大小</div><div class="ql-code-block" data-language="plain">&nbsp;OS_ERR_TASK_CREATE_ISR - 在ISR中创建任务</div><div class="ql-code-block" data-language="plain">&nbsp;OS_ERR_TASK_INVALID - 输入的任务函数为空</div><div class="ql-code-block" data-language="plain">&nbsp;OS_ERR_TCB_INVALID - 输入的任务控制块为空</div></div><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数算法逻辑</li></ol><p>（1）检查是否在中断ISR中调用</p><p>当OS_CFG_CALLED_FROM_ISR_CHK_EN功能启用时，如果在中断服务程序ISR中调用OSTaskCreate函数，则返回错误码OS_ERR_TASK_CREATE_ISR</p><p>（2）检查输入的参数有效性</p><p>当OS_CFG_ARG_CHK_EN功能启用时，</p><p>如果任务控制块指针为空，返回错误码OS_ERR_TCB_INVALID</p><p>如果任务函数指针为空，返回错误码OS_ERR_TASK_INVALID</p><p>如果任务堆栈基地址为空，返回错误码OS_ERR_STK_INVALID</p><p>如果任务堆栈空间小于系统配置的最小任务堆栈空间，返回错误码OS_ERR_STK_SIZE_INVALID</p><p>如果任务堆栈深度限位不小于任务堆栈大小，返回错误码OS_ERR_STK_LIMIT_INVALID</p><p>如果任务优先级低于空闲任务，返回错误码OS_ERR_PRIO_INVALID</p><p>（3）检查是否为空闲任务</p><p>当OS_CFG_TASK_IDLE_EN功能启用时，如果任务优先级为OS_CFG_PRIO_MAX - 1且不为空闲任务时，返回错误码OS_ERR_PRIO_INVALID</p><p>（4）清空任务块且根据设置清空任务堆栈</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>调用OS_TaskInitTCB函数清空任务控制块</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>根据输入opt选项决定是否清空任务堆栈</li></ol><p>（5）根据堆栈生长方向生成堆栈限制指针</p><p>当时CPU_CFG_STK_GROWTH设置为CPU_STK_GROWTH_HI_TO_LO时，据此生成堆栈限制指针</p><p>（6）初始化任务堆栈</p><p>&nbsp;调用OSTaskStkInit函数初始化任务堆栈</p><p>（7）根据堆栈生长方向判断初始化后的堆栈是否越界</p><p>当时CPU_CFG_STK_GROWTH设置为CPU_STK_GROWTH_HI_TO_LO时，检查当前堆栈指针，如果堆栈指针小于任务栈基地址，表面任务栈已经溢出，则返回错误码OS_ERR_STAT_STK_SIZE_INVALID。</p><p>（8）设置任务优先级和基础优先级</p><p>（9）设置堆栈指针和堆栈限制指针以及p_ext指针</p><p>（10）设置时间片和剩余时间片</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>设置任务时间片</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>当OS_CFG_TASK_STK_REDZONE_EN功能启用时，如果输入的时间片为0，则设置任务剩余时间片为默认值，反之，用任务时间片设置任务剩余时间片</li></ol><p>（11）设置堆栈基地址和堆栈大小以及任务选项</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>OS_CFG_STAT_TASK_STK_CHK_EN功能启用时，根据输入设置任务堆栈的基地址和堆栈大小</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>根据输入设置任务选项</li></ol><p>（12）清空任务寄存器数组</p><p>如果OS_CFG_TASK_REG_TBL_SIZE大于0，清空任务寄存器数组</p><p>（13）初始化任务消息队列</p><p>调用OS_MsgQInit函数初始化任务消息队列</p><p>（14）调用任务创建钩子函数</p><p>（15）更新优先级表</p><p>进入临界区根据任务的优先级更新优先级表</p><p>（16）将任务添加至就绪列表</p><p>将任务添加至就绪列表，将任务计数器加1</p><p>（17）检查内核运行状态</p><p>如果内核不在运行态，退出临界区后直接返回；反之退出临界区执行任务调度</p><ol class="bullet"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>返回值</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>无</li><li class="ordered"><span class="ql-ui" contenteditable="false"></span>健康管理错误码</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>无</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;备注：如果在堆栈初始化过程中检测到堆栈溢出，OSTaskCreate() 将返回错误 OS_ERR_STAT_STK_SIZE_INVALID。在这种特定情况下，一些内存可能已损坏。因此，建议将 OS_ERR_STAT_STK_SIZE_INVALID 作为致命错误处理。</p>
+        </div>
+    </div>
+</body>
+</html>

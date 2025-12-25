@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OSTaskSemSet()-设置任务信号量.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p>需求编号：HLR_OS_01_15</p><p>工作描述：HLR：uC/OS-Ⅲ应提供设置任务信号量的接口。</p><p>是否需求：是</p><p>验证方法：测试验证</p><p>补充信息：</p><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数名称</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>OSTaskSemSet( )&nbsp;-设置任务信号量</li><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数框架</li></ol><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;void OSTaskSemPost(</div><div class="ql-code-block" data-language="plain">OS_TCB     *p_tcb,   / in: 指向目标任务的任务控制块（TCB） */</div><div class="ql-code-block" data-language="plain">OS_SEM_CTR   cnt,    / in: 设置给指定任务的任务信号量数量 */</div><div class="ql-code-block" data-language="plain">OS_ERR      *p_err   / out: 错误码指针 */</div><div class="ql-code-block" data-language="plain">);</div></div><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数描述</li></ol><p>该函数用于设置任务的任务信号量数量。如果目标任务正处于等待任务信号量的状态，则返回错误码OS_ERR_TASK_WAITING，返回值为0，&nbsp;否则，获取目标任务信号量计数器的值作为返回值，然后更新目标任务的任务计数器的值为输入的信号量数量，返回码为OS_ERR_NONE。</p><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>参数说明</li></ol><p>（1）p_tcb</p><p>类型：OS_TCB*</p><p>作用：指向目标任务的任务控制块（TCB）。</p><p>注意事项：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;如果 p_tcb 为 NULL，将设置当前任务的信号量数量。</p><p>（2）cnt</p><p>类型：OS_SEM_CTR</p><p>作用：任务信号量计数器的值，表示要设置给目标任务的任务信号量数量</p><p>（3）p_err</p><p>类型：OS_ERR*</p><p>作用：返回函数调用的结果状态码。</p><p>返回代码：</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_ERR_NONE：任务信号量数量设置成功。</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_ERR_SET_ISR:&nbsp;当前任务处于中断中</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_ERR_TASK_WAITING:&nbsp;当前任务正在等待任务信号量</div></div><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数算法逻辑</li></ol><p>（1）中断检查</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当OS_CFG_CALLED_FROM_ISR_CHK_EN功能启用时，检查OSIntNestingCtr是否大于0，如果大于0，表明当前处于中断中，返回错误码OS_ERR_SET_ISR，返回值为0</p><p>（2）检查输入参数p_tcb</p><p>&nbsp;&nbsp;&nbsp;&nbsp;进入临界区，如果 输入的参数p_tcb 为 NULL，则将其指向当前任务。</p><p>（3）检查目标任务是否正在等待任务信号量</p><p>&nbsp;&nbsp;&nbsp;&nbsp;如果目标任务处于等待态，等待超时态，等待挂起态，等待超时挂起态这四种状态中的一种，且其等待的事件为任务信号量，则退出临界区，设置错误码为OS_ERR_TASK_WAITING，返回值为0</p><p>（4）更新目标任务的任务信号量计数器</p><p>&nbsp;&nbsp;&nbsp;&nbsp;获取目标任务的信号量计数器的值，作为返回值，更新目标任务的任务信号量计数器的值为传入的信号量数量，退出临界区，返回码设置为OS_ERR_NONE</p><p><br></p><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>返回值</li></ol><p>类型：OS_SEM_CTR</p><p>作用：目标任务的任务信号量计数器的原始值</p><ol class="bullet"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>健康管理错误码</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>无</li></ol><p>&nbsp;&nbsp;备注：无</p>
+        </div>
+    </div>
+</body>
+</html>
