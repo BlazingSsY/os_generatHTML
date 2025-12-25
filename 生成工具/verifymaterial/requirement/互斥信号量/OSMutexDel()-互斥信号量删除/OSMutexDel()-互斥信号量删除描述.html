@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OSMutexDel()-互斥信号量删除.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p><strong>需求编号：</strong>HLR_OS_04_02</p><p><strong>工作描述：</strong>HLR：uC/OS-Ⅲ应提供互斥量删除接口。</p><p>是否需求：是</p><p>验证方法：测试验证</p><p><strong>补充信息：</strong></p><p>1.函数名称</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">OSMutexDel()&nbsp;---互斥量删除函数</div></div><p>2.函数框架</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">OS_OBJ_QTY OSMutexDel (</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_MUTEX  *p_mutex,    /* 输入：指向互斥量控制块的指针 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_OPT     opt,        /* 输入：删除选项 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_ERR    *p_err       /* 输出：错误码指针 */</div><div class="ql-code-block" data-language="plain">)</div><div class="ql-code-block" data-language="plain"><br></div></div><p>3.函数描述</p><p>该函数用于删除一个互斥量。它可以有条件地删除互斥量（仅当没有任务挂起时）或无条件地删除互斥量（强制删除并处理挂起任务）。</p><p>4.参数说明</p><p>&nbsp;&nbsp;&nbsp;&nbsp;(1) p_mutex</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：OS_MUTEX*</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作用：指向要删除的互斥量控制块的指针。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;(2) opt</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：OS_OPT</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作用：指定删除选项。可以是以下两种取值：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OS_OPT_DEL_NO_PEND：仅在没有任务因等待该互斥量而挂起时才删除。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OS_OPT_DEL_ALWAYS：无论如何都删除互斥量。如果存在等待该互斥量的任务，会将这些任务从挂起列表中移除，并设置它们的 pend 状态为 OS_STATUS_PEND_DEL，表示因互斥量被删除而终止等待。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;(3) p_err</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：OS_ERR*</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作用：用于返回函数执行的错误代码，指示函数调用是否成功以及失败的原因。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;错误码：</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">OS_ERR_NONE：函数执行成功，无错误。</div><div class="ql-code-block" data-language="plain">OS_ERR_DEL_ISR：试图从中断服务例程（ISR）中删除互斥量，这是不允许的。</div><div class="ql-code-block" data-language="plain">OS_ERR_OS_NOT_RUNNING：内核尚未运行时调用了该函数。</div><div class="ql-code-block" data-language="plain">OS_ERR_OBJ_PTR_NULL：传入的互斥量控制块指针 p_mutex 为 NULL。</div><div class="ql-code-block" data-language="plain">OS_ERR_OBJ_TYPE：传入的 p_mutex 指向的对象类型不是互斥量类型。</div><div class="ql-code-block" data-language="plain">OS_ERR_TASK_WAITING：当 opt 为 OS_OPT_DEL_NO_PEND 时，发现有任务正在等待该互斥量，所以无法删除。</div><div class="ql-code-block" data-language="plain">OS_ERR_OPT_INVALID：传入的 opt 参数不是有效的选项。</div></div><p><br></p><p>5.函数算法逻辑</p><p>(1)检查是否在中断环境中调用</p><p>如果 OS_CFG_CALLED_FROM_ISR_CHK_EN 功能启用，检测当前是否处于中断服务例程（ISR）中。若处于 ISR 中，将错误码 OS_ERR_DEL_ISR 存储到 p_err 中，并返回 0 。</p><p><br></p><p>(2)检查内核是否处于运行状态</p><p>如果 OS_CFG_INVALID_OS_CALLS_CHK_EN 功能启用，判断 OSRunning 是否等于 OS_STATE_OS_RUNNING 。若不等于，说明内核未正常运行，将错误码 OS_ERR_OS_NOT_RUNNING 存储到 p_err 中，并返回 0 。</p><p><br></p><p>(3)检查互斥量控制块指针的有效性</p><p>如果 OS_CFG_ARG_CHK_EN 功能启用，检查 p_mutex 是否为 NULL。若为 NULL，将错误码 OS_ERR_OBJ_PTR_NULL 存储到 p_err 中，并返回 0 。</p><p><br></p><p>(4)检查互斥量控制块的类型</p><p>如果 OS_CFG_OBJ_TYPE_CHK_EN 功能启用，检查 p_mutex-&gt;Type 是否等于 OS_OBJ_TYPE_MUTEX 。若不等于，将错误码 OS_ERR_OBJ_TYPE 存储到 p_err 中，并返回 0 。</p><p><br></p><p>(5)根据删除选项处理互斥量删除</p><p>进入临界区。</p><p>获取互斥量的挂起列表 p_pend_list 和初始化任务计数 nbr_tasks 为 0。</p><p>根据 opt 参数的值进行分支判断：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;当 opt 为 OS_OPT_DEL_NO_PEND时，检查等待列表的头部指针是否为空：</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>若为空，表示没有任务在等待该互斥量。如果互斥量有持有者任务，将其从持有者任务的互斥量组中移除。调用 OS_MutexClr() 清除互斥量，退出临界区，设置错误码为 OS_ERR_NONE 并返回任务计数0</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>若不为空，退出临界区，设置错误码为 OS_ERR_TASK_WAITING 并返回 0 。</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;当 opt 为 OS_OPT_DEL_ALWAYS时，初始化时间戳变量 ts 为 0：</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>循环遍历等待列表，只要等待列表的头部指针不为空，就获取当前等待列表头部的 TCB 指针 p_tcb，然后调用 OS_PendAbort() 函数来中止任务的等待操作，设置任务的 pend 状态为 OS_STATUS_PEND_DEL，同时任务计数 nbr_tasks 增加 1。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>如果互斥量有持有者任务，将其从持有者任务的互斥量组中移除。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>如果持有者任务的当前优先级不等于其基础优先级，计算新的优先级并调用 OS_TaskChangePrio() 更新任务优先级。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>调用 OS_MutexClr() 清除互斥量，退出临界区</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>调用 OSSched() 进行任务调度，设置错误码为 OS_ERR_NONE 并返回任务计数。</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;其他情况：退出临界区，设置错误码为 OS_ERR_OPT_INVALID 并返回 0 。</p><p><br></p><p>6.返回值</p><p>&nbsp;&nbsp;&nbsp;&nbsp;类型 ：OS_OBJ_QTY</p><p>&nbsp;&nbsp;&nbsp;&nbsp;作用 ：返回被中止等待该互斥量的任务数量。如果是无条件删除（OS_OPT_DEL_ALWAYS），返回被中止的任务数；如果是仅在无任务等待时删除（OS_OPT_DEL_NO_PEND）且删除成功，则返回 0；如果删除失败（如有任务等待且选择 OS_OPT_DEL_NO_PEND），也返回 0</p><p>7.健康管理错误码</p><p>无</p><p>备注：无</p>
+        </div>
+    </div>
+</body>
+</html>

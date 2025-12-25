@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OS_RdyListMoveHeadToTail()-将就绪列表的头部任务移动至尾部.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p><strong>需求编号：</strong>&nbsp;HLR_OS_11_24</p><p><strong>工作描述：</strong>&nbsp;HLR：uC/OS-III应提供将就绪队列头部任务移动至就绪列表尾部的接口。</p><p><strong>是否需求：</strong>&nbsp;是</p><p><strong>验证方法：</strong>&nbsp;测试验证</p><p><strong>补充信息：</strong></p><p>1.函数名称</p><p>&nbsp;OS_RdyListMoveHeadToTail() - 将就绪队列的头部任务控移动至尾部</p><p>2.函数框架</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">void OS_RdyListMoveHeadToTail (OS_RDY_LIST *p_list)</div></div><p>3.函数描述</p><p>该函数用于将指定就绪队列的头部任务节点移动到就绪列表尾部，以支持同优先级任务的时间片轮转调度策略。函数会根据就绪列表中任务数量的不同，执行相应的操作。</p><p>4.参数说明</p><p>（1）p_list</p><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>&nbsp;类型：OS_RDY_LIST*</li><li class="ordered"><span class="ql-ui" contenteditable="false"></span>&nbsp;作用：指向需要调整顺序的就绪队列表。</li></ol><p>注意事项：该指针不可为 NULL，且必须指向有效的就绪队列。</p><p>5.算法逻辑</p><p>（1）根据就绪列表中的任务数量，分别做以下处理：</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>若就绪列表中只有一个任务，即头部和尾部相同，直接退出</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>若该就绪列表只有两个任务，则交换就绪列表头部指针和尾部指针，同时将移动后的头部任务的前向指针置空，后向指针指向尾部任务，尾部任务的前向指针指向头部任务，后向指针置空</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>若就绪列表中有两个以上的任务，将列表头指针指向就绪列表中原头部任务的下一个任务，列表尾指针指向就绪列表中原头部任务，同时更新相关任务的前向指针和后向指针</li></ol><p>6.返回值</p><p>&nbsp;无。</p><p>7.健康管理错误码</p><p>&nbsp;无</p><p>备注：</p><p>&nbsp;该函数为内部函数，用户不应直接调用。仅在调度器内部根据时间片调度策略自动触发调用，用于支持任务公平调度。</p>
+        </div>
+    </div>
+</body>
+</html>

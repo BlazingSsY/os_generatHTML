@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OSTmrCreate()-创建定时器.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p>需求编号：HLR_OS_06_01</p><p>工作描述：HLR：uC/OS-Ⅲ应提供定时器创建接口，以创建和初始化定时器。</p><p>是否需求：是</p><p>验证方法：测试验证</p><p>补充信息：</p><p><strong>1. 函数名称</strong></p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">OSTmrCreate()---定时器创建</div></div><p><strong>2. 函数框架</strong></p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">void OSTmrCreate {</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_TMR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*p_tmr,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* 输入：指向定时器控制块的指针 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;CPU_CHAR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*p_name,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* 输入：定时器的名称 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_TICK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dly,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* 输入：定时器启动延迟时间（滴答数） */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_TICK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;period,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* 输入：定时器周期时间（滴答数） */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_OPT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;opt,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* 输入：定时器选项 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_TMR_CALLBACK_PTR&nbsp;&nbsp;p_callback,&nbsp;&nbsp;/* 输入：定时器回调函数指针 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;void&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*p_callback_arg,/* 输入：回调函数参数 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_ERR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*p_err&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* 输出：错误码指针 */</div><div class="ql-code-block" data-language="plain">}</div></div><p><strong>3. 函数描述</strong></p><p>该函数用于创建一个定时器。定时器可以是周期性的或单次触发的，具体由选项参数决定。函数会初始化定时器控制块，并将其设置为停止状态。</p><p><strong>4. 参数说明</strong></p><p>(1) p_tmr</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>类型：OS_TMR*</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>作用：指向定时器控制块的指针，用于管理定时器。</li></ol><p>(2) p_name</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>类型：CPU_CHAR*</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>作用：定时器的名称，用于调试和跟踪。</li></ol><p>(3) dly</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>类型：OS_TICK</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>作用：定时器启动前的延迟时间（以滴答数为单位）。</li></ol><p>(4) period</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>类型：OS_TICK</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>作用：定时器的周期时间（以滴答数为单位），仅适用于周期性定时器。</li></ol><p>(5) opt</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>类型：OS_OPT</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>作用：指定定时器的类型，可以是以下两种取值：</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OS_OPT_TMR_PERIODIC：创建周期性定时器。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OS_OPT_TMR_ONE_SHOT：创建单次触发定时器。</p><p>(6) p_callback</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>类型：OS_TMR_CALLBACK_PTR</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>作用：指向定时器回调函数的指针，当定时器到期时调用该函数。</li></ol><p>(7) p_callback_arg</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>类型：void*</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>作用：传递给回调函数的参数。</li></ol><p>(8) p_err</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>类型：OS_ERR*</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>作用：用于返回函数执行的错误码，指示函数调用是否成功以及失败的原因。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>错误码：</li></ol><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">OS_ERR_TMR_ISR：从中断服务例程调用该函数，这是不允许的。</div><div class="ql-code-block" data-language="plain">OS_ERR_OBJ_PTR_NULL：传入的定时器控制块指针无效。</div><div class="ql-code-block" data-language="plain">OS_ERR_OPT_INVALID：传入的 opt 参数不是有效的选项。</div><div class="ql-code-block" data-language="plain">OS_ERR_TMR_INVALID_PERIOD：对于周期性定时器，周期时间设置为 0。</div><div class="ql-code-block" data-language="plain">OS_ERR_TMR_INVALID_CALLBACK：对于周期性定时器，回调函数指针为 NULL。</div><div class="ql-code-block" data-language="plain">OS_ERR_TMR_INVALID_DLY：对于单次触发定时器，延迟时间设置为 0。</div><div class="ql-code-block" data-language="plain">OS_ERR_OBJ_CREATED：定时器控制块已被创建。</div><div class="ql-code-block" data-language="plain">OS_ERR_NONE：函数执行成功，无错误。</div></div><p><br></p><p><strong>5. 函数算法逻辑</strong></p><p>1).&nbsp;检查是否在中断环境中调用</p><p>如果 OS_CFG_CALLED_FROM_ISR_CHK_EN 功能启用，检测当前是否处于中断服务例程（ISR）中。若处于 ISR 中，将错误码 OS_ERR_TMR_ISR 存储到 p_err 中，并返回。</p><p>2).&nbsp;参数检查</p><p>如果 OS_CFG_ARG_CHK_EN 功能启用：</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>检查定时器控制块指针的有效性：检查 p_tmr 是否为 NULL。若为 NULL，将错误码 OS_ERR_OBJ_PTR_NULL 存储到 p_err 中，并返回。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>检查定时器选项的有效性：根据 opt 参数的值进行分支判断：</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当 opt 为 OS_OPT_TMR_PERIODIC 时：检查 period 是否为 0。若是，将错误OS_ERR_TMR_INVALID_PERIOD 存储到 p_err 中，并返回。检查 p_callback 是否为 NULL。若是，将错误码 OS_ERR_TMR_INVALID_CALLBACK 存储到 p_err 中，并返回。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当 opt 为 OS_OPT_TMR_ONE_SHOT 时：检查 dly 是否为 0。若是，将错误码 OS_ERR_TMR_INVALID_DLY 存储到 p_err 中，并返回。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他情况：将错误码 OS_ERR_OPT_INVALID 存储到 p_err 中，并返回。</p><p>3).&nbsp;锁定定时器模块（如果内核运行）</p><p>如果内核处于运行状态（OSRunning == OS_STATE_OS_RUNNING），调用 OS_TmrLock() 锁定定时器模块，防止在定时器创建过程中被其他任务或中断干扰。</p><p>4).&nbsp;检查定时器控制块是否已被创建</p><p>如果启用了对象类型检查（OS_OBJ_TYPE_REQ &gt; 0u）并且启用了已创建对象检查（OS_CFG_OBJ_CREATED_CHK_EN &gt; 0u），检查定时器控制块的类型是否为定时器类型（OS_OBJ_TYPE_TMR）。如果是，解锁定时器模块（如果内核运行），将错误码 OS_ERR_OBJ_CREATED 存储到 p_err 中，并返回。</p><p>5).&nbsp;初始化定时器控制块</p><p>将定时器控制块的类型设置为 OS_OBJ_TYPE_TMR（如果 OS_OBJ_TYPE_REQ &gt; 0u）。</p><p>将定时器的状态设置为 OS_TMR_STATE_STOPPED，表示定时器处于停止状态。</p><p>将定时器的启动延迟时间（Dly）设置为 dly 乘以滴答数转换因子（OSTmrToTicksMult）。</p><p>将定时器的剩余时间（Remain）初始化为 0。</p><p>将定时器的周期时间（Period）设置为 period 乘以滴答数转换因子（OSTmrToTicksMult）。</p><p>将定时器的选项（Opt）、回调函数指针（CallbackPtr）、回调函数参数（CallbackPtrArg）分别设置为对应的输入参数。</p><p>将定时器的 NextPtr 和 PrevPtr 指针初始化为 NULL，表示定时器未被插入到任何链表中。</p><p>6).&nbsp;解锁定时器模块（如果内核运行）</p><p>如果内核处于运行状态，调用 OS_TmrUnlock() 解锁定时器模块。</p><p>7).&nbsp;设置错误码</p><p>验证在所有参数有效的情况下，将错误码 OS_ERR_NONE 存储到 p_err 中，表示定时器创建成功。</p><p>6. 返回值</p><p>类型&nbsp;：无返回值（void）</p><p>作用&nbsp;：该函数不返回值，直接修改定时器控制块的内容，并通过 p_err 参数返回执行状态。</p><p>7. 健康管理错误码</p><p>无。</p>
+        </div>
+    </div>
+</body>
+</html>

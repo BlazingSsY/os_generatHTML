@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OSMutexCreate()-互斥信号量创建.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p><strong>需求编号：</strong>HLR_OS_04_01</p><p><strong>工作描述：</strong>HLR：uC/OS-Ⅲ应提供互斥量创建接口。</p><p>是否需求：是</p><p>验证方法：测试验证</p><p><strong>补充信息：</strong></p><p>1.函数名称</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">OSMutexCreate()&nbsp;---&nbsp;互斥量创建函数</div></div><p>2.函数框架</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">void OSMutexCreate (</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_MUTEX  *p_mutex,    /* 输入：指向互斥量控制块的指针 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;CPU_CHAR  *p_name,     /* 输入：互斥量的名称 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_ERR    *p_err       /* 输出：错误码指针 */</div><div class="ql-code-block" data-language="plain">)</div></div><p>3.函数描述</p><p>该函数用于创建一个互斥量。互斥量用于保护共享资源，确保同一时间只有一个任务可以访问该资源。函数会初始化互斥量控制块，并将其标记为可用状态</p><p>4.参数说明</p><p>&nbsp;&nbsp;&nbsp;&nbsp;(1) p_mutex</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：OS_MUTEX*</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作用：指向互斥量控制块的指针，用于管理互斥量。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;(2) p_name</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：CPU_CHAR*</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作用：互斥量的名称，用于调试和跟踪。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;(3) p_err</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：OS_ERR*</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作用：用于返回函数执行的错误代码，指示函数调用是否成功以及失败的原因。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;错误码：</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">OS_ERR_NONE：函数执行成功，无错误。</div><div class="ql-code-block" data-language="plain">OS_ERR_CREATE_ISR：从中断服务例程调用该函数，这是不允许的。</div><div class="ql-code-block" data-language="plain">OS_ERR_OBJ_PTR_NULL：传入的互斥量控制块指针无效。</div><div class="ql-code-block" data-language="plain">OS_ERR_OBJ_CREATED：互斥量控制块已被创建。</div></div><p><br></p><p>5.函数算法逻辑</p><p>(1)检查是否在中断环境中调用</p><p>如果 OS_CFG_CALLED_FROM_ISR_CHK_EN 功能启用，检测当前是否处于中断服务例程（ISR）中。若处于 ISR 中，将错误码 OS_ERR_CREATE_ISR 存储到 p_err 中，并返回。</p><p><br></p><p>(2)检查互斥量控制块指针的有效性</p><p>如果 OS_CFG_ARG_CHK_EN 功能启用，检查 p_mutex 是否为 NULL。若为 NULL，将错误码 OS_ERR_OBJ_PTR_NULL 存储到 p_err 中，并返回。</p><p><br></p><p>(3)对象类型检查</p><p>进入临界区。</p><p>如果对象类型检查（OS_OBJ_TYPE_REQ 和创建对象检查（OS_CFG_OBJ_CREATED_CHK_EN启用，检查互斥量控制块的类型是否已设置为互斥量类型。如果是，退出临界区，将错误码 OS_ERR_OBJ_CREATED 存储到 p_err 中，并返回。</p><p><br></p><p>(4)初始化互斥量控制块</p><p>将互斥量控制块的类型设置为互斥量类型（OS_OBJ_TYPE_MUTEX）。</p><p>初始化互斥量的下一个互斥量指针为 NULL，表示该互斥量未链接到其他互斥量。</p><p>将互斥量的所有者任务控制块指针设置为 NULL，表示当前没有任务拥有该互斥量。</p><p>将互斥量的所有者嵌套计数设置为 0，表示该互斥量未被任何任务锁定。</p><p>调用 OS_PendListInit() 函数初始化互斥量的挂起列表，该列表用于管理等待该互斥量的任务。</p><p><br></p><p>(5)函数返回</p><p>退出临界区，将错误码 OS_ERR_NONE 存储到 p_err 中。</p><p>6.返回值</p><p>无</p><p>7.健康管理错误码</p><p>无</p><p>备注：</p>
+        </div>
+    </div>
+</body>
+</html>

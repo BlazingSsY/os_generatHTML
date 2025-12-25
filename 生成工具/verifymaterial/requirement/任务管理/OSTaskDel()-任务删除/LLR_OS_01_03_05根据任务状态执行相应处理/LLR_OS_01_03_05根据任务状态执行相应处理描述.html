@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="LLR_OS_01_03_05根据任务状态执行相应处理.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p>需求编号需求编号：LLR_OS_01_03_05</p><p>需求描述：</p><p>1.当任务处于就绪态时，需删除就绪列表相关信息</p><p>2.当任务处于挂起态时，无须处理</p><p>3.当任务处于延时或延时挂起态时，需清除延时列表里的相关信息</p><p>4.当任务处于等待态，等待挂起态，等待超时态，等待超时挂起态时，对于等待超时和等待超时挂起，需清除延时列表里的相关信息，此外，对于所有的等待状态，需根据不同的等待目标，做如下处理：</p><p>&nbsp;&nbsp;4.1 无等待目标，等待任务消息，等待任务信号量，无须处理</p><p>&nbsp;&nbsp;4.2 等待事件，等待消息，等待信号量，需清除对应等待列表的相关信息</p><p>&nbsp;&nbsp;4.3 等待互斥信号量，需清除对应等待列表的相关信息，并将等待状态更新为无等待事件，如果互斥信号量的持有者因任务做了优先级提升，需要重新计算互斥量持有者的优先级：首先从持有者任务的互斥量组中获取最高优先级，如果该优先级低于互斥量持有者的基础优先级，将使用基础优先级作为计算出的新优先级，反之则使用互斥量组最高优先级作为计算出的新优先级，如果计算出的新优先级跟互斥量持有者的当前优先级不同，需更调用OS_TaskChangePrio函数更改互斥量持有者的优先级</p><p>&nbsp;&nbsp;&nbsp;4.4 其他等待目标，无须处理</p><p>5.当任务处于其他状态时，返回当前状态不可用的错误：OS_ERR_STATE_INVALID</p>
+        </div>
+    </div>
+</body>
+</html>

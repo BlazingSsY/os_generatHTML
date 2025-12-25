@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="LLR_OS_11_14_01终止任务等待.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p>需求编号：LLR_OS_11_14_01</p><p>需求描述：</p><p>根据目标任务状态进行分支处理：</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>目标任务处于等待态或等待超时态</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;&nbsp;•&nbsp;若启用消息队列功能，则将目标任务的Msg_Ptr置空，Msg_Size置0</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;&nbsp;•&nbsp;调用OS_PendListRemove函数将目标任务从相应等待列表中移除</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;&nbsp;•&nbsp;如果启用了时钟节拍，并且目标任务处于等待超时态，则调用OS_TickListRemove函数将目标任务从相应延时列表中移除</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;&nbsp;•&nbsp;将任务插入到就绪列表中，设置任务状态为就绪态，设置等待状态为传入的reason参数，设置等待对象为OS_TASK_PEND_ON_NOTHING，退出</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>目标任务处于等待挂起态或等待超时挂起态</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;&nbsp;•&nbsp;若启用消息队列功能，则将目标任务的Msg_Ptr置空，Msg_Size置0</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;&nbsp;•&nbsp;调用OS_PendListRemove函数将目标任务从相应等待列表中移除</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;&nbsp;•&nbsp;如果启用了时钟节拍，并且目标任务处于等待超时挂起态，则调用OS_TickListRemove函数将目标任务从相应延时列表中移除</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;&nbsp;•&nbsp;设置任务状态为挂起态，设置等待状态为传入的reason参数，设置等待对象为OS_TASK_PEND_ON_NOTHING，退出</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>若目标任务为就绪态，延时态，挂起态、延时挂起态或其他状态，不处理，直接退出</li></ol><p><br></p><p><br></p>
+        </div>
+    </div>
+</body>
+</html>

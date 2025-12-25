@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OS_TaskReturn()-处理任务意外返回.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p>需求编号：HLR_OS_01_21</p><p>工作描述：HLR：uC/OS-Ⅲ应提供处理任务意外返回接口。</p><p>是否需求：是</p><p>验证方法：测试验证</p><p>补充信息：</p><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数名称</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>OS_TaskReturn() - 处理任务意外返回。</li><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数框架</li></ol><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">void OS_TaskReturn(</div><div class="ql-code-block" data-language="plain">void</div><div class="ql-code-block" data-language="plain">);</div></div><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数描述</li></ol><p>&nbsp;&nbsp;&nbsp;该函数用于处理任务意外返回的情况。在 uC/OS-III 中，任务通常应该是一个无限循环或在完成工作后删除自己。如果任务意外返回（即函数执行结束而没有被删除或陷入无限循环），系统会调用该函数来处理这种情况。</p><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>参数说明</li></ol><p>无参数</p><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>函数算法逻辑</li></ol><p>（1）调用钩子函数</p><p>&nbsp;&nbsp;&nbsp;&nbsp;调用 OSTaskReturnHook 钩子函数，允许用户自定义行为来处理任务意外返回的情况。用户可以在钩子函数中记录日志、执行清理操作或采取其他必要的措施。</p><p>（2）删除任务</p><p>&nbsp;&nbsp;&nbsp;&nbsp;调用 OSTaskDel 函数删除当前任务。</p><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>返回值</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;无</p><ol class="ordered"><li class="ordered"><span class="ql-ui" contenteditable="false"></span>健康管理错误码</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;无</p><p>备注：此函数是 uC/OS-III 的内部函数，应用程序不应直接调用它。</p>
+        </div>
+    </div>
+</body>
+</html>

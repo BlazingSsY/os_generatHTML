@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>verify_traceable_index</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 40px;
+        }
+        
+        h1 {
+            font-size: 28px;
+            color: #2c3e50;
+            text-align: center;
+            margin: 30px 0 40px 0;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        h2 {
+            font-size: 22px;
+            color: #34495e;
+            margin: 35px 0 20px 0;
+            padding-left: 15px;
+            border-left: 5px solid #3498db;
+            background-color: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        h3 {
+            font-size: 18px;
+            color: #2c3e50;
+            margin: 25px 0 15px 0;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        h4 {
+            font-size: 16px;
+            color: #34495e;
+            margin: 20px 0 12px 0;
+            font-weight: 600;
+        }
+        
+        p {
+            margin: 15px 0;
+            text-align: justify;
+        }
+        
+        ul {
+            margin: 15px 0;
+            padding-left: 35px;
+        }
+        
+        li {
+            margin: 8px 0;
+            line-height: 1.8;
+        }
+        
+        .link-group {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .link-group h4 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        .link-item {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            margin: 8px 12px 8px 0;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .link-item:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        
+        .note {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        
+        .definition {
+            background-color: #e8f4fd;
+            border: 1px solid #b3e0ff;
+            border-radius: 5px;
+            padding: 12px 15px;
+            margin: 10px 0;
+        }
+        
+        .definition strong {
+            color: #2c3e50;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        /* 图片样式 */
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .image-caption {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .image-placeholder {
+            background-color: #e9ecef;
+            border: 2px dashed #dee2e6;
+            border-radius: 8px;
+            padding: 40px 20px;
+            text-align: center;
+            color: #6c757d;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+            
+            h1 { font-size: 24px; }
+            h2 { font-size: 20px; }
+            h3 { font-size: 18px; }
+            h4 { font-size: 16px; }
+            
+            .link-item {
+                display: block;
+                margin: 8px 0;
+                text-align: center;
+            }
+            
+            .image-container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>可追溯验证材料查看指南</h1>
+    
+    <div class="section">
+        <p>本文提供UCOSIII验证材料的可追溯性信息查看指南，主要包含以下内容：</p>
+        <ul>
+            <li>需求、源码、设计组件、测试用例、测试结果、文档等</li>
+        </ul>
+        <p></p>
+        <h5>注意：本文中的图片仅为示意图，取自UCOSIII的验证材料，其他项目可做参考</h3>
+    </div>
+
+    <div class="section">
+        <h2>1. 需求</h2>
+        <p>需求的可追溯验证材料可以通过两种方式查看：需求表和需求导航</p>
+        
+        <h3>1.1 需求表</h3>
+        <p>需求表可按照SF-IR-SR的层级进行分级查看，点击下面的链接即可进入相应的SF级页面进行查看</p>
+        
+        <div class="link-group">
+            <h4>需求表查看链接：</h4>
+            <a href="requirement/req_table/SF_IR.html" class="link-item">SF级需求表</a>
+        </div>
+
+        <h4>1.1.1 SF级需求表：</h4>
+        <p>点击上面的SF级需求表查看链接后，将进入相应页面，如下图所示：</p>
+        
+        <div class="image-container">
+            <img src="verify_traceable_index.files/image001.png" alt="分级查看页面示意图" onerror="this.style.display='none'; document.getElementById('placeholder-1').style.display='block';">
+            <div class="image-caption">图1: SF级需求表示意图</div>
+        </div>
+        
+        <div id="placeholder-1" class="image-placeholder" style="display: none;">
+            <p>图片加载失败：image001.png</p>
+            <p>请确保图片文件存在于 verify_traceable_index.files/ 目录中</p>
+        </div>
+        
+        <div class="definition">
+            <p><strong>SF</strong>：为System Feature的缩写，用于描述产品具备、可为客户带来价值的"大颗粒"功能或能力，可看作当前软件的最顶层需求，其内容UCOSIII自带一个超链接，点击可查看SF详情</p>
+            <p><strong>IR-高层需求ID</strong>：该ID是当前SF所分解出的每个IR级的高层需求所对应的唯一ID，用来标识每一个IR，点击任一高层需求ID将进入该IR产生的下一级需求表页面</p>
+            <p><strong>IR-高层需求名称</strong>：该IR的具体名称，点击可查看该IR的详细信息</p>
+        </div>
+
+        <h4>1.1.1.1 点击"UCOSIII"，将进入如下页面：</h4>
+        
+        <div class="image-container">
+            <img src="verify_traceable_index.files/image002.png" alt="SF详细信息页面示意图" onerror="this.style.display='none'; document.getElementById('placeholder-2').style.display='block';">
+            <div class="image-caption">图2: SF详细信息页面示意图</div>
+        </div>
+        
+        <div id="placeholder-2" class="image-placeholder" style="display: none;">
+            <p>图片加载失败：image002.png</p>
+            <p>请确保图片文件存在于 verify_traceable_index.files/ 目录中</p>
+        </div>
+        
+        <p>上图中，包含了SF的详细信息，包含基本信息、需求描述、CM信息、关联项四大类信息</p>
+        <ul>
+        	  <li>"基本信息"提供需求级别、需求ID、需求名称</li>
+            <li>"需求描述"提供该需求的详细描述，可点击"详细描述"链接查看</li>
+            <li>"CM信息"提供该需求的配置管理信息，点击"评审记录"和"历史记录"可查看相应的记录信息</li>
+            <li>"关联项"提供该SF的下一层级(IR级)需求，可点击需求名称进入需求详细信息页面</li>
+        </ul>
+        <h4>1.1.1.2 点击任一"IR-高层需求名称"，将进入该IR的详细信息页面，如下所示：</h4>
+        
+        <div class="image-container">
+            <img src="verify_traceable_index.files/image003.png" alt="IR详细信息页面示意图" onerror="this.style.display='none'; document.getElementById('placeholder-3').style.display='block';">
+            <div class="image-caption">图3: IR详细信息页面示意图</div>
+        </div>
+        
+        <div id="placeholder-3" class="image-placeholder" style="display: none;">
+            <p>图片加载失败：image003.png</p>
+            <p>请确保图片文件存在于 verify_traceable_index.files/ 目录中</p>
+        </div>
+        
+        <p>上图中，包含描述了IR的详细信息，包含基本信息、需求描述、CM信息、关联项四大类信息</p>
+        <ul>
+        	  <li>"基本信息"提供需求级别、需求ID、需求名称</li>
+            <li>"需求描述"提供该需求的详细描述，可点击"详细描述"链接查看</li>
+            <li>"CM信息"提供该需求的配置管理信息，点击"评审记录"和"历史记录"可查看相应的记录信息</li>
+            <li>"关联项"提供该IR的上一层级需求(SF级)和下一层级(SR级)需求，可点击需求名称进入需求详细信息页面</li>
+        </ul>
+
+        <h4>1.1.1.3 点击"IR-高层需求ID"中的任一高层需求ID，即可进入由该IR产生IR级需求表，包含该IR产生的所有SR级需求，如下图所示：</h4>
+        
+        <div class="image-container">
+            <img src="verify_traceable_index.files/image004.png" alt="SR和AR需求表示意图" onerror="this.style.display='none'; document.getElementById('placeholder-4').style.display='block';">
+            <div class="image-caption">图4: IR级需求表示意图</div>
+        </div>
+        
+        <div id="placeholder-4" class="image-placeholder" style="display: none;">
+            <p>图片加载失败：image004.png</p>
+            <p>请确保图片文件存在于 verify_traceable_index.files/ 目录中</p>
+        </div>
+        
+        <div class="definition">
+            <p><strong>SR-高层需求ID</strong>：该ID是当前IR所分解出的每个SR级的高层需求所对应的唯一ID(全局唯一)，点击任一高层需求ID将进入该SR产生的下一级需求表页面</p>
+            <p><strong>SR-高层需求名称</strong>：该SR的具体名称，点击可查看该SR的详细信息</p>
+            <p>点击<strong>返回上一级</strong>将进入上一层级需求表</p>
+        </div>
+
+        <h4>1.1.1.4 点击任一"SR-高层需求名称"，将进入如下页面：</h4>
+        
+        <div class="image-container">
+            <img src="verify_traceable_index.files/image005.png" alt="SR详细信息页面示意图" onerror="this.style.display='none'; document.getElementById('placeholder-5').style.display='block';">
+            <div class="image-caption">图5: SR详细信息页面示意图</div>
+        </div>
+        
+        <div id="placeholder-5" class="image-placeholder" style="display: none;">
+            <p>图片加载失败：image005.png</p>
+            <p>请确保图片文件存在于 verify_traceable_index.files/ 目录中</p>
+        </div>
+        
+        <p>上图中，包含描述了SR的详细信息，包含基本信息、需求描述、CM信息、关联项四大类信息</p>
+        <ul>
+        	  <li>"基本信息"提供需求级别、需求ID、需求名称</li>
+            <li>"需求描述"提供该需求的详细描述，可点击"详细描述"链接查看</li>
+            <li>"CM信息"提供该需求的配置管理信息，点击"评审记录"和"历史记录"可查看相应的记录信息</li>
+            <li>"关联项"提供该SR的上一层级需求(IR级)和下一层级(AR级)需求，可点击需求名称进入需求详细信息页面</li>
+        </ul>
+
+        <h4>1.1.1.5 点击"SR-高层需求ID"中的任一高层需求ID，即可进入由该SR产生SR级需求表，包含该SR产生的所有AR级需求，如下图所示：</h4>
+        
+        <div class="image-container">
+            <img src="verify_traceable_index.files/image006.png" alt="SR和AR需求表示意图" onerror="this.style.display='none'; document.getElementById('placeholder-6').style.display='block';">
+            <div class="image-caption">图6: SR级需求表示意图</div>
+        </div>
+        
+        <div id="placeholder-6" class="image-placeholder" style="display: none;">
+            <p>图片加载失败：image006.png</p>
+            <p>请确保图片文件存在于 verify_traceable_index.files/ 目录中</p>
+        </div>
+        
+        <div class="definition">
+            <p><strong>AR-低层需求ID</strong>：该ID是当前SR所分解出的每个AR级的低层需求所对应的唯一ID(全局唯一)</p>
+            <p><strong>AR-低层层需求名称</strong>：该AR的具体名称，点击可查看该AR的详细信息</p>
+            <p>点击<strong>返回上一级</strong>将进入上一层级需求表</p>
+        </div>
+
+        <h4>1.1.1.6 点击任一"AR-高层需求名称"，将进入如下页面：</h4>
+        
+        <div class="image-container">
+            <img src="verify_traceable_index.files/image007.png" alt="AR详细信息页面示意图" onerror="this.style.display='none'; document.getElementById('placeholder-7').style.display='block';">
+            <div class="image-caption">图7: AR详细信息页面示意图</div>
+        </div>
+        
+        <div id="placeholder-7" class="image-placeholder" style="display: none;">
+            <p>图片加载失败：image007.png</p>
+            <p>请确保图片文件存在于 verify_traceable_index.files/ 目录中</p>
+        </div>
+        
+        <p>上图中，包含描述了AR的详细信息，包含基本信息、需求描述、CM信息、关联项四大类信息</p>
+        <ul>
+        	  <li>"基本信息"提供需求级别、需求ID、需求名称</li>
+            <li>"需求描述"提供该需求的详细描述，可点击"详细描述"链接查看</li>
+            <li>"CM信息"提供该需求的配置管理信息，点击"评审记录"和"历史记录"可查看相应的记录信息</li>
+            <li>"关联项"提供该AR的上一层级需求(SR级)和关联的测试用例，可点击需求名称进入需求详细信息页面，点击测试用例名称进入测试用例详细信息页面</li>
+        </ul>
+
+    </div>
+
+    <div class="section">
+        <h3>1.2 需求导航</h3>
+        <p>需求导航以SF-IR-SR-AR的层级提供导航浏览。点击下面的链接可进入需求导航页面</p>
+        
+        <div class="link-group">
+            <h4>需求导航链接：</h4>
+            <a href="requirement/req_navigation/需求导航.html" class="link-item" target="_blank">需求导航</a>
+        </div>
+        
+        <p>点击上面的"需求导航"链接将进入需求导航页面，如下图所示：</p>
+        
+        <div class="image-container">
+            <img src="verify_traceable_index.files/image008.png" alt="需求导航示意图" onerror="this.style.display='none'; document.getElementById('placeholder-8').style.display='block';">
+            <div class="image-caption">图8: 需求导航示意图</div>
+        </div>
+        
+        <div id="placeholder-8" class="image-placeholder" style="display: none;">
+            <p>图片加载失败：image008.png</p>
+            <p>请确保图片文件存在于 verify_traceable_index.files/ 目录中</p>
+        </div>
+        
+        <p>需求导航可按SF-IR-SR-AR层级进行追溯浏览。点击右侧箭头可展开/折叠下级需求。点击"展开全部"可查看完整层级结构，点击"折叠全部"可重新折叠所有节点，如下图所示：</p>
+        
+        <div class="image-container">
+            <img src="verify_traceable_index.files/image009.png" alt="展开需求导航示意图" onerror="this.style.display='none'; document.getElementById('placeholder-9').style.display='block';">
+            <div class="image-caption">图9: 展开需求导航示意图</div>
+        </div>
+        
+        <div id="placeholder-9" class="image-placeholder" style="display: none;">
+            <p>图片加载失败：image009.png</p>
+            <p>请确保图片文件存在于 verify_traceable_index.files/ 目录中</p>
+        </div>
+        
+        <p>点击需求名称将进入该需求的详细页面，具体页面已在前面展示，这里不再赘述。</p>
+    </div>
+
+    <div class="section">
+        <h2>2. 源文件</h2>
+        <p>点击下面的"源文件目录"可直接查看所有源文件</p>
+        <div class="link-group">
+            <a href="source/src_file/" class="link-item" target="_blank">源文件目录</a>
+        </div>
+        
+        
+        <p>源文件的可追溯性材料以源文件需求追溯矩阵的形式展出，点击下面的链接可直接访问该矩阵</p>
+        <div class="link-group">
+            <a href="source/code_matrix/CodeReqMatrix.html" class="link-item" target="_blank">查看源文件需求追溯矩阵</a>
+        </div>
+        
+        <p>源文件需求追溯矩阵的组织形式如下图所示：</p>
+        
+        <div class="image-container">
+            <img src="verify_traceable_index.files/image010.png" alt="源表组织形式示意图" onerror="this.style.display='none'; document.getElementById('placeholder-10').style.display='block';">
+            <div class="image-caption">图10: 源文件需求追溯矩阵组织形式示意图</div>
+        </div>
+        
+        <div id="placeholder-10" class="image-placeholder" style="display: none;">
+            <p>图片加载失败：image010.png</p>
+            <p>请确保图片文件存在于 verify_traceable_index.files/ 目录中</p>
+        </div>
+        
+        <ul>
+            <li><strong>源文件</strong>：点击源文件名称可直接打开该文件，点击右侧箭头可展开/折叠其下的详细信息</li>
+            <li><strong>库名称</strong>：是该源文件所实现的功能库的名称，点击可查看该库(需求)的详细信息</li>
+            <li><strong>评审记录</strong>：是该源文件的评审记录，点击可查看</li>
+            <li><strong>CM历史记录</strong>：是该源文件的CM记录，点击可查看</li>
+            <li><strong>库-需求ID</strong>：是该库所对应的需求的ID</li>
+            <li><strong>需求名称</strong>：是源文件中每个函数所对应的需求的名称，点击可访问该需求的详细信息</li>
+            <li><strong>需求ID</strong>：是函数所对应的需求的ID</li>
+        </ul>
+        
+        <p>点击上图的"源文件" "os_task.c"可在直接访问该源文件，如下图所示：</p>
+        
+        <div class="image-container">
+            <img src="verify_traceable_index.files/image011.png" alt="源文件访问示意图" onerror="this.style.display='none'; document.getElementById('placeholder-11').style.display='block';">
+            <div class="image-caption">图11: 源文件访问示意图</div>
+        </div>
+        
+        <div id="placeholder-11" class="image-placeholder" style="display: none;">
+            <p>图片加载失败：image011.png</p>
+            <p>请确保图片文件存在于 verify_traceable_index.files/ 目录中</p>
+        </div>
+        
+        <p>点击的"查看CM历史"，可查看当前文件的CM历史记录，如下图所示：</p>
+        
+        <div class="image-container">
+            <img src="verify_traceable_index.files/image013.png" alt="文件提交记录示意图" onerror="this.style.display='none'; document.getElementById('placeholder-13').style.display='block';">
+            <div class="image-caption">图13: CM历史记录示意图</div>
+        </div>
+        
+        <div id="placeholder-13" class="image-placeholder" style="display: none;">
+            <p>图片加载失败：image013.png</p>
+            <p>请确保图片文件存在于 verify_traceable_index.files/ 目录中</p>
+        </div>
+        
+        <p>点击的"查看评审记录"，可查看当前文件的所有评审记录，如下图所示：</p>
+        
+        <div class="image-container">
+            <img src="verify_traceable_index.files/image014.png" alt="代码库评审记录示意图" onerror="this.style.display='none'; document.getElementById('placeholder-14').style.display='block';">
+            <div class="image-caption">图14: 代码文件评审记录示意图</div>
+        </div>
+        
+        <div id="placeholder-14" class="image-placeholder" style="display: none;">
+            <p>图片加载失败：image014.png</p>
+            <p>请确保图片文件存在于 verify_traceable_index.files/ 目录中</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>3. 设计组件</h2>
+        <p>设计组件的可追溯性按照函数名称进行组织，具体以函数表的形式展示，该函数表包含函数名，函数溯源(需求名称)、需求ID、源文件，点击下面的链接可访问函数表</p>
+        
+        <div class="link-group">
+            <a href="design_comp/func_table.html" class="link-item">函数表链接</a>
+        </div>
+        
+        <p>函数表的具体内容如下所示：</p>
+        
+        <div class="image-container">
+            <img src="verify_traceable_index.files/image015.png" alt="函数表示意图" onerror="this.style.display='none'; document.getElementById('placeholder-15').style.display='block';">
+            <div class="image-caption">图15: 函数表示意图</div>
+        </div>
+        
+        <div id="placeholder-15" class="image-placeholder" style="display: none;">
+            <p>图片加载失败：image015.png</p>
+            <p>请确保图片文件存在于 verify_traceable_index.files/ 目录中</p>
+        </div>
+        
+        <ul>
+            <li><strong>函数名</strong>：函数名称</li>
+            <li><strong>函数溯源(需求名称)</strong>：是该函数所对应的需求的名称，点击可访问该需求的详细信息，包含需求描述、关联项、评审信息、修改记录、责任人等信息</li>
+            <li><strong>需求ID</strong>：是该函数所对应的需求的ID</li>
+            <li><strong>源文件</strong>：是该函数所在的源文件，点击将访问该源文件</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>4. 测试用例</h2>
+        <p>测试用例的可追溯性以测试用例表的形式展示，测试用例表包含用例编号、用例名称、高层需求ID、低层需求ID和名称，测试用例描述、测试步骤、预期结果以及评审状态等</p>
+        
+        <div class="link-group">
+            <a href="test_case/test_case.htm" class="link-item">测试用例表链接</a>
+        </div>
+        
+        <p>测试用例表的具体内容如下图所示：</p>
+        
+        <div class="image-container">
+            <img src="verify_traceable_index.files/image016_1.png" alt="测试用例表示意图" onerror="this.style.display='none'; document.getElementById('placeholder-16').style.display='block';">
+            <img src="verify_traceable_index.files/image016_2.png" alt="测试用例表示意图" onerror="this.style.display='none'; document.getElementById('placeholder-16').style.display='block';">
+            <div class="image-caption">图16: 测试用例表示意图</div>
+        </div>
+        
+        <div id="placeholder-16" class="image-placeholder" style="display: none;">
+            <p>图片加载失败：image016_X.png</p>
+            <p>请确保图片文件存在于 verify_traceable_index.files/ 目录中</p>
+        </div>
+        
+        <div class="definition">
+            <p><strong>用例编号</strong>：每条测试用例的唯一标识，格式固定为 ts_OS_XX_XX_XX_XX。其中，前三段 OS_XX_XX_XX 对应被验证的低层需求 ID；以此类推，前两段XX则代表更高层级的需求；最后一段 XX 表示该需求下的第几条测试用例；</p>
+            <p><strong>用例名称</strong>：测试用例的名称，描述了该测试用例的测试目标</p>
+            <p><strong>测试程序</strong>：测试程序在代码仓的存放路径，测试程序是测试用例的实现形式，所有测试用例最终都会转换成测试程序在目标镜像中执行。点击测试程序仓库，根据表格里的路径信息，可以访问每一个测试程序源代码</p>
+            <p><strong>用例类型</strong>：测试用例归属的测试活动的类型</p>
+            <p><strong>IR-高层需求ID</strong>：该测试用例所验证的功能所属的IR级高层需求ID</p>
+            <p><strong>SR-高层需求ID</strong>：该测试用例所验证的功能所属的SR级高层需求ID</p>
+            <p><strong>AR-低层需求ID</strong>：该测试用例所验证的低层需求ID</p>
+            <p><strong>AR-低层需求名称</strong>：该测试用例所验证的低层需求名称</p>
+            <p><strong>描述、前置条件、测试步骤、预期结果</strong>：测试用例的设计属性</p>
+            <p><strong>创建者、用例评审状态、执行方式、执行者、用例状态、用例结果</strong>：测试用例的生命周期属性</p>
+        </div>
+        
+        <p>测试用例的评审记录，可以通过以下链接访问：</p>
+        
+        <div class="link-group">
+            <a href="#" class="link-item">测试用例评审记录链接</a>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>5. 测试结果</h2>
+        <p>测试结果包含测试总结报告和覆盖率分析报告，点击下面的链接可直接访问：</p>
+        
+        <div class="link-group">
+            <a href="test_result/TR_Summary_Report.html" class="link-item">测试总结报告链接</a>
+            <a href="coverage/source_cover_result.html" class="link-item">源码覆盖率分析报告链接</a>
+            <a href="coverage/source_cover_analysis.html" class="link-item">源码未覆盖元分析链接</a>
+            <a href="coverage/target_cover_result.html" class="link-item">目标码覆盖率分析报告链接</a>
+            <a href="coverage/target_cover_analysis.html" class="link-item">目标码未覆盖原因分析链接</a>
+        </div>
+
+        <h3>测试总结报告如下图所示：</h3>
+        
+        <div class="image-container">
+            <img src="verify_traceable_index.files/image017.png" alt="测试总结报告示意图" onerror="this.style.display='none'; document.getElementById('placeholder-17').style.display='block';">
+            <div class="image-caption">图17: 测试总结报告示意图</div>
+        </div>
+        
+        <div id="placeholder-17" class="image-placeholder" style="display: none;">
+            <p>图片加载失败：image017.png</p>
+            <p>请确保图片文件存在于 verify_traceable_index.files/ 目录中</p>
+        </div>
+        
+        <p><strong>Test Summary</strong>：展示测试用例总体执行情况</p>
+        <p><strong>List OF TESTS</strong>：展示每个测试用例的执行情况，包含测试用例ID、对应的IR级高层需求ID，SR级高层需求ID、AR级低层需求ID、结果文件和状态</p>
+        
+        <h3>源码覆盖分析报告如下图所示，包含覆盖率结果以及每个文件的覆盖率详细情况：</h3>
+        
+        <div class="image-container">
+            <img src="verify_traceable_index.files/image018.png" alt="源码覆盖分析报告示意图" onerror="this.style.display='none'; document.getElementById('placeholder-18').style.display='block';">
+            <div class="image-caption">图18: 源码覆盖分析报告示意图</div>
+        </div>
+        
+        <div id="placeholder-18" class="image-placeholder" style="display: none;">
+            <p>图片加载失败：image018.png</p>
+            <p>请确保图片文件存在于 verify_traceable_index.files/ 目录中</p>
+        </div>
+        
+        <h3>源码未覆盖原因分析如下图所示：</h3>
+        
+        <div class="image-container">
+            <img src="verify_traceable_index.files/image019.png" alt="源码未覆盖原因分析示意图" onerror="this.style.display='none'; document.getElementById('placeholder-19').style.display='block';">
+            <div class="image-caption">图19: 源码未覆盖原因分析示意图</div>
+        </div>
+        
+        <div id="placeholder-19" class="image-placeholder" style="display: none;">
+            <p>图片加载失败：image019.png</p>
+            <p>请确保图片文件存在于 verify_traceable_index.files/ 目录中</p>
+        </div>
+        
+        <h3>目标覆盖分析报告如下图所示，包含覆盖率结果以及每个文件的覆盖率详细情况：</h3>
+        
+        <div class="image-container">
+            <img src="verify_traceable_index.files/image020.png" alt="目标覆盖分析报告示意图" onerror="this.style.display='none'; document.getElementById('placeholder-20').style.display='block';">
+            <div class="image-caption">图20: 目标覆盖分析报告示意图</div>
+        </div>
+        
+        <div id="placeholder-20" class="image-placeholder" style="display: none;">
+            <p>图片加载失败：image020.png</p>
+            <p>请确保图片文件存在于 verify_traceable_index.files/ 目录中</p>
+        </div>
+        
+        <h3>目标码未覆盖原因分析如下图所示：</h3>
+        
+        <div class="image-container">
+            <img src="verify_traceable_index.files/image021.png" alt="目标码未覆盖原因分析示意图" onerror="this.style.display='none'; document.getElementById('placeholder-21').style.display='block';">
+            <div class="image-caption">图21: 目标码未覆盖原因分析示意图</div>
+        </div>
+        
+        <div id="placeholder-21" class="image-placeholder" style="display: none;">
+            <p>图片加载失败：image021.png</p>
+            <p>请确保图片文件存在于 verify_traceable_index.files/ 目录中</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>6. 文档</h2>
+        <p>可通过下面的链接访问文档目录：</p>
+        
+        <div class="link-group">
+            <a href="verify_doc" class="link-item">验证文档链接</a>
+        </div>
+        
+        <p>该链接将文档进一步细分为六组内容，按如下的目录结构进行组织，也点击下面目录或文档名可直接访问：</p>
+        
+        <h4><a href="verify_doc/流程计划与标准" style="text-decoration: none; color: #0066cc;">流程计划和标准</a></h4>
+        <ul>
+            <li><a href="verify_doc/流程计划与标准/软件开发计划.html">软件开发计划</a></li>
+            <li><a href="verify_doc/流程计划与标准/软件配置管理计划.html">软件配置管理计划</a></li>
+            <li><a href="verify_doc/流程计划与标准/软件质量保证计划.html">软件质量保证计划</a></li>
+            <li><a href="verify_doc/流程计划与标准/软件验证计划.html">软件验证计划</a></li>
+            <li><a href="verify_doc/流程计划与标准/软件计划附录.html">软件计划附录</a></li>
+            <li><a href="verify_doc/流程计划与标准/软件需求标准.html">软件需求标准</a></li>
+            <li><a href="verify_doc/流程计划与标准/软件设计标准.html">软件设计标准</a></li>
+        </ul>
+
+        <h4><a href="verify_doc/项目计划和标准" style="text-decoration: none; color: #0066cc;">项目计划和标准</a></h4>
+        <ul>
+            <li><a href="verify_doc/项目计划和标准/软件适航认证计划.html">软件适航认证计划</a></li>
+            <li><a href="verify_doc/项目计划和标准/软件测试计划.html">软件测试计划</a></li>
+            <li><a href="verify_doc/项目计划和标准/项目概况.html">项目概况</a></li>
+            <li><a href="verify_doc/项目计划和标准/编码规范.html">编码规范</a></li>
+        </ul>
+
+        <h4><a href="verify_doc/项目文件" style="text-decoration: none; color: #0066cc;">项目文件</a></h4>
+        <ul>
+            <li><a href="verify_doc/项目文件/软件成果摘要.html">软件成果摘要</a></li>
+            <li><a href="verify_doc/项目文件/软件漏洞分析.html">软件漏洞分析</a></li>
+            <li><a href="verify_doc/项目文件/软件需求规范.html">软件需求规范</a></li>
+            <li><a href="verify_doc/项目文件/子集定义.html">子集定义</a></li>
+            <li><a href="verify_doc/项目文件/软件设计文档.html">软件设计文档</a></li>
+            <li><a href="verify_doc/项目文件/软件生命周期环境配置索引.html">软件生命周期环境配置索引</a></li>
+            <li><a href="verify_doc/项目文件/软件配置索引.html">软件配置索引</a></li>
+            <li><a href="verify_doc/项目文件/需求追溯文档.html">需求追溯文档</a></li>
+        </ul>
+
+        <h4><a href="verify_doc/工具鉴定" style="text-decoration: none; color: #0066cc;">工具鉴定</a></h4>
+        <ul>
+            <li><a href="verify_doc/工具鉴定/TestHarness鉴定文档.html">TestHarness鉴定文档</a></li>
+            <li><a href="verify_doc/工具鉴定/目标码分析工具鉴定文档.html">目标码分析工具鉴定文档</a></li>
+            <li><a href="verify_doc/工具鉴定/源码分析工具鉴定文档.html">源码分析工具鉴定文档</a></li>
+            <li><a href="verify_doc/工具鉴定/MCDC分析工具鉴定文档.html">MCDC分析工具鉴定文档</a></li>
+        </ul>
+
+        <h4><a href="verify_doc/白皮书" style="text-decoration: none; color: #0066cc;">白皮书</a></h4>
+        <ul>
+            <li><a href="verify_doc/白皮书/白皮书.html">白皮书</a></li>
+        </ul>
+
+        <h4><a href="verify_doc/软件质量保证/" style="text-decoration: none; color: #0066cc;">软件质量保证</a></h4>
+        <ul>
+            <li><a href="verify_doc/软件质量保证/软件质量保证.html">软件质量保证</a></li>
+        </ul>
+    </div>
+</body>

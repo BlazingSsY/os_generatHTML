@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OSFlagPend()-等待事件标志组中的事件.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p>需求编号：HLR_OS_05_03</p><p>工作描述：HLR：uC/OS-Ⅲ应提供等待事件标志组中的事件的接口</p><p>是否需求：是</p><p>验证方法：测试验证</p><p>补充信息：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;1. 函数名称</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">OSFlagPend() //&nbsp;等待事件标志组中的事件的函数</div></div><p>&nbsp;&nbsp;&nbsp;&nbsp;2. 函数框架</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">OS_FLAGS  OSFlagPend (</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_FLAG_GRP  *p_grp,    /* 输入：指向事件标志组控制块的指针 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_FLAGS      flags,    /* 输入：要等待的事件标志 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_TICK       timeout,  /* 输入：等待超时时间 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_OPT        opt,      /* 输入：等待选项 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;CPU_TS       *p_ts,     /* 输出：时间戳指针 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_ERR       *p_err     /* 输出：错误码指针 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;) </div><div class="ql-code-block" data-language="plain"><br></div></div><p>&nbsp;&nbsp;&nbsp;&nbsp;3. 函数描述</p><p>&nbsp;&nbsp;&nbsp;&nbsp;该函数用于等待事件标志组中的事件标志，任务可以指定等待的事件标志组合、等待时间以及等待选项。函数根据不同的等待条件和选项返回相应的事件标志或错误码。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;4. 参数说明</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1) p_grp</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：OS_FLAG_GRP*</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作用：指向事件标志组控制块的指针，用于标识要等待的事件标志组。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(2) flags</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：OS_FLAGS</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作用：指定要等待的事件标志位组合。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(3) timeout</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：OS_TICK</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作用：指定任务等待事件标志的时间。如果在指定时间内事件标志未满足条件，任务将放弃等待。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(4) opt</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：OS_OPT</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作用：等待选项</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">OS_OPT_PEND_FLAG_CLR_ALL ：等待所有指定的事件标志位被清除。</div><div class="ql-code-block" data-language="plain">OS_OPT_PEND_FLAG_CLR_ANY ：等待任意一个指定的事件标志位被清除。</div><div class="ql-code-block" data-language="plain">OS_OPT_PEND_FLAG_SET_ALL ：等待所有指定的事件标志位被设置。</div><div class="ql-code-block" data-language="plain">OS_OPT_PEND_FLAG_SET_ANY ：等待任意一个指定的事件标志位被设置。</div><div class="ql-code-block" data-language="plain"><br></div><div class="ql-code-block" data-language="plain">OS_OPT_PEND_FLAG_CLR_ALL | OS_OPT_PEND_FLAG_CONSUME ：等待所有指定的事件标志位被清除，并在条件满足时复位这些标志位。</div><div class="ql-code-block" data-language="plain">OS_OPT_PEND_FLAG_CLR_ANY | OS_OPT_PEND_FLAG_CONSUME ：等待任意一个指定的事件标志位被清除，并在条件满足时复位这些标志位。</div><div class="ql-code-block" data-language="plain">OS_OPT_PEND_FLAG_SET_ALL | OS_OPT_PEND_FLAG_CONSUME ：等待所有指定的事件标志位被设置，并在条件满足时复位这些标志位。</div><div class="ql-code-block" data-language="plain">OS_OPT_PEND_FLAG_SET_ANY | OS_OPT_PEND_FLAG_CONSUME ：等待任意一个指定的事件标志位被设置，并在条件满足时复位这些标志位。</div><div class="ql-code-block" data-language="plain">OS_OPT_PEND_FLAG_CLR_ALL | OS_OPT_PEND_NON_BLOCKING ：非阻塞等待所有指定的事件标志位被清除。</div><div class="ql-code-block" data-language="plain">OS_OPT_PEND_FLAG_CLR_ANY | OS_OPT_PEND_NON_BLOCKING ：非阻塞等待任意一个指定的事件标志位被清除。</div><div class="ql-code-block" data-language="plain">OS_OPT_PEND_FLAG_SET_ALL | OS_OPT_PEND_NON_BLOCKING ：非阻塞等待所有指定的事件标志位被设置。</div><div class="ql-code-block" data-language="plain">OS_OPT_PEND_FLAG_SET_ANY | OS_OPT_PEND_NON_BLOCKING ：非阻塞等待任意一个指定的事件标志位被设置。</div><div class="ql-code-block" data-language="plain">OS_OPT_PEND_FLAG_CLR_ALL | (OS_OPT_PEND_FLAG_CONSUME | OS_OPT_PEND_NON_BLOCKING) ：非阻塞等待所有指定的事件标志位被清除，并在条件满足时复位这些标志位。</div><div class="ql-code-block" data-language="plain">OS_OPT_PEND_FLAG_CLR_ANY | (OS_OPT_PEND_FLAG_CONSUME | OS_OPT_PEND_NON_BLOCKING) ：非阻塞等待任意一个指定的事件标志位被清除，并在条件满足时复位这些标志位。</div><div class="ql-code-block" data-language="plain">OS_OPT_PEND_FLAG_SET_ALL | (OS_OPT_PEND_FLAG_CONSUME | OS_OPT_PEND_NON_BLOCKING) ：非阻塞等待所有指定的事件标志位被设置，并在条件满足时复位这些标志位。</div><div class="ql-code-block" data-language="plain">OS_OPT_PEND_FLAG_SET_ANY | (OS_OPT_PEND_FLAG_CONSUME | OS_OPT_PEND_NON_BLOCKING) ：非阻塞等待任意一个指定的事件标志位被设置，并在条件满足时复位这些标志位。</div></div><p><br></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(5) p_ts</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：CPU_TS*</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作用：用于返回时间戳。如果传入非 NULL 指针，函数会在成功获得事件标志时将当前时间戳存储到该位置。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(6) p_err</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：OS_ERR*</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作用：用于返回函数执行的错误代码，指示函数调用是否成功以及失败的原因。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;错误码</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">OS_ERR_NONE:&nbsp;等待事件标志成功</div><div class="ql-code-block" data-language="plain">OS_ERR_PEND_ISR：从中断服务例程调用等待函数且未指定非阻塞选项。</div><div class="ql-code-block" data-language="plain">OS_ERR_OS_NOT_RUNNING：内核尚未运行时调用了该函数。</div><div class="ql-code-block" data-language="plain">OS_ERR_OBJ_PTR_NULL：传入的事件标志组控制块指针 p_grp 为 NULL。</div><div class="ql-code-block" data-language="plain">OS_ERR_OPT_INVALID：传入的 opt 参数不是有效的选项。</div><div class="ql-code-block" data-language="plain">OS_ERR_OBJ_TYPE：传入的 p_grp 指向的对象类型不是事件标志组类型。</div><div class="ql-code-block" data-language="plain">OS_ERR_PEND_WOULD_BLOCK：指定非阻塞等待但事件标志条件不满足。</div><div class="ql-code-block" data-language="plain">OS_ERR_SCHED_LOCKED：调度程序锁定时尝试阻塞等待。</div><div class="ql-code-block" data-language="plain">OS_ERR_PEND_ABORT：等待被中止。</div><div class="ql-code-block" data-language="plain">OS_ERR_TIMEOUT：等待超时。</div><div class="ql-code-block" data-language="plain">OS_ERR_OBJ_DEL：等待的事件标志组被删除。</div><div class="ql-code-block" data-language="plain">OS_ERR_STATUS_INVALID：等待状态无效</div></div><p>&nbsp;&nbsp;&nbsp;&nbsp;5. 函数算法逻辑</p><p>&nbsp;&nbsp;&nbsp;&nbsp;(1) 检查是否在中断环境中调用</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>如果 OS_CFG_CALLED_FROM_ISR_CHK_EN 功能启用，检测当前是否处于中断服务例程（ISR）中。若处于 ISR 中且等待选项不是非阻塞模式，将错误码 OS_ERR_PEND_ISR 存储到 p_err 中，并返回 0 。</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;(2) 检查内核是否处于运行状态</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>如果 OS_CFG_INVALID_OS_CALLS_CHK_EN 功能启用，判断 OSRunning 是否等于 OS_STATE_OS_RUNNING 。若不等于，说明内核未正常运行，将错误码 OS_ERR_OS_NOT_RUNNING 存储到 p_err 中，并返回 0</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;(3) 检查参数有效性</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果 OS_CFG_ARG_CHK_EN 功能启用，则：</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>检查事件标志组控制块指针的有效性：，检查 p_grp 是否为 NULL。若为 NULL，将错误码 OS_ERR_OBJ_PTR_NULL 存储到 p_err 中，并返回 0 。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>检查opt参数有效性：检查opt 参数是否为有效的等待选项。若无效，将错误码 OS_ERR_OPT_INVALID 存储到 p_err 中，并返回 0，若有效，则正常处理</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;(4) 检查事件标志组对象类型有效性</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>如果 OS_CFG_OBJ_TYPE_CHK_EN 功能启用，检查 p_grp-&gt;Type 是否等于 OS_OBJ_TYPE_FLAG 。若不等于，将错误码 OS_ERR_OBJ_TYPE 存储到 p_err 中，并返回 0 。</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;(5) 根据opt选项进行等待处理</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>检查 opt 是否包含 OS_OPT_PEND_FLAG_CONSUME 选项，设置复位标志。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>如果 p_ts 不为 NULL，将其初始化为 0。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>从opt中提取等待模式，进入临界区</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>根据等待模式进行分支判断：</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;等待所有标志位设置</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果事件标志组中所有指定标志位都已设置，根据复位标志进行相应操作（清除已设置的标志位），将匹配的标志位存储到当前任务控制块的 FlagsRdy 中，退出临界区，设置错误码为 OS_ERR_NONE 并返回匹配的标志位</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果事件标志组中所有指定标志位没有全部设置，进一步判断是否为非阻塞等待：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若是非阻塞等待，退出临界区，设置错误码为 OS_ERR_PEND_WOULD_BLOCK 并返回 0；</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若是阻塞等待，检查调度程序是否锁定：若锁定，退出临界区，设置错误码为 OS_ERR_SCHED_LOCKED 并返回 0；若未锁定，调用 OS_FlagBlock() 将任务阻塞并加入事件标志组的等待列表，然后退出临界区。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;等待任意标志位设置</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果事件标志组中任意一个指定标志位已设置：根据复位标志位进行相应操作（清除已设置的标志位），将匹配的标志位存储到当前任务控制块的 FlagsRdy 中，退出临界区，设置错误码为 OS_ERR_NONE 并返回匹配的标志位。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果事件标志组中没有任何一个指定标志位被设置，后续处理逻辑与等待所有标志位设置模式相同，包括判断非阻塞等待、调度程序锁定情况以及调用 OS_FlagBlock() 阻塞任务。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;等待所有标志位清除（如果OS_CFG_FLAG_MODE_CLR_EN功能启用）</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果事件标志组所有指定标志位都已清除，根据复位标志进行相应操作（设置已清除的标志位），将匹配的标志位存储到当前任务控制块的 FlagsRdy 中，退出临界区，设置错误码为 OS_ERR_NONE 并返回匹配的标志位。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果事件标志组指定标志位没有全部被清除，后续处理逻辑与等待所有标志位设置模式相同。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;等待任意标志位清除模式（如果OS_CFG_FLAG_MODE_CLR_EN功能启用）</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果事件标志组任意一个指定标志位已清除。如果是，根据复位标志进行相应操作（设置已清除的标志位），将匹配的标志位存储到当前任务控制块的 FlagsRdy 中，退出临界区，设置错误码为 OS_ERR_NONE 并返回匹配的标志位。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果事件标志组没有任何指定标志位被清除，后续处理逻辑与等待所有标志位设置模式相同。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;其他无效模式</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;退出临界区，设置错误码为 OS_ERR_OPT_INVALID 并返回 0。</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>执行任务调度</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;(6) 处理等待结果</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;重新进入临界区后，根据当前任务的等待状态（OSTCBCurPtr-&gt;PendStatus）进行处理，处理完成后，如果错误码不为OS_ERR_NONE，将直接返回0：</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>若等待状态为 OS_STATUS_PEND_OK</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表示成功获取事件标志，设置错误码为 OS_ERR_NONE。</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>若等待状态为 OS_STATUS_PEND_ABORT</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表示等待被中止，退出临界区，设置错误码为 OS_ERR_PEND_ABORT。</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>若等待状态为 OS_STATUS_PEND_TIMEOUT</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表示等待超时，退出临界区，设置错误码为 OS_ERR_TIMEOUT，并将时间戳设置为 0。</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>若挂起状态为 OS_STATUS_PEND_DEL</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表示等待的事件标志组被删除，退出临界区，设置错误码为 OS_ERR_OBJ_DEL。</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>其他无效状态</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;退出临界区，设置错误码为 OS_ERR_STATUS_INVALID。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;(7) 检查复位标志并根据opt选项进行复位:</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果复位标志被设置，根据opt选项中的等待模式进行复位：</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>等待所有标志位设置：清除已设置的标志位</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>等待任意标志位设置：清除已设置的标志位</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>等待所有标志位清除：设置已清除的标志位</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>等待任意标志位清除模式：设置已清除的标志位</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>其他无效模式：退出临界区，返回错误码OS_ERR_OPT_INVALID，返回值为0</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;(8) 退出临界段并返回:</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>退出临界段。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>设置错误码为OS_ERR_NONE</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>返回事件标志位</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;6. 返回值</p><p>类型 ：OS_FLAGS</p><p>作用 ：返回匹配的事件标志位。如果成功获取事件标志，返回匹配的标志位组合；如果因超时、中止等原因未获取事件标志，返回 0。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;7. 健康管理错误码</p><p>&nbsp;&nbsp;&nbsp;&nbsp;无</p>
+        </div>
+    </div>
+</body>
+</html>

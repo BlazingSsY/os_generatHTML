@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OSSemPost()-释放信号量.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p><span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(0, 0, 0);">需求编号：HLR_OS_03_05</span></p><p><strong>工作描述：</strong>HLR：uC/OS-Ⅲ应提供信号量释放接口，以释放指定信号量</p><p>是否需求：是</p><p>验证方法：测试验证</p><p><strong>补充信息：</strong></p><p>1.函数名称</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">OSSemPost()&nbsp;--&nbsp;释放信号量</div></div><p>2.函数框架</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">OS_SEM_CTR OSSemPost (</div><div class="ql-code-block" data-language="plain">OS_SEM *p_sem,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*输入：信号量控制块指针*/</div><div class="ql-code-block" data-language="plain">OS_OPT opt,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*输入：释放选项*/</div><div class="ql-code-block" data-language="plain">OS_ERR *p_err&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*输出：错误码*/</div><div class="ql-code-block" data-language="plain">)</div></div><p>3.函数描述</p><p>OSSemPost()&nbsp;函数<span style="background-color: rgb(255, 255, 255); color: rgb(64, 64, 64);">用于释放信号量资源，可选择唤醒一个或全部等待该信号量的任务</span>。</p><p>4.参数说明</p><p><span style="background-color: rgb(255, 255, 255); color: rgb(64, 64, 64);">(1) p_sem</span></p><p><span style="background-color: rgb(255, 255, 255); color: rgb(64, 64, 64);">类型：OS_SEM*</span></p><p><span style="background-color: rgb(255, 255, 255); color: rgb(64, 64, 64);">作用：指向要操作的信号量控制块</span></p><p><span style="background-color: rgb(255, 255, 255); color: rgb(64, 64, 64);">(2) opt</span></p><p><span style="background-color: rgb(255, 255, 255); color: rgb(64, 64, 64);">类型：OS_OPT</span></p><p><span style="background-color: rgb(255, 255, 255); color: rgb(64, 64, 64);">作用：释放选项：</span></p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span><span style="background-color: rgb(255, 255, 255); color: rgb(64, 64, 64);">OS_OPT_POST_1：唤醒一个等待任务</span></li><li class="bullet"><span class="ql-ui" contenteditable="false"></span><span style="background-color: rgb(255, 255, 255); color: rgb(64, 64, 64);">OS_OPT_POST_ALL：唤醒所有等待任务</span></li><li class="bullet"><span class="ql-ui" contenteditable="false"></span><span style="background-color: rgb(255, 255, 255); color: rgb(64, 64, 64);">可组合OS_OPT_POST_NO_SCHED：不立即触发调度</span></li></ol><p><span style="background-color: rgb(255, 255, 255); color: rgb(64, 64, 64);">(3) p_err</span></p><p><span style="background-color: rgb(255, 255, 255); color: rgb(64, 64, 64);">类型：OS_ERR*</span></p><p><span style="background-color: rgb(255, 255, 255); color: rgb(64, 64, 64);">作用：返回操作错误码</span></p><p><span style="background-color: rgb(255, 255, 255); color: rgb(64, 64, 64);">错误码:</span></p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">OS_ERR_NONE：操作成功</div><div class="ql-code-block" data-language="plain"><br></div><div class="ql-code-block" data-language="plain">OS_ERR_OS_NOT_RUNNING：内核未运行</div><div class="ql-code-block" data-language="plain"><br></div><div class="ql-code-block" data-language="plain">OS_ERR_OBJ_PTR_NULL：参数p_sem为NULL</div><div class="ql-code-block" data-language="plain"><br></div><div class="ql-code-block" data-language="plain">OS_ERR_OPT_INVALID：无效的opt参数</div><div class="ql-code-block" data-language="plain"><br></div><div class="ql-code-block" data-language="plain">OS_ERR_OBJ_TYPE：对象类型错误</div><div class="ql-code-block" data-language="plain"><br></div><div class="ql-code-block" data-language="plain">OS_ERR_SEM_OVF：信号量计数器溢出</div></div><p>5.函数算法逻辑</p><p>(1) 内核运行状态检查</p><p>当系统配置启用内核运行检查时(OS_CFG_INVALID_OS_CALLS_CHK_EN)，首先检查操作系统内核是否处于正常运行状态(OSRunning)。如果检测到内核未运行(!= OS_STATE_OS_RUNNING)，立即设置操作系统未运行的错误码(OS_ERR_OS_NOT_RUNNING)，并返回0。</p><p>(2) 输入参数验证</p><p>在参数检查功能启用的情况下(OS_CFG_ARG_CHK_EN)，执行以下检查：</p><p>首先确认信号量指针参数(p_sem)是否为有效指针(!= (OS_SEM *)0)，若为空指针则设置无效对象指针错误码(OS_ERR_OBJ_PTR_NULL)并返回0</p><p>然后检查选项参数(opt)是否为以下合法值之一：</p><p>&nbsp;&nbsp;&nbsp;单个任务唤醒选项(OS_OPT_POST_1)</p><p>&nbsp;&nbsp;&nbsp;&nbsp;全部任务唤醒选项(OS_OPT_POST_ALL)</p><p>&nbsp;&nbsp;&nbsp;&nbsp;上述选项与禁止调度标志(OS_OPT_POST_NO_SCHED)的组合</p><p>任何无效参数都会触发相应的错误码返回(OS_ERR_OPT_INVALID)并返回0</p><p>(3) 对象类型验证</p><p>当对象类型检查功能激活时(OS_CFG_OBJ_TYPE_CHK_EN)，系统会检查提供的信号量控制块类型(p_sem-&gt;Type)是否确实是信号量类型(!= OS_OBJ_TYPE_SEM)。若类型不匹配，设置对象类型错误码(OS_ERR_OBJ_TYPE)并返回0。</p><p>(4) 无等待任务处理流程</p><p>进入临界区，</p><p>系统首先检查当前信号量的等待队列(p_sem-&gt;PendList.HeadPtr)：</p><p>当没有任务等待时(== (OS_TCB *)0)：</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>&nbsp;检查信号量计数值(p_sem-&gt;Ctr)是否已达上限(== (OS_SEM_CTR)-1)，若是则设置溢出错误(OS_ERR_SEM_OVF)并返回0</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>若未溢出则递增信号量计数器(p_sem-&gt;Ctr++)，保存当前计数值(ctr = p_sem-&gt;Ctr)后退出临界区，设置操作成功标志(OS_ERR_NONE)并返回当前计数值</li></ol><p>(5) 等待任务唤醒执行</p><p>取等待队列中的第一个任务控制块</p><p>从等待队列首节点开始遍历(p_tcb)</p><p>每次处理一个任务控制块，记录下一个待处理任务</p><p>调用核心唤醒函数(OS_Post)处理当前任务</p><p>根据选项(opt)决定是否继续处理后续任务：</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>单个唤醒选项(OS_OPT_POST_1)时只处理第一个任务</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>全部唤醒选项(OS_OPT_POST_ALL)时继续处理队列中所有任务</li></ol><p>处理完成后退出临界区保护</p><p>(6) 任务调度控制</p><p>根据选项参数(opt)的设置：</p><p>当未设置禁止调度标志(!(opt &amp; OS_OPT_POST_NO_SCHED))时，立即执行任务调度(OSSched)</p><p>已设置禁止调度标志时跳过调度步骤</p><p>(7) 操作结果返回</p><p>最终设置操作成功错误码(*p_err = OS_ERR_NONE)，并返回0</p><p><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">6. 返回值</span></p><p><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">类型：OS_SEM_CTR</span></p><p><span style="color: rgb(64, 64, 64); background-color: rgb(255, 255, 255);">作用：当无任务等待时返回当前信号量计数值，其他返回0</span></p><p><br></p><p>6.健康管理错误码（可按需无限扩充，每层下级均可再加说明嵌套）</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>无</li></ol>
+        </div>
+    </div>
+</body>
+</html>

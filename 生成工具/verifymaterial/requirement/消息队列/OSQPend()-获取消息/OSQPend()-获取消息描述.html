@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OSQPend()-获取消息.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p><span style="color: rgb(0, 0, 0); font-size: 14px; background-color: rgb(255, 255, 255);">需求编号：HLR_OS_02_04</span></p><p><strong>工作描述：</strong>HLR：<span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);">uC/OS-Ⅲ</span>应提供从消息队列获取消息接口，以供任务从消息队列获取消息。</p><p>是否需求：是</p><p>验证方法：测试验证</p><p><strong>补充信息：</strong></p><p>1.函数名称</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">OSQPend()&nbsp;&nbsp; -&nbsp;&nbsp;&nbsp;从消息队列获取消息</div></div><p>2.函数框架</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">void  *OSQPend </div><div class="ql-code-block" data-language="plain">(</div><div class="ql-code-block" data-language="plain">OS_Q*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p_Q，&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*in：指向消息队列的指针*/</div><div class="ql-code-block" data-language="plain">OS_TICK&nbsp;&nbsp;&nbsp;timeout，&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*in：可选超时时间（以时钟滴答为单位）*/</div><div class="ql-code-block" data-language="plain">OS_OPT &nbsp;&nbsp;&nbsp;OPT，&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*in：确定如果队列为空，用户是否要阻止*/</div><div class="ql-code-block" data-language="plain">OS_MSG_SIZE*&nbsp;&nbsp;p_msg_size，/*in：指向将接收消息大小的变量的指针*/</div><div class="ql-code-block" data-language="plain">CPU_TS*&nbsp;&nbsp;&nbsp;p_TS，&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*in：指向变量的指针，该变量将接收消息接收、挂起中止或消息队列删除的时间戳*/</div><div class="ql-code-block" data-language="plain">OS_ERR*&nbsp;&nbsp;&nbsp;p_ERR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*out：指向变量的指针，该变量将包含此函数返回的错误代码*/</div><div class="ql-code-block" data-language="plain">)</div></div><p>3.函数描述</p><p>从消息队列接收消息时使用。</p><p>4. 参数说明</p><p>(1) p_q</p><ol class="MsoNormal"><li class="MsoNormal"><span class="ql-ui" contenteditable="false"></span>类型：OS_Q*</li><li class="MsoNormal"><span class="ql-ui" contenteditable="false"></span>作用：指向消息队列的指针</li></ol><p>(2) timeout</p><ol class="MsoNormal"><li class="MsoNormal"><span class="ql-ui" contenteditable="false"></span>类型：OS_TICK</li><li class="MsoNormal"><span class="ql-ui" contenteditable="false"></span>作用：超时时间（时钟节拍数），0表示无限等待</li></ol><p>(3) opt</p><ol class="MsoNormal"><li class="MsoNormal"><span class="ql-ui" contenteditable="false"></span>类型：OS_OPT</li><li class="MsoNormal"><span class="ql-ui" contenteditable="false"></span>作用：等待选项：</li><li class="MsoNormal"><span class="ql-ui" contenteditable="false"></span>OS_OPT_PEND_BLOCKING：阻塞等待</li><li class="MsoNormal"><span class="ql-ui" contenteditable="false"></span>OS_OPT_PEND_NON_BLOCKING：非阻塞等待</li></ol><p>(4)<span style="color: rgb(203, 22, 14);"> </span>p_msg_size</p><ol class="MsoNormal"><li class="MsoNormal"><span class="ql-ui" contenteditable="false"></span>类型：OS_MSG_SIZE*</li><li class="MsoNormal"><span class="ql-ui" contenteditable="false"></span>作用：指向将接收消息大小的变量的指针</li></ol><p>(4) p_ts</p><ol class="MsoNormal"><li class="MsoNormal"><span class="ql-ui" contenteditable="false"></span>类型：CPU_TS*</li><li class="MsoNormal"><span class="ql-ui" contenteditable="false"></span>作用：返回获取信号量的时间戳（若启用时间戳功能）</li></ol><p>(5) p_err</p><ol class="MsoNormal"><li class="MsoNormal"><span class="ql-ui" contenteditable="false"></span>类型：OS_ERR*</li><li class="MsoNormal"><span class="ql-ui" contenteditable="false"></span>作用：返回操作错误码</li></ol><p>错误码:</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">*OS_ERR_NONE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;调用成功，您的任务收到一条消息</div><div class="ql-code-block" data-language="plain">*OS_ERR_OBJ_DEL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果“p_q”已删除</div><div class="ql-code-block" data-language="plain">*OS_ERR_OBJ_PTR_NULL&nbsp;如果为“p_q”传递NULL指针</div><div class="ql-code-block" data-language="plain">*OS_ERR_OBJ_TYPE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果未创建消息队列</div><div class="ql-code-block" data-language="plain">*OS_ERR_OPT_INVALID&nbsp;&nbsp;您指定的选项无效</div><div class="ql-code-block" data-language="plain">*OS_ERR_OS_NOT_RUNNING&nbsp;&nbsp;如果uC/OS-III尚未运行</div><div class="ql-code-block" data-language="plain">*OS_ERR_PEND_ABORT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;暂停已中止</div><div class="ql-code-block" data-language="plain">*OS_ERR_PEND_ISR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果您从ISR调用此函数</div><div class="ql-code-block" data-language="plain">*OS_ERR_PEND_WOULD_BLOCK&nbsp;&nbsp;如果您指定了非阻塞但队列不是空的</div><div class="ql-code-block" data-language="plain">*OS_ERR_PTR_INVALID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果传递了空指针“p_msg_size”</div></div><p><br></p><p><br></p><p>5&nbsp;函数算法逻辑</p><p><span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);">（1）检查是否在中断环境中调用</span></p><p>宏OS_CFG_CALLED_FROM_ISR_CHK_EN预编译为1，检查OSIntNestingCtr 是否大于0。若大于0，则说明当前函数在ISR中执行，此时若opt &amp; OS_OPT_PEND_NON_BLOCKING) != OS_OPT_PEND_NON_BLOCKING，设置错误码OS_ERR_PEND_ISR，返回0。</p><p><span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);">（2）检查内核是否处于运行状态</span></p><p><span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);">如果&nbsp;OS_CFG_INVALID_OS_CALLS_CHK_EN&nbsp;功能启用，判断&nbsp;OSRunning&nbsp;是否等于&nbsp;OS_STATE_OS_RUNNING&nbsp;。若不等于，说明内核未正常运行，将错误码&nbsp;OS_ERR_OS_NOT_RUNNING&nbsp;存储到&nbsp;p_err&nbsp;中，并返回&nbsp;NULL。</span></p><p><span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);">（3）验证参数的有效性</span></p><p><span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);">&nbsp;&nbsp;&nbsp;&nbsp;如果&nbsp;OS_CFG_ARG_CHK_EN&nbsp;功能启用，检查&nbsp;p_q&nbsp;是否为&nbsp;NULL。若为&nbsp;NULL，将错误码&nbsp;OS_ERR_OBJ_PTR_NULL&nbsp;存储到&nbsp;p_err&nbsp;中，并返回&nbsp;NULL。</span></p><p><span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);">&nbsp;&nbsp;&nbsp;&nbsp;检查&nbsp;p_msg_size&nbsp;是否为&nbsp;NULL。若为&nbsp;NULL，将错误码&nbsp;OS_ERR_PTR_INVALID&nbsp;存储到&nbsp;p_err&nbsp;中，并返回&nbsp;NULL。</span></p><p><span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);">&nbsp;&nbsp;&nbsp;&nbsp;验证&nbsp;opt&nbsp;参数是否为有效的等待选项。若无效，将错误码&nbsp;OS_ERR_OPT_INVALID&nbsp;存储到&nbsp;p_err&nbsp;中，并返回&nbsp;NULL。</span></p><p><span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);">&nbsp;&nbsp;（4）验证消息队列控制块的类型</span></p><p><span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);">&nbsp;&nbsp;&nbsp;&nbsp;如果&nbsp;OS_CFG_OBJ_TYPE_CHK_EN&nbsp;功能启用，检查&nbsp;p_q-&gt;Type&nbsp;是否等于&nbsp;OS_OBJ_TYPE_Q&nbsp;。若不等于，将错误码&nbsp;OS_ERR_OBJ_TYPE&nbsp;存储到&nbsp;p_err&nbsp;中，并返回&nbsp;NULL。</span></p><p><span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);">（5）记录当前时间戳</span></p><p><span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);">&nbsp;&nbsp;&nbsp;&nbsp;</span>	<span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);">如果输入的p_ts&nbsp;指针不为&nbsp;NULL，将其指向的时间戳变量设置为&nbsp;0。</span></p><p><span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);">（6）&nbsp;&nbsp;&nbsp;&nbsp;尝试从消息队列中获取消息</span></p><p><span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);">&nbsp;&nbsp;&nbsp;&nbsp;</span>	<span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);">进入临界区，调用&nbsp;OS_MsgQGet()&nbsp;函数尝试从消息链表中获取消息。如果成功获取消息，退出临界区，将错误码&nbsp;OS_ERR_NONE&nbsp;存储到&nbsp;p_err&nbsp;中，并返回消息指针。</span></p><p><span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);">（7）&nbsp;&nbsp;</span>	<span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);">处理非阻塞等待</span></p><p><span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);">&nbsp;&nbsp;&nbsp;&nbsp;</span>	<span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);">如果&nbsp;opt&nbsp;包含非阻塞等待选项且消息队列中没有消息，退出临界区，将错误码&nbsp;OS_ERR_PEND_WOULD_BLOCK&nbsp;存储到&nbsp;p_err&nbsp;中，并返回&nbsp;NULL。</span></p><p><span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);">（8）&nbsp;&nbsp;</span>	处理调度器锁定</p><p><span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);">&nbsp;&nbsp;&nbsp;&nbsp;</span>	<span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);">&nbsp;&nbsp;&nbsp;&nbsp;当消息队列中没有消息且opt选项不包含非阻塞等待时，若调度程序被锁定，退出临界区，将错误码&nbsp;OS_ERR_SCHED_LOCKED&nbsp;存储到&nbsp;p_err&nbsp;中，并返回&nbsp;NULL。</span></p><ol class="MsoNormal"><li class="MsoNormal"><span class="ql-ui" contenteditable="false"></span>调用OS_Pend()将当前任务挂起，加入等待列表</li><li class="MsoNormal"><span class="ql-ui" contenteditable="false"></span>退出临界区</li><li class="MsoNormal"><span class="ql-ui" contenteditable="false"></span>执行任务调度OSSched()</li></ol><p><span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);">（9）处理等待结果</span></p><p><span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);">*&nbsp;重新进入临界区，根据当前任务的挂起状态（OSTCBCurPtr-&gt;PendStatus）设置相应的错误码和返回值：</span></p><p><span style="background-color: rgb(255, 255, 255); font-size: 14px;">OS_STATUS_PEND_OK：成功接收到消息，将消息指针和大小存储到相应变量中，设置错误码为&nbsp;OS_ERR_NONE。</span></p><p><span style="background-color: rgb(255, 255, 255); font-size: 14px;">OS_STATUS_PEND_ABORT：等待被中止，设置返回值为0，消息大小值为0，设置错误码为&nbsp;OS_ERR_PEND_ABORT。</span></p><p><span style="background-color: rgb(255, 255, 255); font-size: 14px;">OS_STATUS_PEND_TIMEOUT：等待超时，设置返回值为0，消息大小值为0，设置错误码为&nbsp;OS_ERR_TIMEOUT。</span></p><p><span style="background-color: rgb(255, 255, 255); font-size: 14px;">OS_STATUS_PEND_DEL：等待的消息队列被删除，设置返回值为0，消息大小值为0，设置错误码为&nbsp;OS_ERR_OBJ_DEL。</span></p><p><span style="background-color: rgb(255, 255, 255); font-size: 14px;">其他状态：设置返回值为0，消息大小值为0，设置错误码为&nbsp;OS_ERR_STATUS_INVALID。</span></p><p><span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);">*&nbsp;退出临界区，返回消息指针或&nbsp;NULL（根据等待结果）。</span></p><p><br></p><p>6&nbsp;返回值</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：void *</p><ol class="MsoNormal"><li class="MsoNormal"><span class="ql-ui" contenteditable="false"></span>作用：<span style="background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);">返回从消息队列中接收到的消息指针。如果成功接收到消息，返回消息指针；如果等待失败或发生错误，返回&nbsp;NULL</span></li></ol><p><br></p><p><br></p><p>7.健康管理错误码</p><p>无</p><p>&nbsp;&nbsp;&nbsp;备注：</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain"><br></div></div>
+        </div>
+    </div>
+</body>
+</html>

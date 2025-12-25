@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="LLR_OS_01_22_06任务处于等待互斥量状态且当前任务的优先级降低或不变.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p>需求编号：LLR_OS_01_22_06</p><p>需求描述：</p><p>若目标任务为等待状态（OS_TASK_STATE_PEND、OS_TASK_STATE_PEND_TIMEOUT、OS_TASK_STATE_PEND_SUSPENDED、OS_TASK_STATE_PEND_TIMEOUT_SUSPENDED），且其等待对象为互斥量OS_TASK_PEND_ON_MUTEX，且目标任务优先级降低（prio_cur &lt;= prio_new）：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 16px; color: rgba(0, 0, 0, 0.9); background-color: rgb(255, 255, 255);">•&nbsp;</span>调用 OS_PendListChangePrio 函数更新 Pend 列表中的任务优先级</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: rgb(255, 255, 255); color: rgba(0, 0, 0, 0.9); font-size: 16px;">•&nbsp;</span>获取互斥量的持有者任务的 TCB 指针，&nbsp;保存至变量p_tcb_owner</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: rgb(255, 255, 255); color: rgba(0, 0, 0, 0.9); font-size: 16px;">•&nbsp;</span>如果持有互斥量的任务的优先级等于当前任务优先级（p_tcb_owner-&gt;Prio == prio_cur）：。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 16px; color: rgba(0, 0, 0, 0.9); background-color: rgb(255, 255, 255);">•&nbsp;•&nbsp;</span>调用 OS_MutexGrpPrioFindHighest 函数，获取互斥量组的最高优先级，并将其设置为新优先级prio_new。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: rgb(255, 255, 255); color: rgba(0, 0, 0, 0.9); font-size: 16px;">•&nbsp;•&nbsp;&nbsp;</span>如果新优先级高于互斥量的基础优先级（prio_new &gt; p_tcb_owner-&gt;BasePrio），则将其设置为基优先级（p_tcb_owner-&gt;BasePrio）。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 16px; color: rgba(0, 0, 0, 0.9); background-color: rgb(255, 255, 255);">•&nbsp;•&nbsp;</span>如果新优先级等于互斥量持有者的当前优先级（prio_new == p_tcb_owner-&gt;Prio），说明不需要调整优先级，将 p_tcb_owner 设置为 NULL，反之则使用新的优先级，复用“更改任务优先级”流程来更改p_tcb_owner所指向任务的优先级</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 16px; color: rgba(0, 0, 0, 0.9); background-color: rgb(255, 255, 255);">•&nbsp;</span>如果持有互斥量的任务的优先级不等于当前任务优先级（p_tcb_owner-&gt;Prio != prio_cur），则不需要调整持有者的优先级，p_tcb_owner置为NULL。</p>
+        </div>
+    </div>
+</body>
+</html>

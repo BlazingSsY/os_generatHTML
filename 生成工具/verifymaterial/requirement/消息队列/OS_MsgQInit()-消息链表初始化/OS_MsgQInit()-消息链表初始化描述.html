@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OS_MsgQInit()-消息链表初始化.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p><strong>需求编号</strong>：HLR_OS_02_07</p><p><strong>工作描述：</strong>HLR：<span style="color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);">uC/OS-Ⅲ</span>应提供消息队列的消息链表初始化接口，以便初始化消息队列的消息链表。</p><p>是否需求：是</p><p>验证方法：测试验证</p><p><strong>补充信息：</strong></p><p>1.函数名称</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">OS_MsgQInit()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;消息链表初始化&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></div><p>2.函数框架</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">void OS_MsgQInit (</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_MSG_Q  *p_msg_q,    /* 输入：指向消息链表的指针 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_MSG_QTY size        /* 输入：消息链表中消息的最大数量 */</div><div class="ql-code-block" data-language="plain">)</div></div><p>3.函数描述</p><p>OS_MsgQInit()&nbsp;<span style="color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);">该函数用于初始化一个消息队列的消息链表。消息链表用于存储消息</span></p><p><span style="color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);">4.&nbsp;参数说明</span></p><p><span style="color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);">(1)&nbsp;p_msg_q</span></p><p><span style="color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);">类型：OS_MSG_Q*</span></p><p><span style="color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);">作用：指向消息队列的消息链表的指针，用于管理消息链表。</span></p><p><span style="color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);">(2)&nbsp;size</span></p><p><span style="color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);">类型：OS_MSG_QTY</span></p><p><span style="color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);">作用：指定消息链表中消息的最大数量。</span></p><p><span style="color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);">5.&nbsp;函数算法逻辑</span></p><p><span style="color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);">（1）设置消息队列的最大消息数量</span></p><p><span style="color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);">将消息链表的&nbsp;NbrEntriesSize&nbsp;成员设置为传入的&nbsp;size&nbsp;参数，表示消息队列可存储的最大消息数量。</span></p><p><span style="color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);">（2）初始化消息队列的当前消息数量</span></p><p><span style="color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);">将消息链表的&nbsp;NbrEntries&nbsp;成员初始化为&nbsp;0，表示当前消息队列中没有消息。</span></p><p><span style="color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);">（3）初始化消息队列的入队和出队指针</span></p><p><span style="color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);">将消息链表的&nbsp;InPtr&nbsp;和&nbsp;OutPtr&nbsp;指针都设置为&nbsp;NULL，表示消息队列为空。</span></p><p><span style="color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);">6.&nbsp;返回值</span></p><p><span style="color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);">&nbsp;&nbsp;无</span></p><p><span style="color: rgb(51, 51, 51); font-size: 14px; background-color: rgb(255, 255, 255);">7.&nbsp;健康管理错误码</span></p><p>无</p>
+        </div>
+    </div>
+</body>
+</html>

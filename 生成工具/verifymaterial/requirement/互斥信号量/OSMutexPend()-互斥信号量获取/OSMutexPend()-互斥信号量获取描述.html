@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需求描述</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 返回链接样式1 */
+        .back-right-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式2 */
+        .back-right2-link {
+            position: absolute;
+            top: 82px;
+            right: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-right2-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* 返回链接样式3 */
+        .back-left-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-left-link:hover {
+            color: #004499;
+            background-color: #f0f7ff;
+            border-color: #0066cc;
+            text-decoration: none;
+        }
+        
+        h1 {
+              font-size: 28px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .text-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 0;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+          <!-- 返回链接 -->
+    <a href="OSMutexPend()-互斥信号量获取.html" class="back-right-link">返回上一级</a>
+    <div class="container">
+        <h1>需求描述</h1>
+        
+        <div class="text-box">
+<p><strong>需求编号：</strong>HLR_OS_04_03</p><p><strong>工作描述：</strong>HLR：uC/OS-Ⅲ应提供互斥量获取接口。</p><p>是否需求：是</p><p>验证方法：测试验证</p><p><strong>补充信息：</strong></p><p>1.函数名称</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">OSMutexPend()&nbsp;---互斥量获取函数</div></div><p>2.函数框架</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">void OSMutexPend (</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_MUTEX  *p_mutex,    /* 输入：指向互斥量控制块的指针 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_TICK    timeout,    /* 输入：等待超时时间 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_OPT     opt,        /* 输入：等待选项 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;CPU_TS    *p_ts,       /* 输出：时间戳 */</div><div class="ql-code-block" data-language="plain">&nbsp;&nbsp;&nbsp;&nbsp;OS_ERR    *p_err       /* 输出：错误码指针 */</div><div class="ql-code-block" data-language="plain">)</div></div><p>3.函数描述</p><p>该函数用于等待获取一个互斥量。如果互斥量当前不可用，任务可以指定等待的超时时间和等待模式（阻塞或非阻塞）。函数根据不同的等待结果返回相应的错误码。</p><p>4.参数说明</p><p>&nbsp;&nbsp;&nbsp;&nbsp;(1) p_mutex</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：OS_MUTEX*</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作用：指向互斥量控制块的指针，用于标识要等待的互斥量。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;(2) timeout</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：OS_TICK</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作用：指定任务等待互斥量的最长时间。如果在指定时间内互斥量不可用，任务将放弃等待。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;(3) opt</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：OS_OPT</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作用：指定等待选项，可以是以下两种取值：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OS_OPT_PEND_BLOCKING：阻塞等待，任务会挂起直到互斥量可用或超时。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OS_OPT_PEND_NON_BLOCKING：非阻塞等待，如果互斥量不可用，任务不会挂起，函数立即返回。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;(4) p_ts</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：CPU_TS*</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作用：用于返回时间戳（如果需要）。如果传入非 NULL 指针，函数会在成功获取互斥量时将当前时间戳存储到该位置。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;(5) p_err</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：OS_ERR*</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作用：用于返回函数执行的错误代码，指示函数调用是否成功以及失败的原因。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;错误码：</p><div class="ql-code-block-container" spellcheck="false"><div class="ql-code-block" data-language="plain">OS_ERR_NONE：    函数执行成功，无错误。</div><div class="ql-code-block" data-language="plain">OS_ERR_PEND_ISR：&nbsp;&nbsp;&nbsp;&nbsp;从中断服务例程调用等待函数且未指定非阻塞选项。</div><div class="ql-code-block" data-language="plain">OS_ERR_OS_NOT_RUNNING：&nbsp;&nbsp;&nbsp;&nbsp;内核尚未运行时调用了该函数。</div><div class="ql-code-block" data-language="plain">OS_ERR_OBJ_PTR_NULL：&nbsp;&nbsp;&nbsp;&nbsp;传入的互斥量控制块指针无效。</div><div class="ql-code-block" data-language="plain">OS_ERR_OPT_INVALID：&nbsp;&nbsp;&nbsp;&nbsp;传入的 opt 参数不是有效的选项。</div><div class="ql-code-block" data-language="plain">OS_ERR_OBJ_TYPE：&nbsp;&nbsp;&nbsp;&nbsp;传入的互斥量控制块类型不正确。</div><div class="ql-code-block" data-language="plain">OS_ERR_PEND_WOULD_BLOCK：&nbsp;&nbsp;&nbsp;&nbsp;指定非阻塞等待但互斥量不可用。</div><div class="ql-code-block" data-language="plain">OS_ERR_SCHED_LOCKED：&nbsp;&nbsp;&nbsp;&nbsp;调度程序锁定时尝试阻塞等待。</div><div class="ql-code-block" data-language="plain">OS_ERR_PEND_ABORT：&nbsp;&nbsp;&nbsp;&nbsp;等待被中止。</div><div class="ql-code-block" data-language="plain">OS_ERR_TIMEOUT：&nbsp;&nbsp;&nbsp;&nbsp;等待超时。</div><div class="ql-code-block" data-language="plain">OS_ERR_OBJ_DEL：&nbsp;&nbsp;&nbsp;&nbsp;等待的互斥量被删除。</div><div class="ql-code-block" data-language="plain">OS_ERR_STATUS_INVALID：&nbsp;&nbsp;&nbsp;&nbsp;挂起状态无效。</div><div class="ql-code-block" data-language="plain">OS_ERR_MUTEX_OVF：&nbsp;&nbsp;&nbsp;&nbsp;互斥量嵌套计数溢出。</div><div class="ql-code-block" data-language="plain">OS_ERR_MUTEX_OWNER：&nbsp;&nbsp;&nbsp;&nbsp;当前任务已是互斥量的所有者。</div></div><p><br></p><p>5.函数算法逻辑</p><p>(1)检查是否在中断环境中调用</p><p>如果 OS_CFG_CALLED_FROM_ISR_CHK_EN 功能启用，检测当前是否处于中断服务例程（ISR）中。若处于 ISR 中，将错误码 OS_ERR_PEND_ISR 存储到 p_err 中，并返回。</p><p><br></p><p>(2)检查内核是否处于运行状态</p><p>如果 OS_CFG_INVALID_OS_CALLS_CHK_EN 功能启用，判断 OSRunning 是否等于 OS_STATE_OS_RUNNING 。若不等于，说明内核未正常运行，将错误码 OS_ERR_OS_NOT_RUNNING 存储到 p_err 中，并返回。</p><p><br></p><p>(3)检查互斥量控制块指针的有效性</p><p>如果 OS_CFG_ARG_CHK_EN 功能启用，检查 p_mutex 是否为 NULL。若为 NULL，将错误码 OS_ERR_OBJ_PTR_NULL 存储到 p_err 中，并返回。</p><p><br></p><p>(4)检查等待选项</p><p>如果 OS_CFG_ARG_CHK_EN 功能启用，检查 opt 参数：&nbsp;若为OS_OPT_PEND_BLOCKING和OS_OPT_PEND_NON_BLOCKING，则正常处理；&nbsp;其他选项，则将错误码 OS_ERR_OPT_INVALID 存储到 p_err 中，并返回。</p><p><br></p><p>(5)检查互斥量控制块的类型</p><p>如果 OS_CFG_OBJ_TYPE_CHK_EN 功能启用，检查 p_mutex-&gt;Type 是否等于 OS_OBJ_TYPE_MUTEX 。若不等于，将错误码 OS_ERR_OBJ_TYPE 存储到 p_err 中，并返回。</p><p>(6)检查互斥量是否可用</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>进入临界区。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>检查互斥量的所有者嵌套计数是否为 0。如果是，表示互斥量可用：</li></ol><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;将互斥量的所有者任务控制块指针设置为当前任务控制块（OSTCBCurPtr）。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;将互斥量的所有者嵌套计数设置为 1。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;将当前任务添加到互斥量所有者组。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;退出临界区，将错误码 OS_ERR_NONE 存储到 p_err 中，并返回。</p><p>(7)检查当前任务是否已持有该互斥量：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;检查互斥量的嵌套计数是否达到最大值（OS_NESTING_CTR 的最大值）。如果是，退出临界区，将错误码&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OS_ERR_MUTEX_OVF 存储到 p_err 中，并返回。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;增加互斥量的所有者嵌套计数。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;退出临界区，将错误码 OS_ERR_MUTEX_OWNER 存储到 p_err 中，并返回。</p><p>(8)&nbsp;如果互斥量不可用且等待选项为非阻塞模式：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;退出临界区，将错误码 OS_ERR_PEND_WOULD_BLOCK 存储到 p_err 中，并返回。</p><p>(9）如果互斥量不可用且等待选项为阻塞模式</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>检查调度器是否被锁定，若已锁定，则退出临界区，将错误码 OS_ERR_SCHED_LOCKED 存储到 p_err 中，并返回。</li></ol><p>(10)&nbsp;判断是否需要提升互斥量持有者任务的优先级</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>如果互斥量的所有者任务的优先级低于当前任务，则提升所有者任务的优先级至当前任务的优先级。</li></ol><p>(11)&nbsp;阻塞当前任务</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>调用 OS_Pend() 函数将当前任务阻塞，等待互斥量可用或超时。</li></ol><p>(12)执行任务调度</p><p>退出临界区，调用 OSSched() 进行任务调度，选择下一个最高优先级的就绪任务来运行。</p><p>(13)处理等待结果</p><p>重新进入临界区，根据当前任务的挂起状态（OSTCBCurPtr-&gt;PendStatus）设置相应的错误码：</p><ol class="bullet"><li class="bullet"><span class="ql-ui" contenteditable="false"></span>OS_STATUS_PEND_OK：成功获取互斥量，设置错误码为 OS_ERR_NONE。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>OS_STATUS_PEND_ABORT：等待被中止，设置错误码为 OS_ERR_PEND_ABORT。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>OS_STATUS_PEND_TIMEOUT：等待超时，设置错误码为 OS_ERR_TIMEOUT。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>OS_STATUS_PEND_DEL：等待的互斥量被删除，设置错误码为 OS_ERR_OBJ_DEL。</li><li class="bullet"><span class="ql-ui" contenteditable="false"></span>其他状态：设置错误码为 OS_ERR_STATUS_INVALID。</li></ol><p>退出临界区。</p><p>6.返回值</p><p>无</p><p>7.健康管理错误码</p><p>无</p><p>备注：该函数不能在定时器回调函数中调用</p>
+        </div>
+    </div>
+</body>
+</html>

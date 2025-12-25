@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>源文件需求追踪矩阵</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 28px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .description {
+            margin-bottom: 30px;
+            color: #555;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .file-section {
+            margin-bottom: 40px;
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .file-header {
+            background-color: #3498db;
+            color: white;
+            padding: 15px 20px;
+            font-weight: 600;
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .file-name-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .arrow {
+            cursor: pointer;
+            padding: 5px 8px;
+            border-radius: 3px;
+            transition: all 0.3s;
+            user-select: none;
+            font-size: 16px;
+        }
+        
+        .arrow:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .file-header.expanded .arrow {
+            transform: rotate(90deg);
+        }
+        
+        .file-link {
+            color: white;
+            text-decoration: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        
+        .file-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            text-decoration: underline;
+        }
+        
+        .file-details {
+            padding: 20px;
+            background-color: white;
+            display: none;
+        }
+        
+        .file-details.expanded {
+            display: block;
+        }
+        
+        .library-info {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #f8fafc;
+            border-radius: 6px;
+            border-left: 4px solid #2c3e50;
+        }
+        
+        .info-row {
+            display: flex;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        
+        .info-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .info-label {
+            width: 120px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .info-value {
+            flex: 1;
+        }
+        
+        .info-link {
+            color: #2980b9;
+            text-decoration: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+        
+        .info-link:hover {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .modules-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            table-layout: fixed;
+        }
+        
+        .modules-table th {
+            background-color: #2c3e50;
+            color: white;
+            font-weight: 500;
+            padding: 12px 15px;
+            text-align: left;
+            border-right: 1px solid #3a506b;
+        }
+        
+        .modules-table th:last-child {
+            border-right: none;
+        }
+        
+        .modules-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eaeaea;
+            border-right: 1px solid #eaeaea;
+            vertical-align: top;
+        }
+        
+        .modules-table td:last-child {
+            border-right: none;
+        }
+        
+        .modules-table tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        .modules-table tr:hover {
+            background-color: #f0f7ff;
+        }
+        
+        .function-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .requirement-name {
+            color: #555;
+            line-height: 1.4;
+        }
+        
+        .requirement-link {
+            color: #2980b9;
+            text-decoration: none;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            display: inline-block;
+        }
+        
+        .requirement-link:hover {
+            background-color: #3498db;
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .requirement-id {
+            display: inline-block;
+            background-color: #e8f4fc;
+            color: #2980b9;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            font-size: 13px;
+        }
+        
+        /* 列宽设置 */
+        .col-function {
+            width: 30%;
+        }
+        
+        .col-requirement {
+            width: 45%;
+        }
+        
+        .col-requirement-id {
+            width: 25%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>源文件需求追踪矩阵</h1>
+        
+        <div class="description">
+            本页面展示了每个源文件所对应的库信息，以及文件中包含的函数及其对应的需求信息。
+        </div>
+
+        <!-- 文件: os_task.c -->
+        <div class="file-section">
+            <div class="file-header">
+                <div class="file-name-area">
+                    <a href="../src_file/os_task.c" class="file-link" target="_blank">os_task.c</a>
+                </div>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="file-details">
+                <!-- 库信息 -->
+                <div class="library-info">
+                    <div class="info-row">
+                        <div class="info-label">库名称:</div>
+                        <div class="info-value">
+                            <a href="../../requirement/SF/任务管理/任务管理.html" class="info-link" target="_blank">任务管理</a>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">库-需求ID:</div>
+                        <div class="info-value">HLR_OS_01</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">评审记录:</div>
+                        <div class="info-value">
+                            <a href="review_records.html?lib=Task_Manager" class="info-link" target="_blank">查看评审记录</a>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">CM历史记录:</div>
+                        <div class="info-value">
+                            <a href="cm_history.html?lib=Task_Manager" class="info-link" target="_blank">查看CM历史</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 功能模块表格 -->
+                <table class="modules-table">
+                    <thead>
+                        <tr>
+                            <th class="col-function">函数名称</th>
+                            <th class="col-requirement">需求名称</th>
+                            <th class="col-requirement-id">需求ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="function-name">OSTaskChangePrio()</td>
+                            <td class="requirement-name">
+                                <a href="../../requirement/SF/任务管理/OSTaskChangePrio()-任务优先级设置/OSTaskChangePrio()-任务优先级设置.html" class="requirement-link" target="_blank">OSTaskChangePrio()-任务优先级设置</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_01_01</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTaskCreate()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_01_02" class="requirement-link" target="_blank">OSTaskCreate()-任务创建</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_01_02</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTaskDel()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_01_03" class="requirement-link" target="_blank">OSTaskDel()-任务删除</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_01_03</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTaskQFlush()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_01_04" class="requirement-link" target="_blank">OSTaskQFlush()-清空任务消息队列</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_01_04</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTaskQPend()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_01_05" class="requirement-link" target="_blank">OSTaskQPend()-等待任务消息</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_01_05</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTaskQPendAbort()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_01_06" class="requirement-link" target="_blank">OSTaskQPendAbort()-终止等待任务消息</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_01_06</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTaskQPost()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_01_07" class="requirement-link" target="_blank">OSTaskQPost()-发送任务消息</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_01_07</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTaskRegGet()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_01_08" class="requirement-link" target="_blank">OSTaskRegGet()-获取任务寄存器数组成员的当前值</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_01_08</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTaskRegGetID()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_01_09" class="requirement-link" target="_blank">OSTaskRegGetID()-获取任务寄存器ID</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_01_09</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTaskRegSet()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_01_10" class="requirement-link" target="_blank">OSTaskRegSet()-设置任务寄存器数组成员的当前值</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_01_10</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTaskResume()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_01_11" class="requirement-link" target="_blank">OSTaskResume()-恢复任务</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_01_11</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTaskSemPend()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_01_12" class="requirement-link" target="_blank">OSTaskSemPend()-等待任务信号量</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_01_12</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTaskSemPendAbort()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_01_13" class="requirement-link" target="_blank">OSTaskSemPendAbort()-终止等待任务信号量</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_01_13</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTaskSemPost()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_01_14" class="requirement-link" target="_blank">OSTaskSemPost()-发布任务信号量</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_01_14</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTaskSemSet()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_01_15" class="requirement-link" target="_blank">OSTaskSemSet()-设置任务信号量</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_01_15</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTaskStkChk()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_01_16" class="requirement-link" target="_blank">OSTaskStkChk()-任务堆栈检查</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_01_16</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTaskSuspend()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_01_17" class="requirement-link" target="_blank">OSTaskSuspend()-挂起任务</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_01_17</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTaskTimeQuantaSet()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_01_18" class="requirement-link" target="_blank">OSTaskTimeQuantaSet()-设置任务时间片</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_01_18</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_TaskInit()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_01_19" class="requirement-link" target="_blank">OS_TaskInit()-任务管理初始化</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_01_19</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_TaskInitTCB()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_01_20" class="requirement-link" target="_blank">OS_TaskInitTCB()-任务控制块初始化</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_01_20</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_TaskReturn()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_01_21" class="requirement-link" target="_blank">OS_TaskReturn()-处理任务意外返回</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_01_21</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_TaskChangePrio()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_01_22" class="requirement-link" target="_blank">OS_TaskChangePrio()-更改任务优先级</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_01_22</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 文件: os_q.c -->
+        <div class="file-section">
+            <div class="file-header">
+                <div class="file-name-area">
+                    <a href="os_q.c" class="file-link" target="_blank">os_q.c</a>
+                </div>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="file-details">
+                <div class="library-info">
+                    <div class="info-row">
+                        <div class="info-label">库名称:</div>
+                        <div class="info-value">
+                            <a href="library_details.html?lib=Message_Queue" class="info-link" target="_blank">消息队列</a>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">库-需求ID:</div>
+                        <div class="info-value">HLR_OS_02</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">评审记录:</div>
+                        <div class="info-value">
+                            <a href="review_records.html?lib=Message_Queue" class="info-link" target="_blank">查看评审记录</a>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">CM历史记录:</div>
+                        <div class="info-value">
+                            <a href="cm_history.html?lib=Message_Queue" class="info-link" target="_blank">查看CM历史</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <table class="modules-table">
+                    <thead>
+                        <tr>
+                            <th class="col-function">函数名称</th>
+                            <th class="col-requirement">需求名称</th>
+                            <th class="col-requirement-id">需求ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="function-name">OSQCreate()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_02_01" class="requirement-link" target="_blank">OSQCreate()-创建消息队列</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_02_01</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSQDel()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_02_02" class="requirement-link" target="_blank">OSQDel()-删除消息队列</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_02_02</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSQFlush()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_02_03" class="requirement-link" target="_blank">OSQFlush()-清空消息队列中的消息</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_02_03</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSQPend()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_02_04" class="requirement-link" target="_blank">OSQPend()-获取消息</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_02_04</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSQPendAbort()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_02_05" class="requirement-link" target="_blank">OSQPendAbort()-中止任务对消息队列的等待</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_02_05</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSQPost()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_02_06" class="requirement-link" target="_blank">OSQPost()-发送消息</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_02_06</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 文件: os_msg.c -->
+        <div class="file-section">
+            <div class="file-header">
+                <div class="file-name-area">
+                    <a href="os_msg.c" class="file-link" target="_blank">os_msg.c</a>
+                </div>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="file-details">
+                <div class="library-info">
+                    <div class="info-row">
+                        <div class="info-label">库名称:</div>
+                        <div class="info-value">
+                            <a href="library_details.html?lib=Message_Queue" class="info-link" target="_blank">消息队列</a>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">库-需求ID:</div>
+                        <div class="info-value">HLR_OS_02</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">评审记录:</div>
+                        <div class="info-value">
+                            <a href="review_records.html?lib=Message_Queue" class="info-link" target="_blank">查看评审记录</a>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">CM历史记录:</div>
+                        <div class="info-value">
+                            <a href="cm_history.html?lib=Message_Queue" class="info-link" target="_blank">查看CM历史</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <table class="modules-table">
+                    <thead>
+                        <tr>
+                            <th class="col-function">函数名称</th>
+                            <th class="col-requirement">需求名称</th>
+                            <th class="col-requirement-id">需求ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="function-name">OS_QClr()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_02_11" class="requirement-link" target="_blank">OS_QClr()-清除消息队列中的内容</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_02_11</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_MsgQInit()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_02_07" class="requirement-link" target="_blank">OS_MsgQInit()-消息链表初始化</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_02_07</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_MsgQGet()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_02_08" class="requirement-link" target="_blank">OS_MsgQGet()-从消息队列中提取消息</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_02_08</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_MsgQPut()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_02_09" class="requirement-link" target="_blank">OS_MsgQPut()-将消息放入消息队列中</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_02_09</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_MsgQFreeAll()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_02_10" class="requirement-link" target="_blank">OS_MsgQFreeAll()-释放消息队列中的消息</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_02_10</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_MsgPoolInit()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_02_12" class="requirement-link" target="_blank">OS_MsgPoolInit()-消息池初始化</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_02_12</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 文件: os_sem.c -->
+        <div class="file-section">
+            <div class="file-header">
+                <div class="file-name-area">
+                    <a href="os_sem.c" class="file-link" target="_blank">os_sem.c</a>
+                </div>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="file-details">
+                <div class="library-info">
+                    <div class="info-row">
+                        <div class="info-label">库名称:</div>
+                        <div class="info-value">
+                            <a href="library_details.html?lib=Semaphore" class="info-link" target="_blank">信号量</a>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">库-需求ID:</div>
+                        <div class="info-value">HLR_OS_03</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">评审记录:</div>
+                        <div class="info-value">
+                            <a href="review_records.html?lib=Semaphore" class="info-link" target="_blank">查看评审记录</a>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">CM历史记录:</div>
+                        <div class="info-value">
+                            <a href="cm_history.html?lib=Semaphore" class="info-link" target="_blank">查看CM历史</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <table class="modules-table">
+                    <thead>
+                        <tr>
+                            <th class="col-function">函数名称</th>
+                            <th class="col-requirement">需求名称</th>
+                            <th class="col-requirement-id">需求ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="function-name">OSSemCreate()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_03_01" class="requirement-link" target="_blank">OSSemCreate()-创建信号量</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_03_01</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSSemDel()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_03_02" class="requirement-link" target="_blank">OSSemDel()-删除信号量</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_03_02</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSSemPend()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_03_03" class="requirement-link" target="_blank">OSSemPend()-获取信号量</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_03_03</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSSemPendAbort()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_03_04" class="requirement-link" target="_blank">OSSemPendAbort()-信号量终止获取</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_03_04</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSSemPost()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_03_05" class="requirement-link" target="_blank">OSSemPost()-释放信号量</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_03_05</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSSemSet()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_03_06" class="requirement-link" target="_blank">OSSemSet()-设置信号量计数器</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_03_06</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_SemClr()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_03_07" class="requirement-link" target="_blank">OS_SemClr()-清除信号量</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_03_07</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 文件: os_mutex.c -->
+        <div class="file-section">
+            <div class="file-header">
+                <div class="file-name-area">
+                    <a href="os_mutex.c" class="file-link" target="_blank">os_mutex.c</a>
+                </div>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="file-details">
+                <div class="library-info">
+                    <div class="info-row">
+                        <div class="info-label">库名称:</div>
+                        <div class="info-value">
+                            <a href="library_details.html?lib=Mutex_Semaphore" class="info-link" target="_blank">互斥信号量</a>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">库-需求ID:</div>
+                        <div class="info-value">HLR_OS_04</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">评审记录:</div>
+                        <div class="info-value">
+                            <a href="review_records.html?lib=Mutex_Semaphore" class="info-link" target="_blank">查看评审记录</a>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">CM历史记录:</div>
+                        <div class="info-value">
+                            <a href="cm_history.html?lib=Mutex_Semaphore" class="info-link" target="_blank">查看CM历史</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <table class="modules-table">
+                    <thead>
+                        <tr>
+                            <th class="col-function">函数名称</th>
+                            <th class="col-requirement">需求名称</th>
+                            <th class="col-requirement-id">需求ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="function-name">OSMutexCreate()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_04_01" class="requirement-link" target="_blank">OSMutexCreate()-互斥信号量创建</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_04_01</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSMutexDel()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_04_02" class="requirement-link" target="_blank">OSMutexDel()-互斥信号量删除</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_04_02</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSMutexPend()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_04_03" class="requirement-link" target="_blank">OSMutexPend()-互斥信号量获取</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_04_03</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSMutexPendAbort()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_04_04" class="requirement-link" target="_blank">OSMutexPendAbort()-互斥信号量终止获取</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_04_04</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSMutexPost()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_04_05" class="requirement-link" target="_blank">OSMutexPost()-互斥信号量释放</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_04_05</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_MutexClr()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_04_06" class="requirement-link" target="_blank">OS_MutexClr()-互斥信号量清除</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_04_06</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_MutexGrpAdd()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_04_07" class="requirement-link" target="_blank">OS_MutexGrpAdd()-任务互斥信号量组添加</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_04_07</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_MutexGrpRemove()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_04_08" class="requirement-link" target="_blank">OS_MutexGrpRemove()-任务互斥信号量组移除</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_04_08</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_MutexGrpPrioFindHighest()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_04_09" class="requirement-link" target="_blank">OS_MutexGrpPrioFindHighest()-查找任务互斥信号量组最高优先级</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_04_09</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_MutexGrpPostAll()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_04_10" class="requirement-link" target="_blank">OS_MutexGrpPostAll()-任务互斥信号量组全部释放</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_04_10</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+       <!-- 文件: os_flag.c -->
+        <div class="file-section">
+            <div class="file-header">
+                <div class="file-name-area">
+                    <a href="os_flag.c" class="file-link" target="_blank">os_flag.c</a>
+                </div>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="file-details">
+                <div class="library-info">
+                    <div class="info-row">
+                        <div class="info-label">库名称:</div>
+                        <div class="info-value">
+                            <a href="library_details.html?lib=Event_Flag" class="info-link" target="_blank">事件标志</a>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">库-需求ID:</div>
+                        <div class="info-value">HLR_OS_05</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">评审记录:</div>
+                        <div class="info-value">
+                            <a href="review_records.html?lib=Event_Flag" class="info-link" target="_blank">查看评审记录</a>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">CM历史记录:</div>
+                        <div class="info-value">
+                            <a href="cm_history.html?lib=Event_Flag" class="info-link" target="_blank">查看CM历史</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <table class="modules-table">
+                    <thead>
+                        <tr>
+                            <th class="col-function">函数名称</th>
+                            <th class="col-requirement">需求名称</th>
+                            <th class="col-requirement-id">需求ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="function-name">OSFlagCreate()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_05_01" class="requirement-link" target="_blank">OSFlagCreate()-创建事件标志组</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_05_01</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSFlagDel()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_05_02" class="requirement-link" target="_blank">OSFlagDel()-删除事件标志组</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_05_02</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSFlagPend()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_05_03" class="requirement-link" target="_blank">OSFlagPend()-等待事件标志组中的事件</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_05_03</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSFlagPendAbort()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_05_04" class="requirement-link" target="_blank">OSFlagPendAbort()-终止等待事件标志</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_05_04</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSFlagPendGetFlagRdy()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_05_05" class="requirement-link" target="_blank">OSFlagPendGetFlagRdy()-获取当前任务等待到的事件标志</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_05_05</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSFlagPost()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_05_06" class="requirement-link" target="_blank">OSFlagPost()-发布事件标志</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_05_06</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_FlagBlock()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_05_07" class="requirement-link" target="_blank">OS_FlagBlock()-事件标志组任务阻塞</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_05_07</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_FlagClr()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_05_08" class="requirement-link" target="_blank">OS_FlagClr()-清除事件标志组</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_05_08</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_FlagTaskRdy()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_05_09" class="requirement-link" target="_blank">OS_FlagTaskRdy()-事件标志组任务就绪</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_05_09</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 文件: os_tmr.c -->
+        <div class="file-section">
+            <div class="file-header">
+                <div class="file-name-area">
+                    <a href="os_tmr.c" class="file-link" target="_blank">os_tmr.c</a>
+                </div>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="file-details">
+                <div class="library-info">
+                    <div class="info-row">
+                        <div class="info-label">库名称:</div>
+                        <div class="info-value">
+                            <a href="library_details.html?lib=Timer" class="info-link" target="_blank">定时器</a>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">库-需求ID:</div>
+                        <div class="info-value">HLR_OS_06</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">评审记录:</div>
+                        <div class="info-value">
+                            <a href="review_records.html?lib=Timer" class="info-link" target="_blank">查看评审记录</a>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">CM历史记录:</div>
+                        <div class="info-value">
+                            <a href="cm_history.html?lib=Timer" class="info-link" target="_blank">查看CM历史</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <table class="modules-table">
+                    <thead>
+                        <tr>
+                            <th class="col-function">函数名称</th>
+                            <th class="col-requirement">需求名称</th>
+                            <th class="col-requirement-id">需求ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="function-name">OSTmrCreate()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_06_01" class="requirement-link" target="_blank">OSTmrCreate()-创建定时器</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_06_01</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTmrDel()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_06_02" class="requirement-link" target="_blank">OSTmrDel()-删除定时器</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_06_02</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTmrRemainGet()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_06_03" class="requirement-link" target="_blank">OSTmrRemainGet()-获取定时器剩余时间</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_06_03</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTmrSet()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_06_04" class="requirement-link" target="_blank">OSTmrSet()-设置定时器</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_06_04</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTmrStart()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_06_05" class="requirement-link" target="_blank">OSTmrStart()-启动定时器</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_06_05</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTmrStateGet()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_06_06" class="requirement-link" target="_blank">OSTmrStateGet()-获取定时器状态</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_06_06</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTmrStop()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_06_07" class="requirement-link" target="_blank">OSTmrStop()-停止定时器</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_06_07</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_TmrClr()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_06_08" class="requirement-link" target="_blank">OS_TmrClr()-清除定时器控制块</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_06_08</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_TmrInit()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_06_09" class="requirement-link" target="_blank">OS_TmrInit()-初始化定时器模块</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_06_09</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_TmrLink()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_06_10" class="requirement-link" target="_blank">OS_TmrLink()-链接定时器到链表</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_06_10</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_TmrUnlink()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_06_11" class="requirement-link" target="_blank">OS_TmrUnlink()-从链表中移除定时器</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_06_11</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_TmrTask()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_06_12" class="requirement-link" target="_blank">OS_TmrTask()-定时器管理任务</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_06_12</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_TmrLock()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_06_13" class="requirement-link" target="_blank">OS_TmrLock()-锁定定时器</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_06_13</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_TmrUnlock()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_06_14" class="requirement-link" target="_blank">OS_TmrUnlock()-解锁定时器</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_06_14</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_TmrCondCreate()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_06_15" class="requirement-link" target="_blank">OS_TmrCondCreate()-创建条件变量</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_06_15</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_TmrCondWait()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_06_16" class="requirement-link" target="_blank">OS_TmrCondWait()-条件变量等待</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_06_16</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_TmrCondSignal()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_06_17" class="requirement-link" target="_blank">OS_TmrCondSignal()-条件变量信号触发</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_06_17</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 文件: os_mem.c -->
+        <div class="file-section">
+            <div class="file-header">
+                <div class="file-name-area">
+                    <a href="os_mem.c" class="file-link" target="_blank">os_mem.c</a>
+                </div>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="file-details">
+                <div class="library-info">
+                    <div class="info-row">
+                        <div class="info-label">库名称:</div>
+                        <div class="info-value">
+                            <a href="library_details.html?lib=Memory_Management" class="info-link" target="_blank">内存管理</a>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">库-需求ID:</div>
+                        <div class="info-value">HLR_OS_07</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">评审记录:</div>
+                        <div class="info-value">
+                            <a href="review_records.html?lib=Memory_Management" class="info-link" target="_blank">查看评审记录</a>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">CM历史记录:</div>
+                        <div class="info-value">
+                            <a href="cm_history.html?lib=Memory_Management" class="info-link" target="_blank">查看CM历史</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <table class="modules-table">
+                    <thead>
+                        <tr>
+                            <th class="col-function">函数名称</th>
+                            <th class="col-requirement">需求名称</th>
+                            <th class="col-requirement-id">需求ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="function-name">OSMemCreate()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_07_01" class="requirement-link" target="_blank">OSMemCreate()-内存池创建</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_07_01</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSMemGet()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_07_02" class="requirement-link" target="_blank">OSMemGet()-内存申请</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_07_02</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSMemPut()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_07_03" class="requirement-link" target="_blank">OSMemPut()-内存释放</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_07_03</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_MemInit()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_07_04" class="requirement-link" target="_blank">OS_MemInit()-内存池管理器初始化</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_07_04</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 文件: os_time.c -->
+        <div class="file-section">
+            <div class="file-header">
+                <div class="file-name-area">
+                    <a href="os_time.c" class="file-link" target="_blank">os_time.c</a>
+                </div>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="file-details">
+                <div class="library-info">
+                    <div class="info-row">
+                        <div class="info-label">库名称:</div>
+                        <div class="info-value">
+                            <a href="library_details.html?lib=Time_Service" class="info-link" target="_blank">时间服务</a>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">库-需求ID:</div>
+                        <div class="info-value">HLR_OS_08</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">评审记录:</div>
+                        <div class="info-value">
+                            <a href="review_records.html?lib=Time_Service" class="info-link" target="_blank">查看评审记录</a>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">CM历史记录:</div>
+                        <div class="info-value">
+                            <a href="cm_history.html?lib=Time_Service" class="info-link" target="_blank">查看CM历史</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <table class="modules-table">
+                    <thead>
+                        <tr>
+                            <th class="col-function">函数名称</th>
+                            <th class="col-requirement">需求名称</th>
+                            <th class="col-requirement-id">需求ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="function-name">OSTimeTick()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_08_01" class="requirement-link" target="_blank">OSTimeTick()-系统节拍更新</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_08_01</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTimeSet()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_08_02" class="requirement-link" target="_blank">OSTimeSet()-设置系统节拍计数</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_08_02</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTimeGet()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_08_03" class="requirement-link" target="_blank">OSTimeGet()-获取系统节拍计数</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_08_03</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTimeDly()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_08_04" class="requirement-link" target="_blank">OSTimeDly()-延时当前任务</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_08_04</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTimeDlyHMSM()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_08_05" class="requirement-link" target="_blank">OSTimeDlyHMSM()-时分秒毫秒延时当前任务</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_08_05</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSTimeDlyResume()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_08_06" class="requirement-link" target="_blank">OSTimeDlyResume()-唤醒延时任务</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_08_06</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 文件: os_tick.c -->
+        <div class="file-section">
+            <div class="file-header">
+                <div class="file-name-area">
+                    <a href="os_tick.c" class="file-link" target="_blank">os_tick.c</a>
+                </div>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="file-details">
+                <div class="library-info">
+                    <div class="info-row">
+                        <div class="info-label">库名称:</div>
+                        <div class="info-value">
+                            <a href="library_details.html?lib=Tick_Management" class="info-link" target="_blank">节拍管理</a>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">库-需求ID:</div>
+                        <div class="info-value">HLR_OS_09</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">评审记录:</div>
+                        <div class="info-value">
+                            <a href="review_records.html?lib=Tick_Management" class="info-link" target="_blank">查看评审记录</a>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">CM历史记录:</div>
+                        <div class="info-value">
+                            <a href="cm_history.html?lib=Tick_Management" class="info-link" target="_blank">查看CM历史</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <table class="modules-table">
+                    <thead>
+                        <tr>
+                            <th class="col-function">函数名称</th>
+                            <th class="col-requirement">需求名称</th>
+                            <th class="col-requirement-id">需求ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="function-name">OS_TickInit()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_09_01" class="requirement-link" target="_blank">OS_TickInit()-初始化系统节拍</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_09_01</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_TickUpdate()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_09_02" class="requirement-link" target="_blank">OS_TickUpdate()-更新系统节拍</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_09_02</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_TickListInsert()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_09_03" class="requirement-link" target="_blank">OS_TickListInsert()-插入任务到延时列表</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_09_03</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_TickListInsertDly()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_09_04" class="requirement-link" target="_blank">OS_TickListInsertDly()-插入延时任务到延时列表</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_09_04</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_TickListRemove()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_09_05" class="requirement-link" target="_blank">OS_TickListRemove()-从延时列表中移除任务</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_09_05</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_TickListUpdate()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_09_06" class="requirement-link" target="_blank">OS_TickListUpdate()-更新延时列表</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_09_06</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 文件: os_prio.c -->
+        <div class="file-section">
+            <div class="file-header">
+                <div class="file-name-area">
+                    <a href="os_prio.c" class="file-link" target="_blank">os_prio.c</a>
+                </div>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="file-details">
+                <div class="library-info">
+                    <div class="info-row">
+                        <div class="info-label">库名称:</div>
+                        <div class="info-value">
+                            <a href="library_details.html?lib=Priority_Management" class="info-link" target="_blank">优先级管理</a>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">库-需求ID:</div>
+                        <div class="info-value">HLR_OS_10</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">评审记录:</div>
+                        <div class="info-value">
+                            <a href="review_records.html?lib=Priority_Management" class="info-link" target="_blank">查看评审记录</a>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">CM历史记录:</div>
+                        <div class="info-value">
+                            <a href="cm_history.html?lib=Priority_Management" class="info-link" target="_blank">查看CM历史</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <table class="modules-table">
+                    <thead>
+                        <tr>
+                            <th class="col-function">函数名称</th>
+                            <th class="col-requirement">需求名称</th>
+                            <th class="col-requirement-id">需求ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="function-name">OS_PrioInit()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_10_01" class="requirement-link" target="_blank">OS_PrioInit()-优先级表初始化</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_10_01</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_PrioGetHighest()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_10_02" class="requirement-link" target="_blank">OS_PrioGetHighest()-获取就绪任务的最高优先级</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_10_02</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_PrioInsert()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_10_03" class="requirement-link" target="_blank">OS_PrioInsert()-插入优先级到优先级表</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_10_03</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_PrioRemove()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_10_04" class="requirement-link" target="_blank">OS_PrioRemove()-从优先级表移中除优先级</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_10_04</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 文件: os_core.c -->
+        <div class="file-section">
+            <div class="file-header">
+                <div class="file-name-area">
+                    <a href="os_core.c" class="file-link" target="_blank">os_core.c</a>
+                </div>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="file-details">
+                <div class="library-info">
+                    <div class="info-row">
+                        <div class="info-label">库名称:</div>
+                        <div class="info-value">
+                            <a href="library_details.html?lib=Kernel_Management" class="info-link" target="_blank">内核管理</a>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">库-需求ID:</div>
+                        <div class="info-value">HLR_OS_11</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">评审记录:</div>
+                        <div class="info-value">
+                            <a href="review_records.html?lib=Kernel_Management" class="info-link" target="_blank">查看评审记录</a>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">CM历史记录:</div>
+                        <div class="info-value">
+                            <a href="cm_history.html?lib=Kernel_Management" class="info-link" target="_blank">查看CM历史</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <table class="modules-table">
+                    <thead>
+                        <tr>
+                            <th class="col-function">函数名称</th>
+                            <th class="col-requirement">需求名称</th>
+                            <th class="col-requirement-id">需求ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="function-name">OSInit()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_11_01" class="requirement-link" target="_blank">OSInit()-初始化内核</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_11_01</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSIntEnter()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_11_02" class="requirement-link" target="_blank">OSIntEnter()-中断进入处理</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_11_02</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSIntExit()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_11_03" class="requirement-link" target="_blank">OSIntExit()-中断退出处理</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_11_03</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSSched()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_11_04" class="requirement-link" target="_blank">OSSched()-任务调度</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_11_04</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSSchedLock()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_11_05" class="requirement-link" target="_blank">OSSchedLock()-锁定任务调度</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_11_05</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSSchedUnlock()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_11_06" class="requirement-link" target="_blank">OSSchedUnlock()-解锁任务调度</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_11_06</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSSchedRoundRobinCfg()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_11_07" class="requirement-link" target="_blank">OSSchedRoundRobinCfg()-配置时间片轮询机制</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_11_07</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSSchedRoundRobinYield()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_11_08" class="requirement-link" target="_blank">OSSchedRoundRobinYield()-时间片轮转让出</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_11_08</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSStart()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_11_09" class="requirement-link" target="_blank">OSStart()-启动多任务调度</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_11_09</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OSVersion()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_11_10" class="requirement-link" target="_blank">OSVersion()-获取版本号</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_11_10</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_IdleTask()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_11_11" class="requirement-link" target="_blank">OS_IdleTask()-空闲任务函数</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_11_11</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_IdleTaskInit()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_11_12" class="requirement-link" target="_blank">OS_IdleTaskInit()-空闲任务初始化</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_11_12</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_Pend()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_11_13" class="requirement-link" target="_blank">OS_Pend()-置任务为等待状态</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_11_13</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_PendAbort()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_11_14" class="requirement-link" target="_blank">OS_PendAbort()-终止任务等待</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_11_14</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_PendListChangePrio()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_11_15" class="requirement-link" target="_blank">OS_PendListChangePrio()-更改任务在等待列表中位置</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_11_15</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_PendListInit()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_11_16" class="requirement-link" target="_blank">OS_PendListInit()-初始化等待列表</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_11_16</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_PendListInsertPrio()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_11_17" class="requirement-link" target="_blank">OS_PendListInsertPrio()-将任务插入等待列表</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_11_17</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_PendListRemove()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_11_18" class="requirement-link" target="_blank">OS_PendListRemove()-从等待列表中移除指定任务</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_11_18</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_Post()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_11_19" class="requirement-link" target="_blank">OS_Post()-唤醒等待任务</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_11_19</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_RdyListInit()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_11_20" class="requirement-link" target="_blank">OS_RdyListInit()-初始化就绪列表</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_11_20</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_RdyListInsert()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_11_21" class="requirement-link" target="_blank">OS_RdyListInsert()-将任务插入就绪列表</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_11_21</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_RdyListInsertHead()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_11_22" class="requirement-link" target="_blank">OS_RdyListInsertHead()-将任务插入就绪列表头部</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_11_22</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_RdyListInsertTail()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_11_23" class="requirement-link" target="_blank">OS_RdyListInsertTail()-将任务插入就绪列表尾部</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_11_23</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_RdyListMoveHeadToTail()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_11_24" class="requirement-link" target="_blank">OS_RdyListMoveHeadToTail()-将就绪列表的头部任务移动至尾部</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_11_24</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_RdyListRemove()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_11_25" class="requirement-link" target="_blank">OS_RdyListRemove()-从就绪列表中移除指定任务</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_11_25</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_SchedRoundRobin()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_11_26" class="requirement-link" target="_blank">OS_SchedRoundRobin()-时间片轮转调度</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_11_26</span></td>
+                        </tr>
+                        <tr>
+                            <td class="function-name">OS_TaskBlock()</td>
+                            <td class="requirement-name">
+                                <a href="requirement_details.html?id=HLR_OS_11_27" class="requirement-link" target="_blank">OS_TaskBlock()-阻塞任务</a>
+                            </td>
+                            <td><span class="requirement-id">HLR_OS_11_27</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+    </div>
+
+    <script>
+        // 展开/收起功能
+        document.querySelectorAll('.file-header').forEach(header => {
+            const arrow = header.querySelector('.arrow');
+            const details = header.nextElementSibling;
+            
+            // 箭头点击事件
+            arrow.addEventListener('click', function(e) {
+                e.stopPropagation();
+                header.classList.toggle('expanded');
+                details.classList.toggle('expanded');
+            });
+            
+            // 文件头部点击事件（除了链接）
+            header.addEventListener('click', function(e) {
+                if (!e.target.classList.contains('file-link') && !e.target.classList.contains('requirement-link')) {
+                    header.classList.toggle('expanded');
+                    details.classList.toggle('expanded');
+                }
+            });
+        });
+
+        // 文件名链接点击事件
+        document.querySelectorAll('.file-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+
+        // 需求名称链接点击事件
+        document.querySelectorAll('.requirement-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+    </script>
+</body>
+</html>
