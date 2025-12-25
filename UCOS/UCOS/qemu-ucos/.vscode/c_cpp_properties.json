@@ -1,0 +1,24 @@
+{
+  "configurations": [
+    {
+      "name": "Linux",
+      "includePath": [
+                        "${workspaceFolder}/**",
+                        "${workspaceFolder}\\Micrium\\Software\\uC-CPU",
+                        "${workspaceFolder}\\Micrium\\Software\\uC-CPU\\MPC8544\\GNU",
+                        "${workspaceFolder}\\Micrium\\Software\\uC-LIB",
+                        "${workspaceFolder}\\Micrium\\Software\\uCOS-III\\Source",
+                        "${workspaceFolder}\\DMC\\BSP\\MPC8544-QEMU",
+                        "${workspaceFolder}\\Micrium\\Software\\uCOS-III\\Ports\\PowerPC\\MPC8544\\GNU"
+
+                ],
+
+      "defines": [],
+      "compilerPath": "/usr/bin/powerpc-linux-gnu-gcc",
+      "cStandard": "c11",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "clang-x64"
+    }
+  ],
+  "version": 4
+}

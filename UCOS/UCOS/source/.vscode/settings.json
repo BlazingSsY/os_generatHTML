@@ -1,0 +1,18 @@
+{
+    "files.associations": {
+        "os_cfg.h": "c",
+        "app_cfg.h": "c",
+        "os_cpu.h": "c",
+        "ucos_ii.h": "c",
+        "pc.h": "c",
+        "cpu.h": "c",
+        "lib_def.h": "c",
+        "lib_mem.h": "c",
+        "os.h": "c",
+        "windows.h": "c",
+        "os_cfg_app.h": "c",
+        "cpu_core.h": "c",
+        "cpu_cfg.h": "c",
+        "os_trace.h": "c"
+    }
+}

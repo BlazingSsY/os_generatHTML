@@ -1,0 +1,42 @@
+{
+    "files.associations": {
+        "os_cfg.h": "c",
+        "app_cfg.h": "c",
+        "os_cpu.h": "c",
+        "ucos_ii.h": "c",
+        "pc.h": "c",
+        "cpu.h": "c",
+        "lib_def.h": "c",
+        "lib_mem.h": "c",
+        "os.h": "c",
+        "windows.h": "c",
+        "os_cfg_app.h": "c",
+        "cpu_core.h": "c",
+        "cpu_cfg.h": "c",
+        "os_trace.h": "c",
+        "cpu_def.h": "c",
+        "cpu_cache.h": "c",
+        "mmsystem.h": "c",
+        "sdkddkver.h": "c",
+        "_mingw.h": "c",
+        "mpc5748g.h": "c",
+        "bsp_clk.h": "c",
+        "stdint.h": "c",
+        "lib_ascii.h": "c",
+        "*.tcc": "c",
+        "typedefs.h": "c",
+        "bsp_int.h": "c",
+        "bsp_os.h": "c",
+        "cstdint": "c",
+        "mpc5646c.h": "c",
+        "random": "c",
+        "qemu-ppce500.h": "c",
+        "processor.h": "c",
+        "process.h": "c",
+        "bsp_smpu.h": "c",
+        "bsp_led.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
+
+    
+}

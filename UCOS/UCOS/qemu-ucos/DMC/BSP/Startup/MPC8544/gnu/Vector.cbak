@@ -1,0 +1,129 @@
+/**************************************************************************/
+/*                                                                        */
+/* DESCRIPTION:                                                           */
+/* This is a generic IVOR tablefor all core(IVOR) exceptions, excluding   */
+/* the IVOR4 exception which has a seperate handler for External Int      */
+/*                                                                        */
+/* This file starts in memory at the beginning of the                     */
+/* .ivor_branch_table_p0" section.                                        */
+/**************************************************************************/
+
+#define PPCASM   __asm__
+#define PPCASM_STR(x) #x
+#define PPCASMF(x) PPCASM (" " PPCASM_STR(x) " ")
+#define PPCASMF2(x,x1) PPCASM (" " PPCASM_STR(x) "," PPCASM_STR(x1) " ")
+
+/* 
+**************************************************************************
+* This is the branch table for the IVOR4 vectors in SW vector mode.       
+* The "IVORnTable" label is aligned with the IVPR. The specific IVOR4     
+* vector handler must be offset from this by 0x800 + (Vector << 2 bits)   
+* Syntax specifically written for GHS v5.0 compiler					      
+* This file starts in memory at the beginning of the 
+* ".intc_hw_branch_table_p0" section.	  
+*=========================================================================*/
+PPCASMF( .globl IVORnTable );  
+PPCASMF( .globl IVOR0_Vector );
+PPCASMF( .globl IVOR1_Vector );
+PPCASMF( .globl IVOR2_Vector );
+PPCASMF( .globl IVOR3_Vector );
+PPCASMF( .globl IVOR4_Vector );
+PPCASMF( .globl IVOR5_Vector );
+PPCASMF( .globl IVOR6_Vector );
+PPCASMF( .globl IVOR7_Vector );
+PPCASMF( .globl IVOR8_Vector );
+PPCASMF( .globl IVOR9_Vector );
+PPCASMF( .globl IVOR10_Vector );
+PPCASMF( .globl IVOR11_Vector );
+PPCASMF( .globl IVOR12_Vector );
+PPCASMF( .globl IVOR13_Vector );
+PPCASMF( .globl IVOR14_Vector );
+PPCASMF( .globl IVOR15_Vector );
+
+
+PPCASMF( .extern OS_ExceptHandler_CriticalInput );
+PPCASMF( .extern OS_ExceptHandler_MachineCheck );
+PPCASMF( .extern OS_ExceptHandler_DataStorage );
+PPCASMF( .extern OS_ExceptHandler_InstructionStorage );
+PPCASMF( .extern OS_ExceptHandler_ExternalInput );
+PPCASMF( .extern OS_ExceptHandler_Alignment );
+PPCASMF( .extern OS_ExceptHandler_Program );
+PPCASMF( .extern OS_ExceptHandler_PerformanceMonitor );
+PPCASMF( .extern OS_ExceptHandler_SystemCall );
+PPCASMF( .extern OS_ExceptHandler_Debug );
+PPCASMF( .extern OS_ExceptHandler_Decrementer );
+PPCASMF( .extern OS_ExceptHandler_EFPURoundException );
+PPCASMF( .extern OS_ExceptHandler_EFPUUnavailable );
+PPCASMF( .extern OS_ExceptHandler_IVOR13 );
+PPCASMF( .extern OS_ExceptHandler_IVOR14 );
+PPCASMF( .extern OS_ExceptHandler_IVOR15 );
+
+
+
+PPCASMF2( .section  .ivor_branch_table_p0, "ax" );
+PPCASMF(.align 16);
+PPCASMF( IVORnTable: );
+PPCASMF( IVOR0_Vector: );
+PPCASMF( e_b   OS_ExceptHandler_CriticalInput );
+
+PPCASMF(.align 16);
+PPCASMF( IVOR1_Vector: );
+PPCASMF( e_b   OS_ExceptHandler_MachineCheck );
+
+PPCASMF(.align 16);
+PPCASMF( IVOR2_Vector: );
+PPCASMF( e_b   OS_ExceptHandler_DataStorage );
+
+PPCASMF(.align 16);
+PPCASMF( IVOR3_Vector: );
+PPCASMF( e_b   OS_ExceptHandler_InstructionStorage );
+
+PPCASMF(.align 16);
+PPCASMF( IVOR4_Vector: );
+PPCASMF( e_b   OS_ExceptHandler_ExternalInput );
+
+PPCASMF(.align 16);
+PPCASMF( IVOR5_Vector: );
+PPCASMF( e_b   OS_ExceptHandler_Alignment );
+
+PPCASMF(.align 16);
+PPCASMF( IVOR6_Vector: );
+PPCASMF( e_b   OS_ExceptHandler_Program );
+
+PPCASMF(.align 16);
+PPCASMF( IVOR7_Vector: );
+PPCASMF( e_b   OS_ExceptHandler_PerformanceMonitor );
+
+PPCASMF(.align 16);
+PPCASMF( IVOR8_Vector: );
+PPCASMF( e_b   OS_ExceptHandler_SystemCall );
+
+PPCASMF(.align 16);
+PPCASMF( IVOR9_Vector: );
+PPCASMF( e_b   OS_ExceptHandler_Debug );
+
+PPCASMF(.align 16);
+PPCASMF( IVOR10_Vector: );
+PPCASMF( e_b   OS_ExceptHandler_Decrementer );
+
+PPCASMF(.align 16);
+PPCASMF( IVOR11_Vector: );
+PPCASMF( e_b   OS_ExceptHandler_EFPURoundException );
+
+PPCASMF(.align 16);
+PPCASMF( IVOR12_Vector: );
+PPCASMF( e_b   OS_ExceptHandler_EFPUUnavailable );
+
+PPCASMF(.align 16);
+PPCASMF( IVOR13_Vector: );
+PPCASMF( e_b   OS_ExceptHandler_IVOR13 );
+
+PPCASMF(.align 16);
+PPCASMF( IVOR14_Vector: );
+PPCASMF( e_b   OS_ExceptHandler_IVOR14 );
+
+PPCASMF(.align 16);
+PPCASMF( IVOR15_Vector: );
+PPCASMF( e_b   OS_ExceptHandler_IVOR15 );
+
+PPCASMF( .section  end );
